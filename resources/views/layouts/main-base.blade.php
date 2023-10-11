@@ -27,7 +27,7 @@
         </div>
         <div class="navigation">
             <ul>
-                <li><a href="#"><i class="fas fa-user fa-lg"></i> <span>PROFILE</span><div id="link-box-profile" class="link-box"></div></a></li>
+                <li><a href="/welcome"><i class="fas fa-user fa-lg"></i> <span>PROFILE</span><div id="link-box-profile" class="link-box"></div></a></li>
                 <li>
                     <a href="#"><i class="fas fa-tachometer-alt fa-lg"></i> <span>DASHBOARD</span><div id="link-box-profile" class="link-box"></div></a>
                     

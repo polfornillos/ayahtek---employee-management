@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('current.employee-table');
+});
+
+route::get('/welcome', function () {
     return view('welcome');
 });

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\employeeTableController;
+use App\Http\Controllers\LeaveRequestController;
 
 Route::get('/', function () {
     return view('current.admin-login');
@@ -24,9 +25,6 @@ Route::get('/employeetable', function () {
     return view('current.employee-table');
 });
 
-Route::get('/leave-request', function () {
-  return view(('current.admin-leave-request'));
-});
-
+Route::get('/leave-request', [LeaveRequestController::class, 'index']);
 
 Route::get('/welcome', [employeeTableController::class, 'index']); 

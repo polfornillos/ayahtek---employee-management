@@ -24,5 +24,9 @@ Route::get('/employeetable', function () {
     return view('current.employee-table');
 });
 
+Route::get('/leave-request', function () {
+  return view(('current.admin-leave-request'));
+});
+
 
 Route::get('/welcome', [employeeTableController::class, 'index']); 

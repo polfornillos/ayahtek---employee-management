@@ -24,9 +24,5 @@ Route::get('/employeetable', function () {
     return view('current.employee-table');
 });
 
-Route::get('/employee-table', function () {
-    return view('current.employee-table');
-});
-
 
 Route::get('/welcome', [employeeTableController::class, 'index']); 

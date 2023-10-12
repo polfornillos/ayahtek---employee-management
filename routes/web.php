@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use App\Http\Controllers\employeeTableController;
 
 =======
@@ -17,6 +18,11 @@ use App\Http\Controllers\employeeTableController;
 |
 */
 >>>>>>> 5088af0edf06882b803009d72447b9ea0ef8a508
+=======
+
+use App\Http\Controllers\employeeTableController;
+
+>>>>>>> 1fcceec822c12cfc975eff1a40a75478578a3a5f
 Route::get('/', function () {
     return view('current.admin-login');
 });

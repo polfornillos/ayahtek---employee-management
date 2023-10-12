@@ -7,4 +7,9 @@ Route::get('/', function () {
     return view('current.employee-table');
 });
 
-Route::get('/welcome', [employeeTableController::class, 'index']);
+Route::get('/employee-table', function () {
+    return view('current.employee-table');
+});
+
+
+Route::get('/welcome', [employeeTableController::class, 'index']); 

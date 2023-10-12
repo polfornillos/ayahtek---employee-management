@@ -46,3 +46,4 @@
     </body>
 </html>
 <script src="{{ asset('/js/admin-employee-table.js') }}"></script>
+<script src="{{ asset('/js/modal-js.js') }}"></script>

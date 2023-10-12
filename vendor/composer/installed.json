@@ -5637,7 +5637,7 @@
                     "dev-main": "1.5.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Spatie\\Ignition\\": "src"
@@ -5727,7 +5727,7 @@
                     }
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "src/helpers.php"
@@ -5812,7 +5812,7 @@
             },
             "time": "2023-08-16T10:10:12+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Console\\": ""
@@ -5882,7 +5882,7 @@
             },
             "time": "2023-07-12T16:00:22+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\CssSelector\\": ""
@@ -5959,7 +5959,7 @@
                     "url": "https://github.com/symfony/contracts"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "function.php"
@@ -6033,7 +6033,7 @@
                 "Resources/bin/patch-type-declarations"
             ],
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\ErrorHandler\\": ""
@@ -6116,7 +6116,7 @@
             },
             "time": "2023-07-06T06:56:43+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\EventDispatcher\\": ""
@@ -6190,7 +6190,7 @@
                     "url": "https://github.com/symfony/contracts"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Contracts\\EventDispatcher\\": ""
@@ -6262,7 +6262,7 @@
             },
             "time": "2023-09-26T12:56:25+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Finder\\": ""
@@ -6342,7 +6342,7 @@
             },
             "time": "2023-09-04T21:33:54+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\HttpFoundation\\": ""
@@ -6458,7 +6458,7 @@
             },
             "time": "2023-09-30T06:37:04+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\HttpKernel\\": ""
@@ -6541,7 +6541,7 @@
             },
             "time": "2023-09-06T09:47:15+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Mailer\\": ""
@@ -6624,7 +6624,7 @@
             },
             "time": "2023-09-29T06:59:36+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Mime\\": ""
@@ -6707,7 +6707,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -6789,7 +6789,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -6875,7 +6875,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -6963,7 +6963,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -7053,7 +7053,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -7133,7 +7133,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -7212,7 +7212,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -7299,7 +7299,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -7387,7 +7387,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -7457,7 +7457,7 @@
             },
             "time": "2023-08-07T10:39:22+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Process\\": ""
@@ -7537,7 +7537,7 @@
             },
             "time": "2023-09-20T16:05:51+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Routing\\": ""
@@ -7620,7 +7620,7 @@
                     "url": "https://github.com/symfony/contracts"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Contracts\\Service\\": ""
@@ -7706,7 +7706,7 @@
             },
             "time": "2023-09-18T10:38:32+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "Resources/functions.php"
@@ -7812,7 +7812,7 @@
             },
             "time": "2023-07-31T07:08:24+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "Resources/functions.php"
@@ -7888,7 +7888,7 @@
                     "url": "https://github.com/symfony/contracts"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Contracts\\Translation\\": ""
@@ -7964,7 +7964,7 @@
             },
             "time": "2023-04-08T07:25:02+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Uid\\": ""
@@ -8053,7 +8053,7 @@
                 "Resources/bin/var-dump-server"
             ],
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "Resources/functions/dump.php"
@@ -8135,7 +8135,7 @@
                 "Resources/bin/yaml-lint"
             ],
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Yaml\\": ""
@@ -8202,7 +8202,7 @@
             },
             "time": "2021-07-28T10:34:58+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -8263,7 +8263,7 @@
                     "dev-master": "2.2.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "TijsVerkoyen\\CssToInlineStyles\\": "src"
@@ -8331,7 +8331,7 @@
                     "dev-master": "5.5-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Dotenv\\": "src/"
@@ -8401,7 +8401,7 @@
             },
             "time": "2022-03-08T17:03:00+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "voku\\": "src/voku/"
@@ -8485,7 +8485,7 @@
                     "dev-master": "1.10-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Webmozart\\Assert\\": "src/"

@@ -11,7 +11,6 @@
     
 </head>
 
-
 <body>
     <div class="navbar-container">
         <div class="top-section">

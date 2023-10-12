@@ -21,13 +21,11 @@ return new class extends Migration
             $table->date('birthday');
             $table->string('gender');
             $table->string('contact');
-            $table->date('date_updated');
             $table->enum('status', ['active', 'inactive']);
             $table->decimal('salary', 10, 2);
             $table->string('sss_number')->nullable();
             $table->string('philhealth_number')->nullable();
             $table->string('tin')->nullable();
-            $table->date('date_added');
             $table->string('emergency_contact_name')->nullable();
             $table->string('emergency_contact_number')->nullable();
             $table->string('emergency_contact_relationship')->nullable();

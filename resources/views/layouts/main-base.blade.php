@@ -32,9 +32,9 @@
                     
                 </li>
                 <li class="employee-link">
-                    <a href="#"><i class="fas fa-users fa-lg"></i> <span>EMPLOYEES</span><div id="link-box-profile" class="link-box-current"></div></a>
+                    <a href="/employeetable"><i class="fas fa-users fa-lg"></i> <span>EMPLOYEES</span><div id="link-box-profile" class="link-box-current"></div></a>
                 </li>
-                <li><a href="#"><i class="fa-solid fa-table fa-lg"></i> <span>LEAVE REQUESTS</span><div id="link-box-profile" class="link-box"></div></a></li>
+                <li><a href="/leaverequest"><i class="fa-solid fa-table fa-lg"></i> <span>LEAVE REQUESTS</span><div id="link-box-profile" class="link-box"></div></a></li>
                 <li id="signoutBtn"><a href="/"><i class="fas fa-sign-out-alt fa-lg"></i> <span>SIGN OUT</span><div id="link-box-profile" class="link-box"></div></a></li>
             </ul>
         </div>

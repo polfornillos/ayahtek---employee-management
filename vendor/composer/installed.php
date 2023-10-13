@@ -3,7 +3,15 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
+<<<<<<< HEAD
         'reference' => 'f2217b597a6a0c1ac768055f14115fce98e16368',
+=======
+<<<<<<< HEAD
+        'reference' => '368bb10ddb0aa1d4a6c5d20593a61aa70dc2e324',
+=======
+        'reference' => '193342afb3eb4799f0e5415b07bbb75132387baa',
+>>>>>>> 5088af0edf06882b803009d72447b9ea0ef8a508
+>>>>>>> developer-john-dela-cruz
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -394,7 +402,15 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+<<<<<<< HEAD
             'reference' => 'f2217b597a6a0c1ac768055f14115fce98e16368',
+=======
+<<<<<<< HEAD
+            'reference' => '368bb10ddb0aa1d4a6c5d20593a61aa70dc2e324',
+=======
+            'reference' => '193342afb3eb4799f0e5415b07bbb75132387baa',
+>>>>>>> 5088af0edf06882b803009d72447b9ea0ef8a508
+>>>>>>> developer-john-dela-cruz
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

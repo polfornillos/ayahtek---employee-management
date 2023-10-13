@@ -801,21 +801,34 @@ document.getElementById("dropdownMenuButton").addEventListener("click", toggleDr
 document.addEventListener('DOMContentLoaded', function () {
   const viewOption = document.querySelector('.dropdown-item-option[href="#"]');
   const cancelButton = document.querySelector('.cancel-employee-button');
-  const viewModal = document.getElementById('viewModal');
+  const editButton = document.querySelector('.edit-employee-button');
+  const viewModal = document.getElementById('view-modal');
+  const editModal = document.getElementById('edit-modal');
 
   // Function to show the modal
   function openViewModal() {
       viewModal.style.display = 'flex';
   }
 
+  function openEditModal() {
+    editModal.style.display = 'flex';
+}
+
   // Function to hide the modal
   function closeViewModal() {
-      viewModal.style.display = 'none';
+      editModal.style.display = 'none';
   }
 
   // Add click event listeners
   viewOption.addEventListener('click', openViewModal);
   cancelButton.addEventListener('click', closeViewModal);
+  editButton.addEventListener('click', openEditModal);
+
+  window.onclick = function(event) {
+    if (event.target == viewModal) {
+        viewModal.style.display = "none";
+    }
+  }
 });
 
 /*

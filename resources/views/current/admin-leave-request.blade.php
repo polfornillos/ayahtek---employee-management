@@ -58,7 +58,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                    </tbody>
+                      @if($leaveRequests)
+                        @foreach($leaveRequests as $lr)
+                          <tr>
+                            <!-- Populate main table -->
+                            
+                            <td>EMP-{{ str_pad($lr->id, 3, '0', STR_PAD_LEFT) }}</td>
+                            <td>{{ $lr->name }}</td>
+                            <td>{{ $lr->daysLeave }}</td>
+                            <td>{{ $lr->credits }}</td>
+                            <td>{{ \Carbon\Carbon::parse($lr->sLeave)->format('F d, Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($lr->eLeave)->format('F d, Y') }}</td>
+                            <td><div class='status-container'><span class='status-{{ $lr->reason }}'>{{ $lr->reason }}</span></div></td>
+                            <td><div class="dropdown-option">
+                                    <button class="dropdown-toggle" type="button">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item-option view-button" href="#" data-lr-id="{{ $lr->id }}">View</a>
+                                        <a class="dropdown-item-option" href="#">Deactivate</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                      @endif
                 </table>
             </div>
             <div class="table-footer">

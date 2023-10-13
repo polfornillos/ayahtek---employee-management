@@ -46,8 +46,5 @@
     </body>
 </html>
 <script src="{{ asset('/js/admin-employee-table.js') }}"></script>
-<<<<<<< HEAD
 @yield('jquery')
-=======
 <script src="{{ asset('/js/modal-js.js') }}"></script>
->>>>>>> developer-john-dela-cruz

@@ -800,7 +800,8 @@ document.getElementById("dropdownMenuButton").addEventListener("click", toggleDr
 //Open View Modal
 document.addEventListener('DOMContentLoaded', function () {
   const viewOption = document.querySelector('.dropdown-item-option[href="#"]');
-  const cancelButton = document.querySelector('.cancel-employee-button');
+  const cancelButton = document.getElementById('cancel-btn');
+  const cancelEditButton = document.getElementById('edit-cancel-btn');
   const editButton = document.querySelector('.edit-employee-button');
   const viewModal = document.getElementById('view-modal');
   const editModal = document.getElementById('edit-modal');
@@ -811,17 +812,23 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function openEditModal() {
-    editModal.style.display = 'flex';
+     editModal.style.display = 'flex';
   }
 
   // Function to hide the modal
   function closeViewModal() {
+      viewModal.style.display = 'none';
+  }
+
+  function closeEditModal() {
       editModal.style.display = 'none';
   }
+
 
   // Add click event listeners
   viewOption.addEventListener('click', openViewModal);
   cancelButton.addEventListener('click', closeViewModal);
+  cancelEditButton.addEventListener('click', closeEditModal);
   editButton.addEventListener('click', openEditModal);
 
   window.onclick = function(event) {
@@ -830,7 +837,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 });
-
 /*
 // Function to populate the HTML structure with data
 function populateEmployeeDetails(employeeData, index) {

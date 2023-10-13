@@ -17,4 +17,8 @@ class LRequest extends Model
     public function saveLRequest($data) {
       return $this->create($data);
     }
+
+    public function getLRequests() {
+      return $this->all();
+    }
 }

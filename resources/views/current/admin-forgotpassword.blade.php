@@ -22,7 +22,7 @@
             <h4 class="mb-3">Forgot Password</h4>
             <small class="mb-4">Enter email associated with your account and we’ll send you a code to reset your
                 password.</small>
-            <form action="entersecuritycode.html" class="needs-validation" novalidate>
+            <form action="/verifycode" class="needs-validation" novalidate>
                 <div class="input-group mb-3 has-validation" id="input">
                     <span class="input-group-text" id="basic-addon1"><svg width="15" height="12" viewBox="0 0 15 12"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,11 +34,11 @@
                     <input type="email" id="input1" class="form-control fs-6" placeholder="Enter email"
                         aria-label="Email" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback mb-0">
-                        Please enter an email.
+                        Please enter a valid email.
                     </div>
                 </div>
                 <div class="input-group mb-3 justify-content-center">
-                    <button type="submit" onClick="openModal()" class="btn btn-lg btn-primary shadow fs-6" id="btn"
+                    <button type="submit" class="btn btn-lg btn-primary shadow fs-6" id="btn"
                         data-bs-toggle="modal" data-bs-target="#staticBackdrop">SUBMIT</button>
                 </div>
                 <div class="row mt-5">
@@ -69,7 +69,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true" center>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content justify-content-center align-items-center">
@@ -91,25 +91,25 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script>
-        function openModal() {
-            const input1Value = document.getElementById('input1').value;
-            const modal = document.getElementById('staticBackdrop');
-            if (!input1Value) {
-                modal.classList.remove('show');
+            document.getElementById("btn").addEventListener("click", function() {
+            var inputText = document.getElementById("input1").value;
+            const modal = document.getElementById("staticBackdrop");
+            if (inputText.trim() === "") {
+                // Input is empty, do not open the modal
                 modal.classList.add('hide');
-                const display = modal.style.display = "none";
                 console.log(modal);
-                console.log(display);
             } else {
+                // Input is not empty, open the modal
                 modal.classList.add('show');
+                console.log(modal);
             }
-        }
+        });
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         document.addEventListener('DOMContentLoaded', () => {
             const forms = document.querySelectorAll('.needs-validation');
@@ -119,7 +119,7 @@
                     if (!form.checkValidity()) {
                         event.preventDefault();
                         event.stopPropagation();
-                    }
+                    } 
                     form.classList.add('was-validated');
                 });
             });

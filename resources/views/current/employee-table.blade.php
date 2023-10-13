@@ -70,6 +70,31 @@
                         </tr>
                     </thead>
                     <tbody id="table-data">
+                        @if($employees)
+                        @foreach ($employees as $employee)
+                        <tr>
+                            <!-- Populate main table -->
+                            
+                            <td>EMP-{{ str_pad($employee->id, 3, '0', STR_PAD_LEFT) }}</td>
+                            <td>{{ $employee->name }}</td>
+                            <td>{{ \Carbon\Carbon::parse($employee->birthday)->format('F d, Y') }}</td>
+                            <td>{{ $employee->gender }}</td>
+                            <td>{{ $employee->contact }}</td>
+                            <td>{{ $employee->updated_at->format('F d, Y') }}</td>
+                            <td><div class='status-container'><span class='status-{{ $employee->status }}'>{{ ucfirst($employee->status) }}</span></div></td>
+                            <td><div class="dropdown-option">
+                                    <button class="dropdown-toggle" type="button">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item-option view-button" href="#" data-employee-id="{{ $employee->id }}">View</a>
+                                        <a class="dropdown-item-option" href="#">Deactivate</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -85,7 +110,9 @@
             </div>
         </div> 
     </div>
-    <div id="viewModal" class="view-modal-container" >
+    @if($employees)
+    @foreach ($employees as $employee)
+    <div id="viewModal{{ $employee->id }}" class="view-modal-container">
         <div class="view-modal-content">
             <div class="view-modal-header">
                 <h3 class="modal-header">ADD EMPLOYEE</h3>
@@ -99,45 +126,45 @@
                         <div class="employee-details">
                             <div id="employee-id-container" class="employee-content">
                                 <h3>Employee ID</h3>
-                                <p class="employee-id"></p>
+                                <p class="employee-id">EMP-{{ str_pad($employee->id, 3, '0', STR_PAD_LEFT) }}</p>
                             </div>
                             <div id="employee-name-container" class="employee-content">
                                 <h3>Employee Name</h3>
-                                <p class="employee-name"></p>
+                                <p class="employee-name">{{ $employee->name }}</p>
                             </div>
                             <div id="employee-birthday-container" class="employee-content">
                                 <h3>Birthday</h3>
-                                <p class="employee-birthday"></p>
+                                <p class="employee-birthday">{{ \Carbon\Carbon::parse($employee->birthday)->format('F d, Y') }}</p>
                             </div>
                             <div id="employee-gender-container" class="employee-content">
                                 <h3>Gender</h3>
-                                <p class="employee-gender"></p>
+                                <p class="employee-gender">{{ $employee->gender }}</p>
                             </div>
                             <div id="employee-contact-container" class="employee-content">
                                 <h3>Contact number</h3>
-                                <p class="employee-contact"></p>
+                                <p class="employee-contact">{{ $employee->contact }}</p>
                             </div>
                         </div>
                         <div class="employee-details">
                             <div id="employee-id-container" class="employee-content">
                                 <h3>Salary</h3>
-                                <p>20000</p>
+                                <p>{{ $employee->salary }}</p>
                             </div>
                             <div id="employee-name-container" class="employee-content">
                                 <h3>SSS Number</h3>
-                                <p>74-5635493-8</p>
+                                <p>{{ $employee->sss_number }}</p>
                             </div>
                             <div id="employee-birthday-container" class="employee-content">
                                 <h3>Philhealth Number</h3>
-                                <p>91-871187398-9</p>
+                                <p>{{ $employee->philhealth_number }}</p>
                             </div>
                             <div id="employee-gender-container" class="employee-content">
                                 <h3>TIN</h3>
-                                <p>417-741-554-663</p>
+                                <p>{{ $employee->tin }}</p>
                             </div>
                             <div id="employee-contact-container" class="employee-content">
                                 <h3>Date Added</h3>
-                                <p>March 14, 2023</p>
+                                <p>{{ $employee->created_at->format('F d, Y')  }}</p>
                             </div>
                         </div>
                     </div>
@@ -165,8 +192,10 @@
                         <button class="cancel-employee-button">Cancel</button>
                         <button class="edit-employee-button">Edit</button>                 
                     </div>
-                </div>              
+                </div>               
             </div>
         </div>
     </div>
+    @endforeach
+    @endif  
 @endsection

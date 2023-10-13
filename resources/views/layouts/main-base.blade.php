@@ -11,7 +11,7 @@
     
 </head>
 
-<body>
+<body class="bg-main">
     <div class="navbar-container">
         <div class="top-section">
             <div class="profile-section">

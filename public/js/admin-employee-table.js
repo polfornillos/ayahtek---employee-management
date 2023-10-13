@@ -1,5 +1,5 @@
-// Employee data
-let data = [
+// ! Sample Employee data
+/*let data = [
   {
     id: "EMP-001",
     name: "Juan Dela Cruz",
@@ -198,9 +198,9 @@ let data = [
                 </div>
             </div>`,
   },
-];
+];*/
 
-function generateTableData(data, element) {
+/*function generateTableData(data, element) {
   const result = [];
 
   // Iterate over the data and create a table row for each row.
@@ -227,6 +227,8 @@ const tbody = document.querySelector("#table-data");
 
 // pass the data and element then call the function
 generateTableData(data, tbody);
+*/
+
 
 // Changing icons when sorting
 const headerLinks = document.querySelectorAll('.header-link');
@@ -780,21 +782,20 @@ function generateFilteredTableDataByMonth(data, element, month) {
   updatePagination();
 }
 
-//Show Kebab menu button 
-const dropdownButtons = document.querySelectorAll(".dropdown-toggle");
 
-// Add a click event listener to each dropdown button
-dropdownButtons.forEach((button) => {
-  button.addEventListener("click", function (event) {
-    // Find the closest dropdown menu relative to the clicked button
-    const dropdownMenuOption = event.target.closest(".dropdown-option").querySelector(".dropdown-menu-option");
-    
-    // Toggle the "show" class on the found dropdown menu to show/hide it
-    if (dropdownMenuOption) {
-      dropdownMenuOption.classList.toggle("show");
-    }
-  });
-});
+
+//Show Kebab menu button 
+function toggleDropdown() {
+  var dropdown = document.getElementById("myDropdown");
+  if (dropdown.style.display === "flex") {
+      dropdown.style.display = "none";
+  } else {
+      dropdown.style.display = "flex";
+  }
+}
+
+// Add a click event listener to the button
+document.getElementById("dropdownMenuButton").addEventListener("click", toggleDropdown);
 
 //Open View Modal
 document.addEventListener('DOMContentLoaded', function () {
@@ -817,6 +818,7 @@ document.addEventListener('DOMContentLoaded', function () {
   cancelButton.addEventListener('click', closeViewModal);
 });
 
+/*
 // Function to populate the HTML structure with data
 function populateEmployeeDetails(employeeData, index) {
   const employeeContainers = document.querySelectorAll(".employee-details");
@@ -836,7 +838,7 @@ function populateEmployeeDetails(employeeData, index) {
 // Iterate through the data and populate the HTML structure
 data.forEach((employee, index) => {
   populateEmployeeDetails(employee, index);
-});
+});*/
 
 initializeFilteredRows();
 updatePagination();

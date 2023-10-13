@@ -70,11 +70,11 @@
                                         <div class="employee-details">
                                             <div id="employee-id-container" class="employee-content">
                                                 <h3>Employee ID:</h3>
-                                                <input class="textbox" type="text" required>
+                                                <input name="id" class="textbox" type="text" required>
                                             </div>
                                             <div id="employee-name-container" class="employee-content">
                                                 <h3>Employee Name:</h3>
-                                                <input class="textbox" type="text" required>
+                                                <input name="name" class="textbox" type="text" required>
                                             </div>
                                             <div id="employee-birthday-container" class="employee-content">
                                                 <h3>Birthday</h3>
@@ -172,29 +172,29 @@
                                             </div>
                                             <div id="employee-contact-container" class="employee-content">
                                                 <h3>Contact number</h3>
-                                                <input class="textbox" type="text" required>
+                                                <input name="contact" class="textbox" type="text" required>
                                             </div>
                                         </div>
                                         <div class="employee-details">
                                             <div id="employee-id-container" class="employee-content">
                                                 <h3>Salary</h3>
-                                                <input class="textbox" type="text" required>
+                                                <input name="salary" class="textbox" type="text" required>
                                             </div>
                                             <div id="employee-name-container" class="employee-content">
                                                 <h3>SSS Number</h3>
-                                                <input class="textbox" type="text" required>
+                                                <input name="sss_number" class="textbox" type="text" required>
                                             </div>
                                             <div id="employee-birthday-container" class="employee-content">
                                                 <h3>Philhealth Number</h3>
-                                                <input class="textbox" type="text" required>
+                                                <input name="philhealth_number" class="textbox" type="text" required>
                                             </div>
                                             <div id="employee-gender-container" class="employee-content">
                                                 <h3>TIN</h3>
-                                                <input class="textbox" type="text" required>
+                                                <input name="tin" class="textbox" type="text" required>
                                             </div>
                                             <div id="employee-contact-container" class="employee-content">
                                                 <h3>Date Added</h3>
-                                                <input class="date" type="date" required>
+                                                <input name="created_at" class="date" type="date" required>
                                             </div>
                                         </div>
                                     </div>
@@ -206,15 +206,15 @@
                                         <div class="employee-details">
                                             <div id="employee-emergency-name-container" class="employee-content">
                                                 <h3>Name</h3>
-                                                <input class="textbox" type="text">
+                                                <input name="emergency_contact_name" class="textbox" type="text">
                                             </div>
                                             <div id="employee-emergency-relationship-container" class="employee-content">
                                                 <h3>Relationship</h3>
-                                                <input class="textbox" type="text">
+                                                <input name="emergency_contact_name" class="textbox" type="text">
                                             </div>
                                             <div id="employee-emergency-contact-container" class="employee-content">
                                                 <h3>Contact Number</h3>
-                                                <input class="textbox" type="text">
+                                                <input name="emergency_contact_name" class="textbox" type="text">
                                             </div>
                                         </div>
                                     </div>

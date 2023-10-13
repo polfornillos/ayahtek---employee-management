@@ -32,6 +32,7 @@ class LeaveRequestController extends Controller
         'sLeave' => $request->sLeave,
         'eLeave' => $request->eLeave,
         'reason' => $request->reason,
+        'status' => $request->status,
       ];
 
       $this->LRequest->saveLRequest($data);

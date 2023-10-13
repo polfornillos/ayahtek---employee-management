@@ -69,7 +69,7 @@
                             <td>{{ $lr->credits }}</td>
                             <td>{{ \Carbon\Carbon::parse($lr->sLeave)->format('F d, Y') }}</td>
                             <td>{{ \Carbon\Carbon::parse($lr->eLeave)->format('F d, Y') }}</td>
-                            <td><div class='status-container'><span class='status-{{ $lr->reason }}'>{{ $lr->reason }}</span></div></td>
+                            <td><div class='status-container'><span class='status-{{ $lr->status }}'>{{ $lr->status }}</span></div></td>
                             <td><div class="dropdown-option">
                                     <button class="dropdown-toggle" type="button">
                                         <i class="fas fa-ellipsis-v"></i>
@@ -128,7 +128,10 @@
               <input type="date" id="eLeave" name="eLeave" class="form-control mb-4" >
 
               <label for="reason">Reason</label>
-              <textarea class="form-control" placeholder="Leave your reason here" id="reason" name="reason"></textarea>
+              <textarea class="form-control mb-4" placeholder="Leave your reason here" id="reason" name="reason"></textarea>
+
+              <label for="status" class="form-label">Status</label>
+              <input type="input" id="status" name="status" class="form-control mb-4" >
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

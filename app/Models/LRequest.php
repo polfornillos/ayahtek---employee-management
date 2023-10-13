@@ -11,6 +11,8 @@ class LRequest extends Model
 
     protected $guarded = [];
 
+    protected $table = "l_request";
+
     // save leave request
     public function saveLRequest($data) {
       return $this->create($data);

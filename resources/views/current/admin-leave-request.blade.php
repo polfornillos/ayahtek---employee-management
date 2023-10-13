@@ -82,7 +82,9 @@
             <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
           </div>
           <div class="modal-body">
-            <form action="" method="post">
+            <form action="/leave-request/add" method="post">
+              @csrf
+              
               <label for="name" class="form-label">Name:</label>
               <input type="input" id="name" name="name" class="form-control mb-4" >
 
@@ -103,11 +105,12 @@
 
               <label for="reason">Reason</label>
               <textarea class="form-control" placeholder="Leave your reason here" id="reason" name="reason"></textarea>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Submit</button>
           </div>
         </div>
       </div>

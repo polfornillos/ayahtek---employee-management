@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\LRequest;
 use Illuminate\Http\Request;
 
 class LeaveRequestController extends Controller
 {
+
+  private $LRequest;
+
+  public function __construct() {
+    $this->LRequest = new LRequest();
+  }
+
     // renders leave request page
     public function index() {
       return view('current.admin-leave-request');
@@ -23,5 +31,7 @@ class LeaveRequestController extends Controller
         'eLeave' => $request->eLeave,
         'Reason' => $request->Reason,
       ];
+
+      $this->LRequest->saveLRequest($data);
     }
 }

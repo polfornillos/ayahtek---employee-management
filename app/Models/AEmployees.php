@@ -10,4 +10,8 @@ class AEmployees extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function getEmployees(){
+        return $this->all();
+    }
 }

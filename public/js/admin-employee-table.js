@@ -1,233 +1,4 @@
-// Employee data
-let data = [
-  {
-    id: "EMP-001",
-    name: "Juan Dela Cruz",
-    birthday: "January 01, 2000",
-    gender: "Male",
-    contact: "+638965654177",
-    dateupdated: "May 14, 2023",
-    status: "<div class='status-container'><span class='status-active'>Active</span></div>",
-    option: `<div class="dropdown-option">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item-option" href="#">View</a>
-                    <a class="dropdown-item-option" href="#">Deactivate</a>
-                </div>
-            </div>`,
-  },
-  {
-    id: "EMP-002",
-    name: "Kelly Tyrrell",
-    birthday: "March 22, 1997",
-    gender: "Female",
-    contact: "+639129620477",
-    dateupdated: "April 24, 2023",
-    status: "<div class='status-container'><span class='status-active'>Active</span></div>",
-    option: `<div class="dropdown-option">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item-option" href="#">View</a>
-                    <a class="dropdown-item-option" href="#">Deactivate</a>
-                </div>
-            </div>`,
-  },
-  {
-    id: "EMP-003",
-    name: "Nerea Harlan",
-    birthday: "May 27, 1999",
-    gender: "Female",
-    contact: "+638956149447",
-    dateupdated: "March 04, 2023",
-    status: "<div class='status-container'><span class='status-active'>Active</span></div>",
-    option: `<div class="dropdown-option">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item-option" href="#">View</a>
-                    <a class="dropdown-item-option" href="#">Deactivate</a>
-                </div>
-            </div>`,
-  },
-  {
-    id: "EMP-004",
-    name: "Izan Harding",
-    birthday: "May 07, 1989",
-    gender: "Male",
-    contact: "+638954485255",
-    dateupdated: "August 14, 2023",
-    status: "<div class='status-container'><span class='status-active'>Active</span></div>",
-    option: `<div class="dropdown-option">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item-option" href="#">View</a>
-                    <a class="dropdown-item-option" href="#">Deactivate</a>
-                </div>
-            </div>`,
-  },
-  {
-    id: "EMP-005",
-    name: "Elma Merritt",
-    birthday: "July 17, 2001",
-    gender: "Others",
-    contact: "+639172684346",
-    dateupdated: "July 13, 2023",
-    status: "<div class='status-container'><span class='status-inactive'>Inactive</span></div>",
-    option: `<div class="dropdown-option">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item-option" href="#">View</a>
-                    <a class="dropdown-item-option" href="#">Deactivate</a>
-                </div>
-            </div>`,
-  },
-  {
-    id: "EMP-006",
-    name: "Aubrie Fay",
-    birthday: "June 10, 2000",
-    gender: "Female",
-    contact: "+638974430260",
-    dateupdated: "September 04, 2023",
-    status: "<div class='status-container'><span class='status-active'>Active</span></div>",
-    option: `<div class="dropdown-option">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item-option" href="#">View</a>
-                    <a class="dropdown-item-option" href="#">Deactivate</a>
-                </div>
-            </div>`,
-  },
-  {
-    id: "EMP-007",
-    name: "Micky Henry",
-    birthday: "August 17, 1999",
-    gender: "Male",
-    contact: "+639099598719",
-    dateupdated: "August 14, 2023",
-    status: "<div class='status-container'><span class='status-active'>Active</span></div>",
-    option: `<div class="dropdown-option">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item-option" href="#">View</a>
-                    <a class="dropdown-item-option" href="#">Deactivate</a>
-                </div>
-            </div>`,
-  },
-  {
-    id: "EMP-008",
-    name: "Christa Hernando",
-    birthday: "April 13, 1987",
-    gender: "Female",
-    contact: "+638175281528",
-    dateupdated: "July 19, 2023",
-    status: "<div class='status-container'><span class='status-inactive'>Inactive</span></div>",
-    option: `<div class="dropdown-option">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item-option" href="#">View</a>
-                    <a class="dropdown-item-option" href="#">Deactivate</a>
-                </div>
-            </div>`,
-  },
-  {
-    id: "EMP-009",
-    name: "Petrina Croft",
-    birthday: "February 11, 1994",
-    gender: "Others",
-    contact: "+639602997327",
-    dateupdated: "April 16, 2023",
-    status: "<div class='status-container'><span class='status-inactive'>Inactive</span></div>",
-    option: `<div class="dropdown-option">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item-option" href="#">View</a>
-                    <a class="dropdown-item-option" href="#">Deactivate</a>
-                </div>
-            </div>`,
-  },
-  {
-    id: "EMP-010",
-    name: "Generoso Starr",
-    birthday: "December 23, 1996",
-    gender: "Male",
-    contact: "+638953519059",
-    dateupdated: "August 04, 2023",
-    status: "<div class='status-container'><span class='status-inactive'>Inactive</span></div>",
-    option: `<div class="dropdown-option">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item-option" href="#">View</a>
-                    <a class="dropdown-item-option" href="#">Deactivate</a>
-                </div>
-            </div>`,
-  },
-  {
-    id: "EMP-006",
-    name: "Aubrie Fay",
-    birthday: "January 01, 2000",
-    gender: "Male",
-    contact: "December 01, 2023",
-    dateupdated: "December 07, 2023",
-    status: "<div class='status-container'><span class='status-active'>Active</span></div>",
-    option: `<div class="dropdown-option">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item-option" href="#">View</a>
-                    <a class="dropdown-item-option" href="#">Deactivate</a>
-                </div>
-            </div>`,
-  },
-];
-
-function generateTableData(data, element) {
-  const result = [];
-
-  // Iterate over the data and create a table row for each row.
-  for (const row of data) {
-    const tr = document.createElement("tr");
-
-    // Create a table data cell for each column in the row.
-    for (const [key, value] of Object.entries(row)) {
-      const td = document.createElement("td");
-      td.innerHTML = value;
-      tr.append(td);
-    }
-
-    // push to results
-    result.push(tr);
-  }
-
-  // Append the table to the HTML element.
-  element.append(...result);
-}
-
-// query for tbody tag
-const tbody = document.querySelector("#table-data");
-
-// pass the data and element then call the function
-generateTableData(data, tbody);
-
+// ! Sample Employee data
 // Changing icons when sorting
 const headerLinks = document.querySelectorAll('.header-link');
 let currentSortedColumn = null;
@@ -517,6 +288,14 @@ function updatePagination() {
   if (countTextElement) {
     countTextElement.textContent = `${startIndex + 1} - ${Math.min(endIndex, entriesCount)} of ${entriesCount} entries`;
   }
+
+  if (totalPages <= 1) {
+    prevPageButton.style.display = 'none';
+    nextPageButton.style.display = 'none';
+  } else {
+    prevPageButton.style.display = '';
+    nextPageButton.style.display = '';
+  }
 }
 
 const filtersButton = document.querySelector('.filters-button');
@@ -581,72 +360,48 @@ resetFilterItem.addEventListener('click', function(event) {
   resetFilters(); // Call the resetFilters function when "Reset" is clicked
 });
 
-// Function to filter the data based on status
-function filterDataByStatus(data, status) {
-  return data.filter(item => {
-      if (status === "All") {
-          return true; // Return all items
-      } else if (status === "Active") {
-          return item.status.includes("status-active");
-      } else if (status === "Inactive") {
-          return item.status.includes("status-inactive");
+// Function to filter the table rows based on status
+function filterRowsByStatus(status) {
+  const rows = document.querySelectorAll('#table-data tr');
+
+  rows.forEach(row => {
+    const statusContainer = row.querySelector('.status-container');
+    if (statusContainer) {
+      // Extract the employee status from the class
+      const statusElement = statusContainer.querySelector(`.status-${status}`);
+      if (statusElement) {
+        const rowStatus = statusElement.textContent;
+
+        console.log('Row:', row);
+        console.log('Status Element:', statusElement);
+        console.log('Row status:', rowStatus);
+
+        if (status === 'All' || rowStatus.toLowerCase() === status.toLowerCase()) {
+          row.style.display = ''; // Show the row
+        } else {
+          row.style.display = 'none'; // Hide the row
+        }
       }
-      return false; // Invalid status, return nothing
+    }
   });
 }
 
-// Event listener for status filter so you can select active and inactive
+// Event listener for filter buttons
 document.addEventListener('DOMContentLoaded', function() {
-  const dropdownItems = document.querySelectorAll('.dropdown-item');
+  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="status-"]');
 
-  dropdownItems.forEach(item => {
-      item.addEventListener('click', function(event) {
-          event.stopPropagation();
-
-          // Get the filter type
-          const filterType = item.getAttribute('data-filter-type');
-
-          // Check if the filter type is "status-active" or "status-inactive"
-          if (filterType === "status-active" || filterType === "status-inactive") {
-              const status = filterType === "status-active" ? "Active" : "Inactive";
-              
-              // Update the filtered table data based on the selected status
-              generateFilteredTableData(data, tbody, status);
-          }
-      });
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.stopPropagation();
+      const filterType = button.getAttribute('data-filter-type');
+      const status = filterType.replace('status-', ''); 
+      console.log('Clicked filter for:', status);
+      filterRowsByStatus(status);
+    });
   });
 });
 
-// Function to generate the filtered table data
-function generateFilteredTableData(data, element, status) {
-  // Filter the data based on the selected status
-  const filteredData = filterDataByStatus(data, status);
-
-  // Clear the existing table data
-  element.innerHTML = "";
-
-  // Iterate over the filtered data and create table rows
-  for (const row of filteredData) {
-    const tr = document.createElement("tr");
-
-    // Create a table data cell for each column in the row
-    for (const [key, value] of Object.entries(row)) {
-      const td = document.createElement("td");
-      td.innerHTML = value;
-      tr.append(td);
-    }
-
-    // Append the row to the table
-    element.appendChild(tr);
-  }
-
-  // After filtering, update the filteredRows list
-  filteredRows = Array.from(element.querySelectorAll('tr'));
-
-  // Update pagination
-  updatePagination();
-}
-
+/*
 // Function to filter the data based on gender
 function filterDataByGender(data, gender) {
   return data.filter(item => {
@@ -778,24 +533,54 @@ function generateFilteredTableDataByMonth(data, element, month) {
 
   // Update pagination
   updatePagination();
-}
+} */
 
 //Show Kebab menu button 
-const dropdownButtons = document.querySelectorAll(".dropdown-toggle");
+// Function to toggle the dropdown menu for a specific row
+function toggleDropdown(event) {
+  const row = event.target.closest('tr');
+  const dropdown = row.querySelector('.dropdown-menu-option');
+  if (dropdown.style.display === 'flex') {
+      dropdown.style.display = 'none';
+  } else {
+      dropdown.style.display = 'flex';
+  }
+}
 
-// Add a click event listener to each dropdown button
-dropdownButtons.forEach((button) => {
-  button.addEventListener("click", function (event) {
-    // Find the closest dropdown menu relative to the clicked button
-    const dropdownMenuOption = event.target.closest(".dropdown-option").querySelector(".dropdown-menu-option");
-    
-    // Toggle the "show" class on the found dropdown menu to show/hide it
-    if (dropdownMenuOption) {
-      dropdownMenuOption.classList.toggle("show");
-    }
+// Add click event listeners to all dropdown buttons
+const dropdownButtons = document.querySelectorAll('.dropdown-toggle');
+dropdownButtons.forEach(button => {
+  button.addEventListener('click', toggleDropdown);
+});
+
+// Open View Modal
+document.addEventListener('DOMContentLoaded', function () {
+  const viewButtons = document.querySelectorAll('.view-button');
+  const closeButtons = document.querySelectorAll('.cancel-employee-button');
+
+  viewButtons.forEach(viewButton => {
+      viewButton.addEventListener('click', function () {
+          const employeeId = viewButton.getAttribute('data-employee-id');
+          const viewModal = document.getElementById('viewModal' + employeeId);
+
+          if (viewModal) {
+              viewModal.style.display = 'flex';
+          }
+      });
+  });
+
+  closeButtons.forEach(closeButton => {
+      closeButton.addEventListener('click', function () {
+          const viewModal = closeButton.closest('.view-modal-container');
+
+          if (viewModal) {
+              viewModal.style.display = 'none';
+          }
+      });
   });
 });
 
+<<<<<<< HEAD
 //Open View Modal
 document.addEventListener('DOMContentLoaded', function () {
   const viewOption = document.querySelector('.dropdown-item-option[href="#"]');
@@ -830,6 +615,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+=======
+/*
+>>>>>>> 4cd14a4db8a390fb9757c100e3472c86d0f30b11
 // Function to populate the HTML structure with data
 function populateEmployeeDetails(employeeData, index) {
   const employeeContainers = document.querySelectorAll(".employee-details");
@@ -849,7 +637,7 @@ function populateEmployeeDetails(employeeData, index) {
 // Iterate through the data and populate the HTML structure
 data.forEach((employee, index) => {
   populateEmployeeDetails(employee, index);
-});
+});*/
 
 initializeFilteredRows();
 updatePagination();

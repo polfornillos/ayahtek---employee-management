@@ -70,10 +70,11 @@
                         </tr>
                     </thead>
                     <tbody id="table-data">
+                        @if($employees)
+                        @foreach ($employees as $employee)
                         <tr>
                             <!-- Populate main table -->
-                            @if($employees)
-                            @foreach ($employees as $employee)
+                            
                             <td>EMP-{{ str_pad($employee->id, 3, '0', STR_PAD_LEFT) }}</td>
                             <td>{{ $employee->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($employee->birthday)->format('F d, Y') }}</td>
@@ -82,19 +83,18 @@
                             <td>{{ $employee->updated_at->format('F d, Y') }}</td>
                             <td><div class='status-container'><span class='status-{{ $employee->status }}'>{{ ucfirst($employee->status) }}</span></div></td>
                             <td><div class="dropdown-option">
-                                    <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
+                                    <button class="dropdown-toggle" type="button">
                                         <i class="fas fa-ellipsis-v"></i>
                                     </button>
                                     <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item-option" href="#">View</a>
+                                        <a class="dropdown-item-option view-button" href="#" data-employee-id="{{ $employee->id }}">View</a>
                                         <a class="dropdown-item-option" href="#">Deactivate</a>
                                     </div>
                                 </div>
                             </td>
-                            @endforeach
-                            @endif
-
                         </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -110,7 +110,9 @@
             </div>
         </div> 
     </div>
-    <div id="viewModal" class="view-modal-container" >
+    @if($employees)
+    @foreach ($employees as $employee)
+    <div id="viewModal{{ $employee->id }}" class="view-modal-container">
         <div class="view-modal-content">
             <div class="view-modal-header">
                 <h3 class="modal-header">ADD EMPLOYEE</h3>
@@ -121,8 +123,6 @@
                     <div class="employee-details-header"> Employee Details</div>
                     <hr id="employee-details-divider"class="solid">
                     <div class="employee-details-content">
-                        @if($employees)
-                        @foreach ($employees as $employee)
                         <div class="employee-details">
                             <div id="employee-id-container" class="employee-content">
                                 <h3>Employee ID</h3>
@@ -167,8 +167,6 @@
                                 <p>{{ $employee->created_at->format('F d, Y')  }}</p>
                             </div>
                         </div>
-                        @endforeach
-                        @endif
                     </div>
                 </div> 
                 <div id="employee-details-row-two" class="employee-details-row">
@@ -194,8 +192,10 @@
                         <button class="cancel-employee-button">Cancel</button>
                         <button class="edit-employee-button">Edit</button>                 
                     </div>
-                </div>              
+                </div>               
             </div>
         </div>
     </div>
+    @endforeach
+    @endif  
 @endsection

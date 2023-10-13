@@ -536,37 +536,48 @@ function generateFilteredTableDataByMonth(data, element, month) {
 } */
 
 //Show Kebab menu button 
-function toggleDropdown() {
-  var dropdown = document.getElementById("myDropdown");
-  if (dropdown.style.display === "flex") {
-      dropdown.style.display = "none";
+// Function to toggle the dropdown menu for a specific row
+function toggleDropdown(event) {
+  const row = event.target.closest('tr');
+  const dropdown = row.querySelector('.dropdown-menu-option');
+  if (dropdown.style.display === 'flex') {
+      dropdown.style.display = 'none';
   } else {
-      dropdown.style.display = "flex";
+      dropdown.style.display = 'flex';
   }
 }
 
-// Add a click event listener to the button
-document.getElementById("dropdownMenuButton").addEventListener("click", toggleDropdown);
+// Add click event listeners to all dropdown buttons
+const dropdownButtons = document.querySelectorAll('.dropdown-toggle');
+dropdownButtons.forEach(button => {
+  button.addEventListener('click', toggleDropdown);
+});
 
-//Open View Modal
+// Open View Modal
 document.addEventListener('DOMContentLoaded', function () {
-  const viewOption = document.querySelector('.dropdown-item-option[href="#"]');
-  const cancelButton = document.querySelector('.cancel-employee-button');
-  const viewModal = document.getElementById('viewModal');
+  const viewButtons = document.querySelectorAll('.view-button');
+  const closeButtons = document.querySelectorAll('.cancel-employee-button');
 
-  // Function to show the modal
-  function openViewModal() {
-      viewModal.style.display = 'flex';
-  }
+  viewButtons.forEach(viewButton => {
+      viewButton.addEventListener('click', function () {
+          const employeeId = viewButton.getAttribute('data-employee-id');
+          const viewModal = document.getElementById('viewModal' + employeeId);
 
-  // Function to hide the modal
-  function closeViewModal() {
-      viewModal.style.display = 'none';
-  }
+          if (viewModal) {
+              viewModal.style.display = 'flex';
+          }
+      });
+  });
 
-  // Add click event listeners
-  viewOption.addEventListener('click', openViewModal);
-  cancelButton.addEventListener('click', closeViewModal);
+  closeButtons.forEach(closeButton => {
+      closeButton.addEventListener('click', function () {
+          const viewModal = closeButton.closest('.view-modal-container');
+
+          if (viewModal) {
+              viewModal.style.display = 'none';
+          }
+      });
+  });
 });
 
 /*

@@ -29,9 +29,11 @@ class LeaveRequestController extends Controller
         'daysLeave' => $request->daysLeave,
         'sLeave' => $request->sLeave,
         'eLeave' => $request->eLeave,
-        'Reason' => $request->Reason,
+        'reason' => $request->reason,
       ];
 
       $this->LRequest->saveLRequest($data);
+
+      return redirect('/leave-request');
     }
 }

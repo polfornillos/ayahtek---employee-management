@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+// ! Sample Employee data
+>>>>>>> 4cd14a4db8a390fb9757c100e3472c86d0f30b11
 // Changing icons when sorting
 const headerLinks = document.querySelectorAll('.header-link');
 let currentSortedColumn = null;
@@ -287,6 +291,14 @@ function updatePagination() {
   if (countTextElement) {
     countTextElement.textContent = `${startIndex + 1} - ${Math.min(endIndex, entriesCount)} of ${entriesCount} entries`;
   }
+
+  if (totalPages <= 1) {
+    prevPageButton.style.display = 'none';
+    nextPageButton.style.display = 'none';
+  } else {
+    prevPageButton.style.display = '';
+    nextPageButton.style.display = '';
+  }
 }
 
 const filtersButton = document.querySelector('.filters-button');
@@ -351,72 +363,48 @@ resetFilterItem.addEventListener('click', function(event) {
   resetFilters(); // Call the resetFilters function when "Reset" is clicked
 });
 
-// Function to filter the data based on status
-function filterDataByStatus(data, status) {
-  return data.filter(item => {
-      if (status === "All") {
-          return true; // Return all items
-      } else if (status === "Active") {
-          return item.status.includes("status-active");
-      } else if (status === "Inactive") {
-          return item.status.includes("status-inactive");
+// Function to filter the table rows based on status
+function filterRowsByStatus(status) {
+  const rows = document.querySelectorAll('#table-data tr');
+
+  rows.forEach(row => {
+    const statusContainer = row.querySelector('.status-container');
+    if (statusContainer) {
+      // Extract the employee status from the class
+      const statusElement = statusContainer.querySelector(`.status-${status}`);
+      if (statusElement) {
+        const rowStatus = statusElement.textContent;
+
+        console.log('Row:', row);
+        console.log('Status Element:', statusElement);
+        console.log('Row status:', rowStatus);
+
+        if (status === 'All' || rowStatus.toLowerCase() === status.toLowerCase()) {
+          row.style.display = ''; // Show the row
+        } else {
+          row.style.display = 'none'; // Hide the row
+        }
       }
-      return false; // Invalid status, return nothing
+    }
   });
 }
 
-// Event listener for status filter so you can select active and inactive
+// Event listener for filter buttons
 document.addEventListener('DOMContentLoaded', function() {
-  const dropdownItems = document.querySelectorAll('.dropdown-item');
+  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="status-"]');
 
-  dropdownItems.forEach(item => {
-      item.addEventListener('click', function(event) {
-          event.stopPropagation();
-
-          // Get the filter type
-          const filterType = item.getAttribute('data-filter-type');
-
-          // Check if the filter type is "status-active" or "status-inactive"
-          if (filterType === "status-active" || filterType === "status-inactive") {
-              const status = filterType === "status-active" ? "Active" : "Inactive";
-              
-              // Update the filtered table data based on the selected status
-              generateFilteredTableData(data, tbody, status);
-          }
-      });
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.stopPropagation();
+      const filterType = button.getAttribute('data-filter-type');
+      const status = filterType.replace('status-', ''); 
+      console.log('Clicked filter for:', status);
+      filterRowsByStatus(status);
+    });
   });
 });
 
-// Function to generate the filtered table data
-function generateFilteredTableData(data, element, status) {
-  // Filter the data based on the selected status
-  const filteredData = filterDataByStatus(data, status);
-
-  // Clear the existing table data
-  element.innerHTML = "";
-
-  // Iterate over the filtered data and create table rows
-  for (const row of filteredData) {
-    const tr = document.createElement("tr");
-
-    // Create a table data cell for each column in the row
-    for (const [key, value] of Object.entries(row)) {
-      const td = document.createElement("td");
-      td.innerHTML = value;
-      tr.append(td);
-    }
-
-    // Append the row to the table
-    element.appendChild(tr);
-  }
-
-  // After filtering, update the filteredRows list
-  filteredRows = Array.from(element.querySelectorAll('tr'));
-
-  // Update pagination
-  updatePagination();
-}
-
+/*
 // Function to filter the data based on gender
 function filterDataByGender(data, gender) {
   return data.filter(item => {
@@ -548,37 +536,46 @@ function generateFilteredTableDataByMonth(data, element, month) {
 
   // Update pagination
   updatePagination();
-}
-
-
+} */
 
 //Show Kebab menu button 
-function toggleDropdown() {
-  var dropdown = document.getElementById("myDropdown");
-  if (dropdown.style.display === "flex") {
-      dropdown.style.display = "none";
+// Function to toggle the dropdown menu for a specific row
+function toggleDropdown(event) {
+  const row = event.target.closest('tr');
+  const dropdown = row.querySelector('.dropdown-menu-option');
+  if (dropdown.style.display === 'flex') {
+      dropdown.style.display = 'none';
   } else {
-      dropdown.style.display = "flex";
+      dropdown.style.display = 'flex';
   }
 }
 
-// Add a click event listener to the button
-document.getElementById("dropdownMenuButton").addEventListener("click", toggleDropdown);
+// Add click event listeners to all dropdown buttons
+const dropdownButtons = document.querySelectorAll('.dropdown-toggle');
+dropdownButtons.forEach(button => {
+  button.addEventListener('click', toggleDropdown);
+});
 
-//Open View Modal
+// Open View Modal
 document.addEventListener('DOMContentLoaded', function () {
+<<<<<<< HEAD
   const viewOption = document.querySelector('.dropdown-item-option[href="#"]');
   const cancelButton = document.getElementById('cancel-btn');
   const cancelEditButton = document.getElementById('edit-cancel-btn');
   const editButton = document.querySelector('.edit-employee-button');
   const viewModal = document.getElementById('view-modal');
   const editModal = document.getElementById('edit-modal');
+=======
+  const viewButtons = document.querySelectorAll('.view-button');
+  const closeButtons = document.querySelectorAll('.cancel-employee-button');
+>>>>>>> 4cd14a4db8a390fb9757c100e3472c86d0f30b11
 
-  // Function to show the modal
-  function openViewModal() {
-      viewModal.style.display = 'flex';
-  }
+  viewButtons.forEach(viewButton => {
+      viewButton.addEventListener('click', function () {
+          const employeeId = viewButton.getAttribute('data-employee-id');
+          const viewModal = document.getElementById('viewModal' + employeeId);
 
+<<<<<<< HEAD
   function openEditModal() {
      editModal.style.display = 'flex';
   }
@@ -598,6 +595,24 @@ document.addEventListener('DOMContentLoaded', function () {
   cancelButton.addEventListener('click', closeViewModal);
   cancelEditButton.addEventListener('click', closeEditModal);
   editButton.addEventListener('click', openEditModal);
+=======
+          if (viewModal) {
+              viewModal.style.display = 'flex';
+          }
+      });
+  });
+
+  closeButtons.forEach(closeButton => {
+      closeButton.addEventListener('click', function () {
+          const viewModal = closeButton.closest('.view-modal-container');
+
+          if (viewModal) {
+              viewModal.style.display = 'none';
+          }
+      });
+  });
+});
+>>>>>>> 4cd14a4db8a390fb9757c100e3472c86d0f30b11
 
   window.onclick = function(event) {
     if (event.target == viewModal) {

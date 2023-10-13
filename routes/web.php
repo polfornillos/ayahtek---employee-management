@@ -18,3 +18,5 @@ Route::get('/verifycode', [LoginController::class, 'enterSecurityCode']);
 Route::get('/resetpassword', [LoginController::class, 'resetpassword']);
 
 Route::get('/employeetable', [employeeTableController::class, 'employeetable']);
+
+Route::get('/leaverequest', [LeaveRequestController::class, 'index']);

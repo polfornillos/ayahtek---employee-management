@@ -17,7 +17,9 @@ class LeaveRequestController extends Controller
 
     // renders leave request page
     public function index() {
-      return view('current.admin-leave-request');
+      $leaveRequests = $this->LRequest->getLRequests();
+
+      return view('current.admin-leave-request', compact('leaveRequests'));
     }
 
     // function to add leave request data in db

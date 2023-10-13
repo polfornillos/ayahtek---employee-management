@@ -25,8 +25,3 @@ Route::get('/employeetable', function () {
     return view('current.employee-table');
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f2217b597a6a0c1ac768055f14115fce98e16368
-Route::get('/welcome', [employeeTableController::class, 'index']); 

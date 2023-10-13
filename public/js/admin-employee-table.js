@@ -580,7 +580,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-<<<<<<< HEAD
 //Open View Modal
 document.addEventListener('DOMContentLoaded', function () {
   const viewOption = document.querySelector('.dropdown-item-option[href="#"]');
@@ -615,9 +614,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-=======
-/*
->>>>>>> 4cd14a4db8a390fb9757c100e3472c86d0f30b11
 // Function to populate the HTML structure with data
 function populateEmployeeDetails(employeeData, index) {
   const employeeContainers = document.querySelectorAll(".employee-details");
@@ -637,7 +633,7 @@ function populateEmployeeDetails(employeeData, index) {
 // Iterate through the data and populate the HTML structure
 data.forEach((employee, index) => {
   populateEmployeeDetails(employee, index);
-});*/
+});
 
 initializeFilteredRows();
 updatePagination();

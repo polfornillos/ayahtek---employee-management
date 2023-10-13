@@ -12,4 +12,8 @@ class employeeTableController extends Controller
         return view('welcome');
      
     }
+
+    public function employeetable(){
+        return view('current.employee-table');
+    }
 }

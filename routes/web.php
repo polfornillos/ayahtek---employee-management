@@ -3,26 +3,18 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\employeeTableController;
+use App\Http\Controllers\LoginController;
 
-Route::get('/', function () {
-    return view('current.admin-login');
-});
 
-Route::get('/forgotpassword', function () {
-    return view('current.admin-forgotpassword');
-});
 
-Route::get('/verifycode', function () {
-    return view('current.admin-entersecuritycode');
-});
+Route::get('/', [LoginController::class, 'login']);
 
-Route::get('/resetpassword', function () {
-    return view('current.admin-resetpassword');
-});
+Route::get('/forgotpassword', [LoginController::class, 'forgotpassword']);
 
-Route::get('/employeetable', function () {
-    return view('current.employee-table');
-});
+Route::get('/verifycode', [LoginController::class, 'enterSecurityCode']);
 
+Route::get('/resetpassword', [LoginController::class, 'resetpassword']);
+
+Route::get('/employeetable', [employeeTableController::class, 'employeetable']);
 
 Route::get('/welcome', [employeeTableController::class, 'index']); 

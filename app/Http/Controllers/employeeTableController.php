@@ -22,7 +22,7 @@ class employeeTableController extends Controller
     public function employeeTable() { 
         $employees = $this->employees->getEmployees();
 
-        return view('current.employee-table',compact('employees'));
+        return view('current.admin-employee-table',compact('employees'));
     }
     // !Test Creation of Employee Juan Dela Cruz
     /*public function createEmployee(){

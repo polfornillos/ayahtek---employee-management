@@ -812,7 +812,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function openEditModal() {
     editModal.style.display = 'flex';
-}
+  }
 
   // Function to hide the modal
   function closeViewModal() {

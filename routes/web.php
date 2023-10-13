@@ -25,6 +25,10 @@ Route::get('/employeetable', function () {
     return view('current.employee-table');
 });
 
-Route::get('/leave-request', [LeaveRequestController::class, 'index']);
+// group route that utilizes the same controller class
+Route::controller(LeaveRequestController::class)->group(function () {
+    Route::get('/leave-request}', 'index');
+    Route::post('/leave-request/add', 'store');
+});
 
 Route::get('/welcome', [employeeTableController::class, 'index']); 

@@ -519,6 +519,14 @@ function updatePagination() {
   if (countTextElement) {
     countTextElement.textContent = `${startIndex + 1} - ${Math.min(endIndex, entriesCount)} of ${entriesCount} entries`;
   }
+
+  if (totalPages <= 1) {
+    prevPageButton.style.display = 'none';
+    nextPageButton.style.display = 'none';
+  } else {
+    prevPageButton.style.display = '';
+    nextPageButton.style.display = '';
+  }
 }
 
 const filtersButton = document.querySelector('.filters-button');

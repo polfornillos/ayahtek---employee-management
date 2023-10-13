@@ -40,7 +40,7 @@
                             </ul>
                         </div>
                     </div>
-                    <button class="add-employee-button">Add Leave Request</button>
+                    <button class="add-employee-button" data-bs-toggle="modal" data-bs-target="#add-leave-request-modal">Add Leave Request</button>
                 </div>
             </div>
             <div class="table-container">
@@ -73,6 +73,46 @@
             </div>
         </div> 
     </div>
+
+    <div class="modal fade" id="add-leave-request-modal" tabindex="-1" aria-labelledby="addLeaveRequestModalLabel" aria-hidden="false">
+      <div class="modal-dialog">
+        <div class="modal-content p-4">
+          <div class="modal-header-lr">
+            <h1 class="modal-title fs-5 text-center" id="addLeaveRequestModalLabel">Add Leave Request</h1>
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+          </div>
+          <div class="modal-body">
+            <form action="" method="post">
+              <label for="name" class="form-label">Name:</label>
+              <input type="input" id="name" name="name" class="form-control mb-4" >
+
+              <label for="credits" class="form-label">Credits:</label>
+              <input type="input" id="credits" name="credits" class="form-control mb-4" >
+              
+              <label for="tLeave" class="form-label">Type of Leave</label>
+              <input type="input" id="tLeave" name="tLeave" class="form-control mb-4" >
+
+              <label for="daysLeave" class="form-label">Days of Leave</label>
+              <input type="input" id="daysLeave" name="daysLeave" class="form-control mb-4" >
+
+              <label for="sLeave" class="form-label">Start of Leave</label>
+              <input type="date" id="sLeave" name="sLeave" class="form-control mb-4" >
+
+              <label for="eLeave" class="form-label">End of Leave</label>
+              <input type="date" id="eLeave" name="eLeave" class="form-control mb-4" >
+
+              <label for="reason">Reason</label>
+              <textarea class="form-control" placeholder="Leave your reason here" id="reason" name="reason"></textarea>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 @endsection
 
 @section('jquery')

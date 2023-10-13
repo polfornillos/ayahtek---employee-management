@@ -10,4 +10,9 @@ class LRequest extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    // save leave request
+    public function saveLRequest($data) {
+      return $this->create($data);
+    }
 }

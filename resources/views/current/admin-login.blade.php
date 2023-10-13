@@ -59,9 +59,11 @@
                         <small><a href="/forgotpassword">Forgot password?</a></small>
                     </div>
                 </div>
-                <div class="input-group mb-1 justify-content-center">
-                    <button type="submit" class="btn btn-lg shadow btn-primary fs-6">LOGIN</button>
-                </div>
+                <form action="/employeetable" method="">
+                    <div class="input-group mb-1 justify-content-center">
+                        <button type="submit" class="btn btn-lg shadow btn-primary fs-6">LOGIN</button>
+                    </div>
+                </form>
             </form>
             </div>
             

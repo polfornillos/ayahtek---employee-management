@@ -231,8 +231,8 @@ updatePagination();
 
 // Function to update the pagination user interface based on filtered rows
 function updatePagination() {
-  if (filteredRows.length === 0) {
-    // Handle case when no entries are found
+  if (!filteredRows || filteredRows.length === 0) {
+    // Handle the case when no entries are found or filtered
     const pageInfo = document.getElementById('page-info');
     const prevPageButton = document.getElementById('prev-page');
     const nextPageButton = document.getElementById('next-page');
@@ -248,20 +248,20 @@ function updatePagination() {
     return;
   }
 
+  const maxRowsPerPage = 10; // Define your maximum rows per page
   const startIndex = (currentPage - 1) * maxRowsPerPage;
   const endIndex = startIndex + maxRowsPerPage;
-  const pageRows = filteredRows.slice(startIndex, endIndex);
 
-  // Hide all rows and display only the current page's rows
-  filteredRows.forEach((row) => {
-    row.style.display = 'none';
+  // Show or hide the rows based on the current page
+  filteredRows.forEach((row, index) => {
+    if (index >= startIndex && index < endIndex) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
   });
 
-  pageRows.forEach((row) => {
-    row.style.display = '';
-  });
-
-  // Update pagination information
+  // Update pagination information, like page number, total pages, and enable/disable buttons
   const entriesCount = filteredRows.length;
   const totalPages = Math.ceil(entriesCount / maxRowsPerPage);
   const pageInfo = document.getElementById('page-info');
@@ -360,183 +360,45 @@ resetFilterItem.addEventListener('click', function(event) {
   resetFilters(); // Call the resetFilters function when "Reset" is clicked
 });
 
-// Function to filter the table rows based on status
-function filterRowsByStatus(status) {
+//For Filtering Table by Gender
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the filter buttons and table rows
+  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="gender-"]');
   const rows = document.querySelectorAll('#table-data tr');
 
-  rows.forEach(row => {
-    const statusContainer = row.querySelector('.status-container');
-    if (statusContainer) {
-      // Extract the employee status from the class
-      const statusElement = statusContainer.querySelector(`.status-${status}`);
-      if (statusElement) {
-        const rowStatus = statusElement.textContent;
-
-        console.log('Row:', row);
-        console.log('Status Element:', statusElement);
-        console.log('Row status:', rowStatus);
-
-        if (status === 'All' || rowStatus.toLowerCase() === status.toLowerCase()) {
-          row.style.display = ''; // Show the row
-        } else {
-          row.style.display = 'none'; // Hide the row
-        }
-      }
-    }
-  });
-}
-
-// Event listener for filter buttons
-document.addEventListener('DOMContentLoaded', function() {
-  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="status-"]');
-
+  // Add click event listeners to the filter buttons
   filterButtons.forEach(button => {
-    button.addEventListener('click', function(event) {
-      event.stopPropagation();
-      const filterType = button.getAttribute('data-filter-type');
-      const status = filterType.replace('status-', ''); 
-      console.log('Clicked filter for:', status);
-      filterRowsByStatus(status);
-    });
-  });
-});
+      button.addEventListener('click', function () {
+          // Extract the gender from the data-filter-type attribute
+          const gender = button.getAttribute('data-filter-type').replace('gender-', '');
 
-/*
-// Function to filter the data based on gender
-function filterDataByGender(data, gender) {
-  return data.filter(item => {
-    if (gender === 'All Genders') {
-      return true; // Return all items
-    } else {
-      // Normalize gender values for case-insensitive comparison
-      return item.gender.toLowerCase() === gender.toLowerCase();
-    }
-  });
-}
-
-// Event listener for gender filter options
-document.addEventListener('DOMContentLoaded', function () {
-  const genderDropdownItems = document.querySelectorAll('.dropdown-item[data-filter-type^="gender-"]');
-
-  genderDropdownItems.forEach(item => {
-      item.addEventListener('click', function (event) {
-          event.stopPropagation();
-
-          // Get the filter type
-          const filterType = item.getAttribute('data-filter-type');
-
-          // Extract the gender filter value
-          const selectedGender = filterType.replace('gender-', '');
-
-          // Log the selected gender
-          console.log(`Selected gender: ${selectedGender}`);
-
-          // Update the filtered table data based on the selected gender
-          generateFilteredTableDataByGender(data, tbody, selectedGender);
+          // Filter the rows based on the selected gender
+          filterRowsByGender(gender); 
+          updateEntriesCount();
+          
       });
   });
-});
 
-function generateFilteredTableDataByGender(data, element, gender) {
-  // Filter the data based on the selected gender
-  const filteredData = filterDataByGender(data, gender);
+  // Function to filter the rows based on gender
+  function filterRowsByGender(selectedGender) {
+      rows.forEach(row => {
+          const genderCell = row.querySelector('td:nth-child(4)'); // Assuming gender is in the fourth column
+          if (genderCell) {
+              const rowGender = genderCell.textContent;
 
-  console.log('Filtered Data by Gender:', filteredData);
+              if (selectedGender === 'all' || rowGender.toLowerCase() === selectedGender) {
+                  row.style.display = ''; // Show the row
+              } else {
+                  row.style.display = 'none'; // Hide other rows
+              }
+          }
 
-  // Clear the existing table data
-  element.innerHTML = "";
-
-  // Iterate over the filtered data and create table rows
-  for (const row of filteredData) {
-    const tr = document.createElement("tr");
-
-    // Create a table data cell for each column in the row
-    for (const [key, value] of Object.entries(row)) {
-      const td = document.createElement("td");
-      td.innerHTML = value;
-      tr.append(td);
-    }
-
-    // Append the row to the table
-    element.appendChild(tr);
+      });
   }
-
-  // After filtering, update the filteredRows list
-  filteredRows = Array.from(element.querySelectorAll('tr'));
-
-  // Update pagination
-  updatePagination();
-}
-
-function filterDataByMonth(data, month) {
-  return data.filter(item => {
-    // Assuming that your data has a "birthday" property in the format "Month Day, Year"
-    const birthdayMonth = item.birthday.split(' ')[0];
-
-    if (month === 'All Months') {
-      return true; // Return all items
-    } else {
-      return birthdayMonth.toLowerCase() === month.toLowerCase();
-    }
-  });
-}
-
-// Event listener for birthday filter options
-document.addEventListener('DOMContentLoaded', function () {
-  const birthdayDropdownItems = document.querySelectorAll('.dropdown-item[data-filter-type^="birthday-"]');
-
-  birthdayDropdownItems.forEach(item => {
-    item.addEventListener('click', function (event) {
-      event.stopPropagation();
-
-      // Get the filter type
-      const filterType = item.getAttribute('data-filter-type');
-
-      // Extract the month filter value
-      const selectedMonth = filterType.replace('birthday-', '');
-
-      // Log the selected month
-      console.log(`Selected month: ${selectedMonth}`);
-
-      // Update the filtered table data based on the selected month
-      generateFilteredTableDataByMonth(data, tbody, selectedMonth);
-    });
-  });
 });
-
-function generateFilteredTableDataByMonth(data, element, month) {
-  // Filter the data based on the selected month
-  const filteredData = filterDataByMonth(data, month);
-
-  console.log('Filtered Data by Month:', filteredData);
-
-  // Clear the existing table data
-  element.innerHTML = "";
-
-  // Iterate over the filtered data and create table rows
-  for (const row of filteredData) {
-    const tr = document.createElement("tr");
-
-    // Create a table data cell for each column in the row
-    for (const [key, value] of Object.entries(row)) {
-      const td = document.createElement("td");
-      td.innerHTML = value;
-      tr.append(td);
-    }
-
-    // Append the row to the table
-    element.appendChild(tr);
-  }
-
-  // After filtering, update the filteredRows list
-  filteredRows = Array.from(element.querySelectorAll('tr'));
-
-  // Update pagination
-  updatePagination();
-} */
 
 //Show Kebab menu button 
-// Function to toggle the dropdown menu for a specific row
+//Function to toggle the dropdown menu for a specific row
 function toggleDropdown(event) {
   const row = event.target.closest('tr');
   const dropdown = row.querySelector('.dropdown-menu-option');
@@ -579,28 +441,6 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   });
 });
-
-/*
-// Function to populate the HTML structure with data
-function populateEmployeeDetails(employeeData, index) {
-  const employeeContainers = document.querySelectorAll(".employee-details");
-
-  if (index < employeeContainers.length) {
-    // Assuming your data structure corresponds to the order of elements in the HTML
-    const container = employeeContainers[index];
-    container.querySelector(".employee-id").textContent = employeeData.id;
-    container.querySelector(".employee-name").textContent = employeeData.name;
-    container.querySelector(".employee-birthday").textContent = employeeData.birthday;
-    container.querySelector(".employee-gender").textContent = employeeData.gender;
-    container.querySelector(".employee-contact").textContent = employeeData.contact;
-    // Add other fields in a similar manner
-  }
-}
-
-// Iterate through the data and populate the HTML structure
-data.forEach((employee, index) => {
-  populateEmployeeDetails(employee, index);
-});*/
 
 initializeFilteredRows();
 updatePagination();

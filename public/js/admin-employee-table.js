@@ -505,44 +505,66 @@ document.addEventListener('DOMContentLoaded', function () {
   const viewButtons = document.querySelectorAll('.view-button');
   const closeButtons = document.querySelectorAll('.cancel-employee-button');
 
+  //Get the id of the specific row to be able to display the data of that specific row
   viewButtons.forEach(viewButton => {
-      viewButton.addEventListener('click', function () {
-          const employeeId = viewButton.getAttribute('data-employee-id');
-          const viewModal = document.getElementById('viewModal' + employeeId);
+    viewButton.addEventListener('click', function () {
+      const employeeId = viewButton.getAttribute('data-employee-id');
+      const viewModal = document.getElementById('viewModal' + employeeId);
 
-          if (viewModal) {
-              viewModal.style.display = 'flex';
-          }
-      });
-  });
-
-  closeButtons.forEach(closeButton => {
-      closeButton.addEventListener('click', function () {
-          const viewModal = closeButton.closest('.view-modal-container');
-
-          if (viewModal) {
-              viewModal.style.display = 'none';
-          }
-      });
-  });
-});
-
-// Open Edit Modal
-document.addEventListener('DOMContentLoaded', function () {
-  const editButtons = document.querySelectorAll('.edit-employee-button');
- 
-
-  editButtons.forEach(editButton => {
-    editButton.addEventListener('click', function () {
-      const employeeId = editButton.getAttribute('data-employee-id');
-      const editModal = document.getElementById('editModal' + employeeId);
-      
-      // Show the edit modal
-      if (editModal) {
-        editModal.style.display = 'flex';
+      if (viewModal) {
+        viewModal.style.display = 'flex';
       }
     });
   });
+
+  closeButtons.forEach(closeButton => {
+    closeButton.addEventListener('click', function () {
+      const viewModal = closeButton.closest('.view-modal-container');
+
+      if (viewModal) {
+        viewModal.style.display = 'none';
+      }
+    });
+  });
+
+  // Close the view modal when clicking the background
+  viewButtons.forEach(viewButton => {
+    const employeeId = viewButton.getAttribute('data-employee-id');
+    const viewModal = document.getElementById('viewModal' + employeeId);
+
+    if (viewModal) {
+      viewModal.addEventListener('click', function (event) {
+        if (event.target === viewModal) {
+          viewModal.style.display = 'none';
+        }
+      });
+    }
+  });
+});
+
+//Open Add Employye Modal
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the "Add Employee" button, the modal element, and the "Cancel" button
+  const addEmployeeButton = document.querySelector('.add-employee-button');
+  const addModal = document.getElementById('add-modal');
+  const cancelModalButton = document.getElementById('add-cancel-btn');
+
+  // Add a click event listener to the "Add Employee" button to open the modal
+  addEmployeeButton.addEventListener('click', function () {
+    addModal.style.display = 'flex';
+  });
+
+  // Add a click event listener to the "Cancel" button to close the modal
+  cancelModalButton.addEventListener('click', function () {
+    addModal.style.display = 'none';
+  });
+
+  addModal.addEventListener('click', function (event) {
+    if (event.target === addModal) {
+      addModal.style.display = 'none';
+    }
+  });
+
 });
 
 initializeFilteredRows();

@@ -81,7 +81,7 @@
                             <td>{{ $employee->gender }}</td>
                             <td>{{ $employee->contact }}</td>
                             <td>{{ $employee->updated_at->format('F d, Y') }}</td>
-                            <td><div class='status-container'><span class='status-{{ $employee->status }}'>{{ ucfirst($employee->status) }}</span></div></td>
+                            <td><div class='status-container'><span class='status-{{$employee->status}}'>{{ucfirst($employee->status)}}</span></div></td>
                             <td><div class="dropdown-option">
                                     <button class="dropdown-toggle" type="button">
                                         <i class="fas fa-ellipsis-v"></i>

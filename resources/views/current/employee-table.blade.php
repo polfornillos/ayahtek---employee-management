@@ -74,7 +74,7 @@
                         @foreach ($employees as $employee)
                         <tr>
                             <!-- Populate main table -->
-                            
+                            <td>hello</td>
                             <td>EMP-{{ str_pad($employee->id, 3, '0', STR_PAD_LEFT) }}</td>
                             <td>{{ $employee->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($employee->birthday)->format('F d, Y') }}</td>

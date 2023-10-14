@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 // ! Sample Employee data
->>>>>>> 4cd14a4db8a390fb9757c100e3472c86d0f30b11
 // Changing icons when sorting
 const headerLinks = document.querySelectorAll('.header-link');
 let currentSortedColumn = null;
@@ -363,183 +360,130 @@ resetFilterItem.addEventListener('click', function(event) {
   resetFilters(); // Call the resetFilters function when "Reset" is clicked
 });
 
-// Function to filter the table rows based on status
-function filterRowsByStatus(status) {
+//For Filtering Table by Gender
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the filter buttons and table rows
+  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="gender-"]');
   const rows = document.querySelectorAll('#table-data tr');
 
-  rows.forEach(row => {
-    const statusContainer = row.querySelector('.status-container');
-    if (statusContainer) {
-      // Extract the employee status from the class
-      const statusElement = statusContainer.querySelector(`.status-${status}`);
-      if (statusElement) {
-        const rowStatus = statusElement.textContent;
-
-        console.log('Row:', row);
-        console.log('Status Element:', statusElement);
-        console.log('Row status:', rowStatus);
-
-        if (status === 'All' || rowStatus.toLowerCase() === status.toLowerCase()) {
-          row.style.display = ''; // Show the row
-        } else {
-          row.style.display = 'none'; // Hide the row
-        }
-      }
-    }
-  });
-}
-
-// Event listener for filter buttons
-document.addEventListener('DOMContentLoaded', function() {
-  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="status-"]');
-
+  // Add click event listeners to the filter buttons
   filterButtons.forEach(button => {
-    button.addEventListener('click', function(event) {
-      event.stopPropagation();
-      const filterType = button.getAttribute('data-filter-type');
-      const status = filterType.replace('status-', ''); 
-      console.log('Clicked filter for:', status);
-      filterRowsByStatus(status);
-    });
-  });
-});
+      button.addEventListener('click', function () {
+          // Extract the gender from the data-filter-type attribute
+          const gender = button.getAttribute('data-filter-type').replace('gender-', '');
 
-/*
-// Function to filter the data based on gender
-function filterDataByGender(data, gender) {
-  return data.filter(item => {
-    if (gender === 'All Genders') {
-      return true; // Return all items
-    } else {
-      // Normalize gender values for case-insensitive comparison
-      return item.gender.toLowerCase() === gender.toLowerCase();
-    }
-  });
-}
-
-// Event listener for gender filter options
-document.addEventListener('DOMContentLoaded', function () {
-  const genderDropdownItems = document.querySelectorAll('.dropdown-item[data-filter-type^="gender-"]');
-
-  genderDropdownItems.forEach(item => {
-      item.addEventListener('click', function (event) {
-          event.stopPropagation();
-
-          // Get the filter type
-          const filterType = item.getAttribute('data-filter-type');
-
-          // Extract the gender filter value
-          const selectedGender = filterType.replace('gender-', '');
-
-          // Log the selected gender
-          console.log(`Selected gender: ${selectedGender}`);
-
-          // Update the filtered table data based on the selected gender
-          generateFilteredTableDataByGender(data, tbody, selectedGender);
+          // Filter the rows based on the selected gender
+          filterRowsByGender(gender); 
+          updateEntriesCount();
+          
       });
   });
+
+  // Function to filter the rows based on gender
+  function filterRowsByGender(selectedGender) {
+      rows.forEach(row => {
+          const genderCell = row.querySelector('td:nth-child(4)');
+          if (genderCell) {
+              const rowGender = genderCell.textContent;
+
+              if (selectedGender === 'all' || rowGender.toLowerCase() === selectedGender) {
+                  row.style.display = ''; // Show the row
+              } else {
+                  row.style.display = 'none'; // Hide other rows
+              }
+          }
+
+      });
+  }
 });
 
-function generateFilteredTableDataByGender(data, element, gender) {
-  // Filter the data based on the selected gender
-  const filteredData = filterDataByGender(data, gender);
+//For Filtering Table by Birthday
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the filter buttons and table rows
+  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="birthday-"]');
+  const rows = document.querySelectorAll('#table-data tr');
 
-  console.log('Filtered Data by Gender:', filteredData);
+  // Add click event listeners to the filter buttons
+  filterButtons.forEach(button => {
+      button.addEventListener('click', function () {
 
-  // Clear the existing table data
-  element.innerHTML = "";
+          // Extract the Birthday from the data-filter-type attribute
+          const birthdayFilter = button.getAttribute('data-filter-type').replace('birthday-', '');
 
-  // Iterate over the filtered data and create table rows
-  for (const row of filteredData) {
-    const tr = document.createElement("tr");
+          // Convert the month name to the numeric index
+          const selectedMonth = monthNameToIndex(birthdayFilter);
+          
+          // Filter the rows based on the selected Birthday
+          filterRowsByBirthday(selectedMonth); 
+          updateEntriesCount();
+      });
+  });
 
-    // Create a table data cell for each column in the row
-    for (const [key, value] of Object.entries(row)) {
-      const td = document.createElement("td");
-      td.innerHTML = value;
-      tr.append(td);
-    }
+  // Function to filter the rows based on the month of the birthday
+  function filterRowsByBirthday(selectedMonth) {
+    rows.forEach(row => {
+      const birthdayCell = row.querySelector('td:nth-child(3)');
+      if (birthdayCell) {
+        const rowBirthday = new Date(birthdayCell.textContent);
+        const rowMonth = rowBirthday.getMonth(); //Results to 0 for january, 1 for febuary so on and so forth
 
-    // Append the row to the table
-    element.appendChild(tr);
+        console.log(rowMonth);
+        if (selectedMonth === 'all' || rowMonth === selectedMonth) {
+          row.style.display = ''; // Show the row
+        } else {
+          row.style.display = 'none'; // Hide other rows
+        }
+      }
+    });
   }
 
-  // After filtering, update the filteredRows list
-  filteredRows = Array.from(element.querySelectorAll('tr'));
+  // Function to convert month name to the numeric index
+  function monthNameToIndex(monthName) {
+    const monthNames = [
+      'january', 'february', 'march', 'april', 'may', 'june',
+      'july', 'august', 'september', 'october', 'november', 'december'
+    ];
+    return monthNames.indexOf(monthName.toLowerCase());
+  }
+});
 
-  // Update pagination
-  updatePagination();
-}
-
-function filterDataByMonth(data, month) {
-  return data.filter(item => {
-    // Assuming that your data has a "birthday" property in the format "Month Day, Year"
-    const birthdayMonth = item.birthday.split(' ')[0];
-
-    if (month === 'All Months') {
-      return true; // Return all items
-    } else {
-      return birthdayMonth.toLowerCase() === month.toLowerCase();
-    }
-  });
-}
-
-// Event listener for birthday filter options
+//Filter by Status
 document.addEventListener('DOMContentLoaded', function () {
-  const birthdayDropdownItems = document.querySelectorAll('.dropdown-item[data-filter-type^="birthday-"]');
+  // Get the filter buttons and table rows
+  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="status-"]');
+  const rows = document.querySelectorAll('#table-data tr');
 
-  birthdayDropdownItems.forEach(item => {
-    item.addEventListener('click', function (event) {
-      event.stopPropagation();
+  // Add click event listeners to the filter buttons
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      // Extract the status from the data-filter-type attribute
+      const status = button.getAttribute('data-filter-type').replace('status-', '');
 
-      // Get the filter type
-      const filterType = item.getAttribute('data-filter-type');
-
-      // Extract the month filter value
-      const selectedMonth = filterType.replace('birthday-', '');
-
-      // Log the selected month
-      console.log(`Selected month: ${selectedMonth}`);
-
-      // Update the filtered table data based on the selected month
-      generateFilteredTableDataByMonth(data, tbody, selectedMonth);
+      // Filter the rows based on the selected status
+      filterRowsByStatus(status);
+      updateEntriesCount();
     });
   });
+
+  // Function to filter the rows based on status
+  function filterRowsByStatus(selectedStatus) {
+    rows.forEach(row => {
+      const statusContainer = row.querySelector('.status-container');
+      if (statusContainer) {
+        const rowStatus = statusContainer.textContent.toLowerCase();
+
+        if (selectedStatus === 'all' || rowStatus === selectedStatus) {
+          row.style.display = ''; // Show the row
+        } else {
+          row.style.display = 'none'; // Hide other rows
+        }
+      }
+    });
+  }
 });
 
-function generateFilteredTableDataByMonth(data, element, month) {
-  // Filter the data based on the selected month
-  const filteredData = filterDataByMonth(data, month);
-
-  console.log('Filtered Data by Month:', filteredData);
-
-  // Clear the existing table data
-  element.innerHTML = "";
-
-  // Iterate over the filtered data and create table rows
-  for (const row of filteredData) {
-    const tr = document.createElement("tr");
-
-    // Create a table data cell for each column in the row
-    for (const [key, value] of Object.entries(row)) {
-      const td = document.createElement("td");
-      td.innerHTML = value;
-      tr.append(td);
-    }
-
-    // Append the row to the table
-    element.appendChild(tr);
-  }
-
-  // After filtering, update the filteredRows list
-  filteredRows = Array.from(element.querySelectorAll('tr'));
-
-  // Update pagination
-  updatePagination();
-} */
-
 //Show Kebab menu button 
-// Function to toggle the dropdown menu for a specific row
+//Function to toggle the dropdown menu for a specific row
 function toggleDropdown(event) {
   const row = event.target.closest('tr');
   const dropdown = row.querySelector('.dropdown-menu-option');
@@ -558,89 +502,70 @@ dropdownButtons.forEach(button => {
 
 // Open View Modal
 document.addEventListener('DOMContentLoaded', function () {
-<<<<<<< HEAD
-  const viewOption = document.querySelector('.dropdown-item-option[href="#"]');
-  const cancelButton = document.getElementById('cancel-btn');
-  const cancelEditButton = document.getElementById('edit-cancel-btn');
-  const editButton = document.querySelector('.edit-employee-button');
-  const viewModal = document.getElementById('view-modal');
-  const editModal = document.getElementById('edit-modal');
-=======
   const viewButtons = document.querySelectorAll('.view-button');
   const closeButtons = document.querySelectorAll('.cancel-employee-button');
->>>>>>> 4cd14a4db8a390fb9757c100e3472c86d0f30b11
 
+  //Get the id of the specific row to be able to display the data of that specific row
   viewButtons.forEach(viewButton => {
-      viewButton.addEventListener('click', function () {
-          const employeeId = viewButton.getAttribute('data-employee-id');
-          const viewModal = document.getElementById('viewModal' + employeeId);
+    viewButton.addEventListener('click', function () {
+      const employeeId = viewButton.getAttribute('data-employee-id');
+      const viewModal = document.getElementById('viewModal' + employeeId);
 
-<<<<<<< HEAD
-  function openEditModal() {
-     editModal.style.display = 'flex';
-  }
-
-  // Function to hide the modal
-  function closeViewModal() {
-      viewModal.style.display = 'none';
-  }
-
-  function closeEditModal() {
-      editModal.style.display = 'none';
-  }
-
-
-  // Add click event listeners
-  viewOption.addEventListener('click', openViewModal);
-  cancelButton.addEventListener('click', closeViewModal);
-  cancelEditButton.addEventListener('click', closeEditModal);
-  editButton.addEventListener('click', openEditModal);
-=======
-          if (viewModal) {
-              viewModal.style.display = 'flex';
-          }
-      });
+      if (viewModal) {
+        viewModal.style.display = 'flex';
+      }
+    });
   });
 
   closeButtons.forEach(closeButton => {
-      closeButton.addEventListener('click', function () {
-          const viewModal = closeButton.closest('.view-modal-container');
+    closeButton.addEventListener('click', function () {
+      const viewModal = closeButton.closest('.view-modal-container');
 
-          if (viewModal) {
-              viewModal.style.display = 'none';
-          }
+      if (viewModal) {
+        viewModal.style.display = 'none';
+      }
+    });
+  });
+
+  // Close the view modal when clicking the background
+  viewButtons.forEach(viewButton => {
+    const employeeId = viewButton.getAttribute('data-employee-id');
+    const viewModal = document.getElementById('viewModal' + employeeId);
+
+    if (viewModal) {
+      viewModal.addEventListener('click', function (event) {
+        if (event.target === viewModal) {
+          viewModal.style.display = 'none';
+        }
       });
+    }
   });
 });
->>>>>>> 4cd14a4db8a390fb9757c100e3472c86d0f30b11
 
-  window.onclick = function(event) {
-    if (event.target == viewModal) {
-        viewModal.style.display = "none";
+//Open Add Employye Modal
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the "Add Employee" button, the modal element, and the "Cancel" button
+  const addEmployeeButton = document.querySelector('.add-employee-button');
+  const addModal = document.getElementById('add-modal');
+  const cancelModalButton = document.getElementById('add-cancel-btn');
+
+  // Add a click event listener to the "Add Employee" button to open the modal
+  addEmployeeButton.addEventListener('click', function () {
+    addModal.style.display = 'flex';
+  });
+
+  // Add a click event listener to the "Cancel" button to close the modal
+  cancelModalButton.addEventListener('click', function () {
+    addModal.style.display = 'none';
+  });
+
+  addModal.addEventListener('click', function (event) {
+    if (event.target === addModal) {
+      addModal.style.display = 'none';
     }
-  }
+  });
+
 });
-/*
-// Function to populate the HTML structure with data
-function populateEmployeeDetails(employeeData, index) {
-  const employeeContainers = document.querySelectorAll(".employee-details");
-
-  if (index < employeeContainers.length) {
-    // Assuming your data structure corresponds to the order of elements in the HTML
-    const container = employeeContainers[index];
-    container.querySelector(".employee-id").textContent = employeeData.id;
-    container.querySelector(".employee-name").textContent = employeeData.name;
-    container.querySelector(".employee-birthday").textContent = employeeData.birthday;
-    container.querySelector(".employee-gender").textContent = employeeData.gender;
-    container.querySelector(".employee-contact").textContent = employeeData.contact;
-    // Add other fields in a similar manner
-  }
-}
-
-// Iterate through the data and populate the HTML structure
-data.forEach((employee, index) => {
-  populateEmployeeDetails(employee, index);
-});*/
 
 initializeFilteredRows();
 updatePagination();

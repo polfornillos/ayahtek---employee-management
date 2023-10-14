@@ -360,31 +360,127 @@ resetFilterItem.addEventListener('click', function(event) {
   resetFilters(); // Call the resetFilters function when "Reset" is clicked
 });
 
-// Function to filter the table rows based on status
-function filterRowsByStatus(status) {
+//For Filtering Table by Gender
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the filter buttons and table rows
+  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="gender-"]');
   const rows = document.querySelectorAll('#table-data tr');
 
-  rows.forEach(row => {
-    const statusContainer = row.querySelector('.status-container');
-    if (statusContainer) {
-      // Extract the employee status from the class
-      const statusElement = statusContainer.querySelector(`.status-${status}`);
-      if (statusElement) {
-        const rowStatus = statusElement.textContent;
+  // Add click event listeners to the filter buttons
+  filterButtons.forEach(button => {
+      button.addEventListener('click', function () {
+          // Extract the gender from the data-filter-type attribute
+          const gender = button.getAttribute('data-filter-type').replace('gender-', '');
 
-        console.log('Row:', row);
-        console.log('Status Element:', statusElement);
-        console.log('Row status:', rowStatus);
+          // Filter the rows based on the selected gender
+          filterRowsByGender(gender); 
+          updateEntriesCount();
+          
+      });
+  });
 
-        if (status === 'All' || rowStatus.toLowerCase() === status.toLowerCase()) {
+  // Function to filter the rows based on gender
+  function filterRowsByGender(selectedGender) {
+      rows.forEach(row => {
+          const genderCell = row.querySelector('td:nth-child(4)');
+          if (genderCell) {
+              const rowGender = genderCell.textContent;
+
+              if (selectedGender === 'all' || rowGender.toLowerCase() === selectedGender) {
+                  row.style.display = ''; // Show the row
+              } else {
+                  row.style.display = 'none'; // Hide other rows
+              }
+          }
+
+      });
+  }
+});
+
+//For Filtering Table by Birthday
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the filter buttons and table rows
+  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="birthday-"]');
+  const rows = document.querySelectorAll('#table-data tr');
+
+  // Add click event listeners to the filter buttons
+  filterButtons.forEach(button => {
+      button.addEventListener('click', function () {
+
+          // Extract the Birthday from the data-filter-type attribute
+          const birthdayFilter = button.getAttribute('data-filter-type').replace('birthday-', '');
+
+          // Convert the month name to the numeric index
+          const selectedMonth = monthNameToIndex(birthdayFilter);
+          
+          // Filter the rows based on the selected Birthday
+          filterRowsByBirthday(selectedMonth); 
+          updateEntriesCount();
+      });
+  });
+
+  // Function to filter the rows based on the month of the birthday
+  function filterRowsByBirthday(selectedMonth) {
+    rows.forEach(row => {
+      const birthdayCell = row.querySelector('td:nth-child(3)');
+      if (birthdayCell) {
+        const rowBirthday = new Date(birthdayCell.textContent);
+        const rowMonth = rowBirthday.getMonth(); //Results to 0 for january, 1 for febuary so on and so forth
+
+        console.log(rowMonth);
+        if (selectedMonth === 'all' || rowMonth === selectedMonth) {
           row.style.display = ''; // Show the row
         } else {
-          row.style.display = 'none'; // Hide the row
+          row.style.display = 'none'; // Hide other rows
         }
       }
-    }
+    });
+  }
+
+  // Function to convert month name to the numeric index
+  function monthNameToIndex(monthName) {
+    const monthNames = [
+      'january', 'february', 'march', 'april', 'may', 'june',
+      'july', 'august', 'september', 'october', 'november', 'december'
+    ];
+    return monthNames.indexOf(monthName.toLowerCase());
+  }
+});
+
+//Filter by Status
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the filter buttons and table rows
+  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="status-"]');
+  const rows = document.querySelectorAll('#table-data tr');
+
+  // Add click event listeners to the filter buttons
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      // Extract the status from the data-filter-type attribute
+      const status = button.getAttribute('data-filter-type').replace('status-', '');
+
+      // Filter the rows based on the selected status
+      filterRowsByStatus(status);
+      updateEntriesCount();
+    });
   });
-}
+
+  // Function to filter the rows based on status
+  function filterRowsByStatus(selectedStatus) {
+    rows.forEach(row => {
+      const statusContainer = row.querySelector('.status-container');
+      if (statusContainer) {
+        const rowStatus = statusContainer.textContent.toLowerCase();
+
+        if (selectedStatus === 'all' || rowStatus === selectedStatus) {
+          row.style.display = ''; // Show the row
+        } else {
+          row.style.display = 'none'; // Hide other rows
+        }
+      }
+    });
+  }
+});
 
 //Show Kebab menu button 
 // Function to toggle the dropdown menu for a specific row

@@ -114,7 +114,7 @@
     <div id="viewModal{{ $employee->id }}" class="view-modal-container">
         <div class="view-modal-content">
             <div class="view-modal-header">
-                <h3 class="modal-header">ADD EMPLOYEE</h3>
+                <h3 class="modal-header">EMPLOYEE PROFILE</h3>
                 <img class="modal-logo" src="images/ayahtek-logo.png" alt="Logo">
             </div>
             <div id="employee-details-row-one" class="employee-details-container">
@@ -189,7 +189,7 @@
                     </div>
                     <div class="employee-button-container">
                         <button class="cancel-employee-button">Cancel</button>
-                        <button class="edit-employee-button">Edit</button>                 
+                        <button class="edit-employee-button" data-employee-id="{{ $employee->id }}">Edit</button>                 
                     </div>
                 </div>               
             </div>

@@ -483,7 +483,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 //Show Kebab menu button 
-// Function to toggle the dropdown menu for a specific row
+//Function to toggle the dropdown menu for a specific row
 function toggleDropdown(event) {
   const row = event.target.closest('tr');
   const dropdown = row.querySelector('.dropdown-menu-option');
@@ -502,10 +502,6 @@ dropdownButtons.forEach(button => {
 
 // Open View Modal
 document.addEventListener('DOMContentLoaded', function () {
-
-  const cancelEditButton = document.getElementById('edit-cancel-btn');
-  const editButton = document.querySelector('.edit-employee-button');
-  const editModal = document.getElementById('edit-modal');
   const viewButtons = document.querySelectorAll('.view-button');
   const closeButtons = document.querySelectorAll('.cancel-employee-button');
 
@@ -513,19 +509,6 @@ document.addEventListener('DOMContentLoaded', function () {
       viewButton.addEventListener('click', function () {
           const employeeId = viewButton.getAttribute('data-employee-id');
           const viewModal = document.getElementById('viewModal' + employeeId);
-
-  function openEditModal() {
-     editModal.style.display = 'flex';
-  }
-
-  function closeEditModal() {
-      editModal.style.display = 'none';
-  }
-
-
-  // Add click event listeners
-  cancelEditButton.addEventListener('click', closeEditModal);
-  editButton.addEventListener('click', openEditModal);
 
           if (viewModal) {
               viewModal.style.display = 'flex';
@@ -541,6 +524,24 @@ document.addEventListener('DOMContentLoaded', function () {
               viewModal.style.display = 'none';
           }
       });
+  });
+});
+
+// Open Edit Modal
+document.addEventListener('DOMContentLoaded', function () {
+  const editButtons = document.querySelectorAll('.edit-employee-button');
+ 
+
+  editButtons.forEach(editButton => {
+    editButton.addEventListener('click', function () {
+      const employeeId = editButton.getAttribute('data-employee-id');
+      const editModal = document.getElementById('editModal' + employeeId);
+      
+      // Show the edit modal
+      if (editModal) {
+        editModal.style.display = 'flex';
+      }
+    });
   });
 });
 

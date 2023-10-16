@@ -1,6 +1,8 @@
 @extends('layouts.main-base')
 
 @section('script')
+  <!-- css -->
+  <link href="{{ asset('/css/admin-leave-request-modal.css') }}" rel="stylesheet"> 
   <!-- bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -76,7 +78,7 @@
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item-option view-button" href="#" data-lr-id="{{ $lr->id }}">View</a>
+                                        <a class="dropdown-item-option view-button" data-bs-toggle="modal" data-bs-target="#leave-request-modal" href="#" data-lr-id="{{ $lr->id }}">View</a>
                                     </div>
                                 </div>
                             </td>
@@ -143,6 +145,50 @@
       </div>
     </div>
 
+    <div class="modal" id="leave-request-modal" tabindex="-1" aria-labelledby="LeaveRequestModalLabel" aria-hidden="false">
+      <section class="modal-content-lr-view">
+        <header class="modal-header-lr-view">
+          <h5 class="modal-title-lr-view">Leave Request</h5>
+          <img src="./images/ayahtek-logo.png" alt="logo">
+        </header>
+
+        <div class="modal-body-lr-view">
+          <div class="employee-details-lr-view">
+            <h6 class="subheading-modal-lr-view">Employee Details</h6>
+            <div class="employee-details-container-lr-view">
+              <p class="detail-controller"><span class="leave-request-detail-header">Employee ID</span><span data-employee-leave-datail="id"></span></p>
+              <p class="detail-controller"><span class="leave-request-detail-header">Days of leave</span><span data-employee-leave-datail="leaveCount"></span></p>
+              <p class="detail-controller"><span class="leave-request-detail-header">Employee Name</span><span data-employee-leave-datail="name"></span></p>
+              <p class="detail-controller"><span class="leave-request-detail-header">Start Date</span><span data-employee-leave-datail="startDate"></span></p>
+              <p class="detail-controller"><span class="leave-request-detail-header">Remaining Credits</span><span data-employee-leave-datail="credits"></span></p>
+              <p class="detail-controller"><span class="leave-request-detail-header">End date</span><span data-employee-leave-datail="endDate"></span></p>
+              <p class="detail-controller"><span class="leave-request-detail-header">Leave Type</span><span data-employee-leave-datail="leaveType"></span></p>
+              <p class="detail-controller"><span class="leave-request-detail-header">Reason</span><span data-employee-leave-datail="reason"></span></p>
+            </div>
+          </div>
+          <div class="emergency-contact-lr-view">
+            <h6 class="subheading-modal-lr-view">Employee Details</h6>
+            <div class="emergency-contact-details-container-lr-view">
+              <p class="detail-controller"><span class="leave-request-detail-header">Name</span><span data-employee-leave-detail="cName">Not Available</span></p>
+              <p class="detail-controller"><span class="leave-request-detail-header">Relationship</span><span data-employee-leave-detail="cRelation">Not Available</span></p>
+              <p class="detail-controller"><span class="leave-request-detail-header">Contact Number</span><span data-employee-leave-detail="cContact">Not Available</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer-lr-view">
+          <div class="grant-section">
+            <button type="button" class="btn-lr-view btn-approve-lr-view">Approve</button>
+            <button type="button" class="btn-lr-view btn-deny-lr-view">Deny</button>
+          </div>
+          <div class="edit-section">
+            <button type="button" class="btn-lr-view btn-cancel-lr-view" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn-lr-view btn-edit-lr-view">Edit</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
 @endsection
 
 @section('jquery')
@@ -155,6 +201,22 @@
         // toggle visibility of target dropdown
         $(this).closest("tr").find(".dropdown-menu-option").toggle();
       });
+
+      // Add a click event to the modal backdrop
+      $('#leave-request-modal').on('click', function (e) {
+        // Check if the click target is the modal backdrop itself
+        if (e.target === this || e.target.dataset.dismiss) {
+          // Close the modal
+          $('#leave-request-modal').hide();
+          $('.modal-backdrop').hide();
+        }
+      });
+
+      $('.dropdown-item-option').on('click', function() {
+        $('#leave-request-modal').show();
+        $('.modal-backdrop').show();
+      })
+      
     });
   </script>
 @endsection

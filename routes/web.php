@@ -35,3 +35,4 @@ Route::post('/employeetable-deactivate/{id}', [employeeTableController::class, '
 Route::post('/employeetable-activate/{id}', [employeeTableController::class, 'activateUser']);
 Route::post('/employee-save', [employeeTableController::class, 'store']);
 Route::post('/employee-update/{id}', [employeeTableController::class, 'update']);
+Route::post('/employee-delete/{id}', [employeeTableController::class, 'delete']);

@@ -645,7 +645,7 @@ color: #79baf7;
     width: 100%;
     display: flex;
     bottom: 0;
-    justify-content: center;
+    justify-content: space-between;
     gap: 10px;
     border-radius:20px;
 }
@@ -668,7 +668,7 @@ color: #79baf7;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
     padding: 13px 0px;
-    width: 150px;
+    width: 100px;
     font-weight: 600;
     font-size: 15px;
     color: #FFFFFF;

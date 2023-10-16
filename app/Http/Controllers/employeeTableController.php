@@ -92,4 +92,13 @@ class employeeTableController extends Controller
 
         return redirect('/dashboard');
     }
+
+    public function delete($id) {
+        $employee = AEmployees::find($id);
+    
+        $employee->delete();
+    
+        return redirect('/dashboard');
+    }
+    
 }

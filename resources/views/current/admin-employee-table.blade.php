@@ -351,17 +351,17 @@
                         <button class="cancel-employee-button">CANCEL</button>
                         <button class="edit-employee-button" data-employee-id="{{ $employee->id }}">EDIT</button>         
                         <div id="editModal{{ $employee->id }}" class="edit-modal-container" >
-                            <form method="POST" action="/employee-update/{{ $employee->id }}">
-                            @csrf
-                                <div class="edit-modal-content">
-                                    <div class="edit-modal-header">
-                                        <h3 class="modal-header">EDIT PROFILE</h3>
-                                        <img class="modal-logo" src="images/ayahtek-logo.png" alt="Logo">
-                                    </div>
-                                    <div id="employee-details-row-one" class="employee-details-container">
-                                        <div class="employee-details-row">
-                                            <div class="employee-details-header"> Employee Details</div>
-                                            <hr id="employee-details-divider"class="solid">
+                            <div class="edit-modal-content">
+                                <div class="edit-modal-header">
+                                    <h3 class="modal-header">EDIT PROFILE</h3>
+                                    <img class="modal-logo" src="images/ayahtek-logo.png" alt="Logo">
+                                </div>
+                                <div id="employee-details-row-one" class="employee-details-container">
+                                    <div class="employee-details-row">
+                                        <div class="employee-details-header"> Employee Details</div>
+                                        <hr id="employee-details-divider"class="solid">
+                                        <form method="POST" action="/employee-update/{{ $employee->id }}">
+                                        @csrf
                                             <div class="employee-details-content">
                                                 <div class="employee-details">
                                                     <div id="employee-id-container" class="employee-content">
@@ -435,21 +435,25 @@
                                                     </div>
                                                 </div>
                                             <div class="employee-button-container">
+                                                <input type="submit" id="save-btn" class="save-employee-button" value="SAVE"/> 
+                                                </form>  
                                                 <button type="button" id="edit-cancel-btn" class="cancel-employee-button">CANCEL</button>
-                                                <button id="delete-btn" class="delete-employee-button">DELETE</button> 
-                                                <input type="submit" id="save-btn" class="save-employee-button" value="SAVE"/>             
+                                                <form method="POST" action="/employee-delete/{{ $employee->id }}" id="delete-form">
+                                                    @csrf
+                                                    <button type="submit" id="delete-btn" class="delete-employee-button">DELETE</button>
+                                                </form>                                            
                                             </div>  
                                         </div>              
                                     </div>
                                 </div>
-                            </form>
-                        </div> 
-                    </div>
+                            </div> 
+                        </div>
                     </div>
                 </div>               
             </div>
         </div>
     </div>
+</div>
     @endforeach
     @endif  
 @endsection

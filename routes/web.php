@@ -25,6 +25,7 @@ Route::get('/leaverequest', [LeaveRequestController::class, 'index']);
 Route::controller(LeaveRequestController::class)->group(function () {
     Route::get('/leave-request', 'index');
     Route::post('/leave-request/add', 'store');
+    Route::get('/leave-request/{id}', 'show');
 });
 
 Route::get('/welcome', [employeeTableController::class, 'index']); 

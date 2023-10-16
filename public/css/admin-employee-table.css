@@ -536,10 +536,9 @@ color: #79baf7;
 }
 
 .add-modal-container{
-    display: none;
     z-index: 999;
-    position: absolute;
-   
+    position: fixed;
+    display: none;
     justify-content: center;
     align-items: center;
     height: 100%;

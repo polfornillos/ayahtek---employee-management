@@ -16,7 +16,7 @@
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
-                        <div id="add-modal" class="addModal">
+                        <div id="add-modal" class="add-modal-container">
                             <div class="add-modal-content">
                                 <span class="close"></span>
                                 <div class="add-header">

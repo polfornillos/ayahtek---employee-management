@@ -34,12 +34,12 @@
                             <button class="filters-button">Filter</button>
                             <form action="/leave-request" method="GET" class="dropdown-menu dropdown-menu-lr">
                               @csrf
-                              <button type="submit" name="filter" value="approve" class="dropdown-item">Approved</button>
-                              <button type="submit" name="filter" value="pending" class="dropdown-item">Pending</button>
-                              <button type="submit" name="filter" value="denied" class="dropdown-item">Denied</button>
-                              <button type="submit" name="filter" value="highCredit" class="dropdown-item">High Credit</button>
-                              <button type="submit" name="filter" value="lowCredit" class="dropdown-item">Low Credit</button>
-                              <button type="submit" name="filter" value="reset" class="dropdown-item">Reset Filter</button>
+                              <button type="submit" name="filter" value="approve" class="dropdown-item-lr">Approved</button>
+                              <button type="submit" name="filter" value="pending" class="dropdown-item-lr">Pending</button>
+                              <button type="submit" name="filter" value="denied" class="dropdown-item-lr">Denied</button>
+                              <button type="submit" name="filter" value="highCredit" class="dropdown-item-lr">High Credit</button>
+                              <button type="submit" name="filter" value="lowCredit" class="dropdown-item-lr">Low Credit</button>
+                              <button type="submit" name="filter" value="reset" class="dropdown-item-lr">Reset Filter</button>
                             </form>
                         </div>
                     </div>

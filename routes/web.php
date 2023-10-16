@@ -21,7 +21,7 @@ Route::get('/leaverequest', [LeaveRequestController::class, 'index']);
 
 // group route that utilizes the same controller class
 Route::controller(LeaveRequestController::class)->group(function () {
-    Route::get('/leave-request}', 'index');
+    Route::get('/leave-request', 'index');
     Route::post('/leave-request/add', 'store');
 });
 

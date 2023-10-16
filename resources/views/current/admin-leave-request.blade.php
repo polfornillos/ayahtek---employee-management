@@ -58,7 +58,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                    </tbody>
+                      @if($leaveRequests)
+                        @foreach($leaveRequests as $lr)
+                          <tr>
+                            <!-- Populate main table -->
+                            
+                            <td>EMP-{{ str_pad($lr->id, 3, '0', STR_PAD_LEFT) }}</td>
+                            <td>{{ $lr->name }}</td>
+                            <td>{{ $lr->daysLeave }}</td>
+                            <td>{{ $lr->credits }}</td>
+                            <td>{{ \Carbon\Carbon::parse($lr->sLeave)->format('F d, Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($lr->eLeave)->format('F d, Y') }}</td>
+                            <td><div class='status-container'><span class='status-{{ $lr->status }}'>{{ $lr->status }}</span></div></td>
+                            <td><div class="dropdown-option">
+                                    <button class="dropdown-toggle" type="button">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item-option view-button" href="#" data-lr-id="{{ $lr->id }}">View</a>
+                                        <a class="dropdown-item-option" href="#">Deactivate</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                      @endif
                 </table>
             </div>
             <div class="table-footer">
@@ -82,7 +106,9 @@
             <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
           </div>
           <div class="modal-body">
-            <form action="" method="post">
+            <form action="/leave-request/add" method="post">
+              @csrf
+              
               <label for="name" class="form-label">Name:</label>
               <input type="input" id="name" name="name" class="form-control mb-4" >
 
@@ -102,12 +128,16 @@
               <input type="date" id="eLeave" name="eLeave" class="form-control mb-4" >
 
               <label for="reason">Reason</label>
-              <textarea class="form-control" placeholder="Leave your reason here" id="reason" name="reason"></textarea>
+              <textarea class="form-control mb-4" placeholder="Leave your reason here" id="reason" name="reason"></textarea>
+
+              <label for="status" class="form-label">Status</label>
+              <input type="input" id="status" name="status" class="form-control mb-4" >
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Submit</button>
           </div>
         </div>
       </div>

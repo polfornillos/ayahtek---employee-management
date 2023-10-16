@@ -7,6 +7,10 @@ body, html {
     background-color: #D5D5D5;
 }
 
+.bg-main {
+  background-color: #D5D5D5;
+}
+
 .navbar-container {
     width: 342px;
     height: 970px;

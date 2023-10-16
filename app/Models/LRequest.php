@@ -25,4 +25,12 @@ class LRequest extends Model
     public function getLeaveReq($id) {
       return $this->find($id);
     }
+
+    public function updateLeaveReq($data, $id) {
+      $user = $this->find($id);
+
+      $user->status = $data;
+
+      $user->save(); 
+    }
 }

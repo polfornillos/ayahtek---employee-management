@@ -205,9 +205,9 @@
                                     <button class="dropdown-toggle" type="button">
                                         <i class="fas fa-ellipsis-v"></i>
                                     </button>
-                                    <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
+                                    <div class="dropdown-menu-option" id="myDropdown">
                                         <a class="dropdown-item-option view-button" href="#" data-employee-id="{{ $employee->id }}">View</a>
-                                        <a class="dropdown-item-option" href="#">Deactivate</a>
+                                        <a class="dropdown-item-option deactivate-button" href="#" data-employee-id="{{ $employee->id }}">Deactivate</a>
                                     </div>
                                 </div>
                             </td>
@@ -229,6 +229,28 @@
             </div>
         </div> 
     </div>
+
+    @if($employees)
+    @foreach ($employees as $employee)
+    <div id="deactivateEmployee{{ $employee->id }}" class="deactivate-modal-container">
+        <div class="deactivate-modal-content">
+            <img src="images/Warning.png">
+            <div class ="deactivate-content">
+                <p id="confirm-text">CONFIRM</p>
+                <p id="confirm-sub-text">Are you sure you want to deactivate this user?</p>
+            </div>
+            <div class="deactivate-button-container">
+                <button class="cancel-deactivate-button">Cancel</button>
+                <form action="/employeetable-deactivate/{{ $employee->id }}" method="POST">
+                    @csrf
+                    <button type="submit" class="confirm-deactivate-button">Confirm</button>
+                </form>              
+            </div>
+        </div>
+    </div>
+    @endforeach
+    @endif
+
     @if($employees)
     @foreach ($employees as $employee)
     <div id="viewModal{{ $employee->id }}" class="view-modal-container">

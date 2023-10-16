@@ -3,7 +3,7 @@
 const headerLinks = document.querySelectorAll('.header-link');
 let currentSortedColumn = null;
 
-// Adding click event listeners to header links for sorting
+// Click event listeners to header links for sorting
 headerLinks.forEach((link) => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -202,7 +202,7 @@ searchForm.addEventListener('submit', function (e) {
 const prevPageButton = document.getElementById('prev-page');
 const nextPageButton = document.getElementById('next-page');
 
-// Add click event listeners to the pagination buttons
+// Click event listeners to the pagination buttons
 if (prevPageButton) {
   prevPageButton.addEventListener('click', () => {
     if (currentPage > 1) {
@@ -301,9 +301,17 @@ function updatePagination() {
 const filtersButton = document.querySelector('.filters-button');
 const dropdownMenu = document.querySelector('.dropdown-menu');
 
-//Show the dropdown
-filtersButton.addEventListener('click', () => {
+// Show the dropdown
+filtersButton.addEventListener('click', (event) => {
   dropdownMenu.classList.toggle('show');
+  event.stopPropagation();
+});
+
+// Global event listener to close the dropdown when clicking outside
+document.addEventListener('click', function (event) {
+  if (!event.target.closest('.dropdown-menu')) {
+    dropdownMenu.classList.remove('show');
+  }
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -313,13 +321,63 @@ document.addEventListener('DOMContentLoaded', function() {
       item.addEventListener('click', function(event) {
           event.stopPropagation();
 
-          // Your filter handling code here
           const filterType = item.getAttribute('data-filter-type');
           // Perform filtering based on filterType
           console.log(`Filter selected: ${filterType}`);
       });
   });
 });
+
+// Function to filter the table rows based on a filter input
+function FilterTable(filterType, filterValue) {
+  // Find the table and its rows
+  const table = document.querySelector('.main-table');
+  const rows = table.querySelectorAll('tbody tr');
+  filteredRows = [];
+
+  console.log(`Filtering by type ${filterType}, value: ${filterValue}`);
+  
+  // Iterate through each row and check if it matches the filter criteria
+  rows.forEach((row) => {
+    const cells = row.getElementsByTagName('td');
+    const filterCell = cells[filterType - 1]; // Assuming filterType is 1-based
+
+    // Check if the filter cell's text matches the filter value
+    if (filterCell) {
+      const cellText = filterCell.textContent.toLowerCase();
+      console.log(`Row text: ${cellText}`);
+      if (cellText.includes(filterValue) || filterValue === 'all') {
+        row.style.display = ''; // Show the row
+        filteredRows.push(row); // Add the row to the filteredRows array
+      } else {
+        row.style.display = 'none'; // Hide the row
+      }
+    }
+  });
+
+  // Calculate the total number of pages based on filtered rows
+  const totalPages = Math.ceil(filteredRows.length / maxRowsPerPage);
+  const pageInfo = document.getElementById('page-info');
+  const prevPageButton = document.getElementById('prev-page');
+  const nextPageButton = document.getElementById('next-page');
+
+  // Update the user interface based on the number of filtered rows
+  if (pageInfo && prevPageButton && nextPageButton) {
+    if (filteredRows.length === 0) {
+      pageInfo.textContent = 'No entries found';
+      prevPageButton.style.display = 'none';
+      nextPageButton.style.display = 'none';
+    } else {
+      currentPage = 1;
+      pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+      prevPageButton.style.display = totalPages > 1 ? '' : 'none';
+      nextPageButton.style.display = totalPages > 1 ? '' : 'none';
+    }
+  }
+
+  // Update the count of visible entries
+  updateEntriesCount();
+}
 
 // Function to reset all filters
 function resetFilters() {
@@ -362,89 +420,47 @@ resetFilterItem.addEventListener('click', function(event) {
 
 //For Filtering Table by Gender
 document.addEventListener('DOMContentLoaded', function () {
-  // Get the filter buttons and table rows
+  // Get the filter buttons
   const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="gender-"]');
-  const rows = document.querySelectorAll('#table-data tr');
 
-  // Add click event listeners to the filter buttons
+  // Click event listeners for the filter buttons
   filterButtons.forEach(button => {
-      button.addEventListener('click', function () {
-          // Extract the gender from the data-filter-type attribute
-          const gender = button.getAttribute('data-filter-type').replace('gender-', '');
+    button.addEventListener('click', function () {
+      // Extract the gender from the data-filter-type attribute
+      const gender = button.getAttribute('data-filter-type').replace('gender-', '');
+      const filterType = 4; // Assuming the "Gender" is in the fourth column
 
-          // Filter the rows based on the selected gender
-          filterRowsByGender(gender); 
-          updateEntriesCount();
-          
-      });
+      FilterTable(filterType, gender);
+
+      // Update entries count and pagination
+      updateEntriesCount();
+      updatePagination();
+    });
   });
 
-  // Function to filter the rows based on gender
-  function filterRowsByGender(selectedGender) {
-      rows.forEach(row => {
-          const genderCell = row.querySelector('td:nth-child(4)');
-          if (genderCell) {
-              const rowGender = genderCell.textContent;
-
-              if (selectedGender === 'all' || rowGender.toLowerCase() === selectedGender) {
-                  row.style.display = ''; // Show the row
-              } else {
-                  row.style.display = 'none'; // Hide other rows
-              }
-          }
-
-      });
-  }
+  // Initial filtering when the page loads
+  FilterTable(4, 'all');
 });
 
 //For Filtering Table by Birthday
 document.addEventListener('DOMContentLoaded', function () {
   // Get the filter buttons and table rows
   const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="birthday-"]');
-  const rows = document.querySelectorAll('#table-data tr');
 
-  // Add click event listeners to the filter buttons
+  // Click event listeners to the filter buttons
   filterButtons.forEach(button => {
-      button.addEventListener('click', function () {
+    button.addEventListener('click', function () {
+      // Extract the Birthday from the data-filter-type attribute
+      const birthdayFilter = button.getAttribute('data-filter-type').replace('birthday-', '');
 
-          // Extract the Birthday from the data-filter-type attribute
-          const birthdayFilter = button.getAttribute('data-filter-type').replace('birthday-', '');
+      FilterTable(3, birthdayFilter);
 
-          // Convert the month name to the numeric index
-          const selectedMonth = monthNameToIndex(birthdayFilter);
-          
-          // Filter the rows based on the selected Birthday
-          filterRowsByBirthday(selectedMonth); 
-          updateEntriesCount();
-      });
-  });
-
-  // Function to filter the rows based on the month of the birthday
-  function filterRowsByBirthday(selectedMonth) {
-    rows.forEach(row => {
-      const birthdayCell = row.querySelector('td:nth-child(3)');
-      if (birthdayCell) {
-        const rowBirthday = new Date(birthdayCell.textContent);
-        const rowMonth = rowBirthday.getMonth(); //Results to 0 for january, 1 for febuary so on and so forth
-
-        console.log(rowMonth);
-        if (selectedMonth === 'all' || rowMonth === selectedMonth) {
-          row.style.display = ''; // Show the row
-        } else {
-          row.style.display = 'none'; // Hide other rows
-        }
-      }
+      // Update entries count and pagination
+      updateEntriesCount();
+      updatePagination();
     });
-  }
-
-  // Function to convert month name to the numeric index
-  function monthNameToIndex(monthName) {
-    const monthNames = [
-      'january', 'february', 'march', 'april', 'may', 'june',
-      'july', 'august', 'september', 'october', 'november', 'december'
-    ];
-    return monthNames.indexOf(monthName.toLowerCase());
-  }
+  });
+  FilterTable(3, 'all');
 });
 
 //Filter by Status
@@ -453,7 +469,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="status-"]');
   const rows = document.querySelectorAll('#table-data tr');
 
-  // Add click event listeners to the filter buttons
+  // Click event listeners to the filter buttons
   filterButtons.forEach(button => {
     button.addEventListener('click', function () {
       // Extract the status from the data-filter-type attribute
@@ -480,10 +496,10 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+  updatePagination();
 });
 
 //Show Kebab menu button 
-//Function to toggle the dropdown menu for a specific row
 function toggleDropdown(event) {
   const row = event.target.closest('tr');
   const dropdown = row.querySelector('.dropdown-menu-option');
@@ -494,52 +510,81 @@ function toggleDropdown(event) {
   }
 }
 
-// Add click event listeners to all dropdown buttons
+//Event listeners to all dropdown buttons
 const dropdownButtons = document.querySelectorAll('.dropdown-toggle');
 dropdownButtons.forEach(button => {
   button.addEventListener('click', toggleDropdown);
 });
 
-// Open View Modal
+//Global event listener to close the dropdown when clicking outside
+document.addEventListener('click', function (event) {
+  if (!event.target.closest('.dropdown-option')) {
+    const dropdowns = document.querySelectorAll('.dropdown-menu-option');
+    dropdowns.forEach(dropdown => {
+      dropdown.style.display = 'none';
+    });
+  }
+});
+
+// Open View Modal and Deactivate Modal
 document.addEventListener('DOMContentLoaded', function () {
   const viewButtons = document.querySelectorAll('.view-button');
   const closeButtons = document.querySelectorAll('.cancel-employee-button');
 
-  //Get the id of the specific row to be able to display the data of that specific row
   viewButtons.forEach(viewButton => {
-    viewButton.addEventListener('click', function () {
-      const employeeId = viewButton.getAttribute('data-employee-id');
-      const viewModal = document.getElementById('viewModal' + employeeId);
+      viewButton.addEventListener('click', function () {
+          const employeeId = viewButton.getAttribute('data-employee-id');
+          const viewModal = document.getElementById('viewModal' + employeeId);
 
-      if (viewModal) {
-        viewModal.style.display = 'flex';
-      }
-    });
+          if (viewModal) {
+              viewModal.style.display = 'flex';
+          }
+      });
   });
 
   closeButtons.forEach(closeButton => {
-    closeButton.addEventListener('click', function () {
-      const viewModal = closeButton.closest('.view-modal-container');
+      closeButton.addEventListener('click', function () {
+          const viewModal = closeButton.closest('.view-modal-container');
 
-      if (viewModal) {
-        viewModal.style.display = 'none';
-      }
-    });
-  });
-
-  // Close the view modal when clicking the background
-  viewButtons.forEach(viewButton => {
-    const employeeId = viewButton.getAttribute('data-employee-id');
-    const viewModal = document.getElementById('viewModal' + employeeId);
-
-    if (viewModal) {
-      viewModal.addEventListener('click', function (event) {
-        if (event.target === viewModal) {
-          viewModal.style.display = 'none';
-        }
+          if (viewModal) {
+              viewModal.style.display = 'none';
+          }
       });
-    }
   });
+  
+  const deactivateButtons = document.querySelectorAll('.deactivate-button');
+  deactivateButtons.forEach(deactivateButton => {
+      deactivateButton.addEventListener('click', function (event) {
+          event.preventDefault();
+          const employeeId = deactivateButton.getAttribute('data-employee-id');
+          const deactivateModal = document.getElementById('deactivateEmployee' + employeeId);
+          if (deactivateModal) {
+              deactivateModal.style.display = 'flex';
+          }
+      });
+  });
+
+  const closeDeactivateButtons = document.querySelectorAll('.cancel-deactivate-button'); 
+  closeDeactivateButtons.forEach(closeDeactivateButton => {
+      closeDeactivateButton.addEventListener('click', function () {
+          const deactivateModal = closeDeactivateButton.closest('.deactivate-modal-container');
+          
+          if (deactivateModal) {
+              deactivateModal.style.display = 'none';
+          }
+      });
+  });
+
+  // Close modals when clicking on the background
+  const modalBackgrounds = document.querySelectorAll('.view-modal-container, .deactivate-modal-container');
+  modalBackgrounds.forEach(modalBackground => {
+      modalBackground.addEventListener('click', function (event) {
+          if (event.target === modalBackground) {
+              modalBackground.style.display = 'none';
+          }
+      });
+  });
+
 });
 
 //Open Add Employye Modal

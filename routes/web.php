@@ -17,8 +17,6 @@ Route::get('/verifycode', [LoginController::class, 'enterSecurityCode']);
 
 Route::get('/resetpassword', [LoginController::class, 'resetpassword']);
 
-Route::get('/employeetable', [employeeTableController::class, 'employeetable']);
-
 Route::get('/leaverequest', [LeaveRequestController::class, 'index']);
 
 // group route that utilizes the same controller class
@@ -27,4 +25,6 @@ Route::controller(LeaveRequestController::class)->group(function () {
     Route::post('/leave-request/add', 'store');
 });
 
-Route::get('/welcome', [employeeTableController::class, 'index']); 
+Route::get('/employeetable', [employeeTableController::class, 'employeeTable']);
+Route::post('/employeetable-deactivate/{id}', [employeeTableController::class, 'deactivateUser']);
+

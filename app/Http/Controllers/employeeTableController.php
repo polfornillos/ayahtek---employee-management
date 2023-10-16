@@ -24,4 +24,14 @@ class employeeTableController extends Controller
 
         return view('current.admin-employee-table',compact('employees'));
     }
+
+    public function deactivateUser($id) {
+        $employee = AEmployees::find($id);
+        
+        if ($employee) {
+            $employee->update(['status' => 'inactive']);
+            
+            return redirect('/employeetable');
+        }
+    }
 }

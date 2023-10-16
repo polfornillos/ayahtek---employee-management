@@ -7,15 +7,19 @@ use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LoginController;
 
 
-Route::get('/', function () {
-    return view('current.admin-login');
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/', 'login')->name('login')->middleware('alreadyLoggedIn');
+    Route::post('/login-admin', 'loginAdmin')->name('login-admin');
 });
 
-Route::get('/forgotpassword', [LoginController::class, 'forgotpassword']);
+Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard')->middleware('isLoggedIn');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/verifycode', [LoginController::class, 'enterSecurityCode']);
+Route::get('/forgotpassword', [LoginController::class, 'forgotpassword'])->name('forgotpassword');
 
-Route::get('/resetpassword', [LoginController::class, 'resetpassword']);
+Route::get('/verifycode', [LoginController::class, 'enterSecurityCode'])->name('entersecuritycode');;
+
+Route::get('/resetpassword', [LoginController::class, 'resetpassword'])->name('resetpassword');;
 
 Route::get('/employeetable', [employeeTableController::class, 'employeetable']);
 

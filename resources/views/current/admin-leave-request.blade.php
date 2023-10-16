@@ -78,7 +78,8 @@
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item-option view-button" data-bs-toggle="modal" data-bs-target="#leave-request-modal" href="#" data-lr-id="{{ $lr->id }}">View</a>
+                                        <a class="dropdown-item-option view-button"
+                                        data-url="/leave-request/{{$lr->id}}" data-bs-toggle="modal" data-bs-target="#leave-request-modal" href="javascript:void(0)" >View</a>
                                     </div>
                                 </div>
                             </td>
@@ -212,11 +213,49 @@
         }
       });
 
-      $('.dropdown-item-option').on('click', function() {
-        $('#leave-request-modal').show();
-        $('.modal-backdrop').show();
-      })
+      // $('.dropdown-item-option').on('click', function() {
+      //   $('#leave-request-modal').show();
+      //   $('.modal-backdrop').show();
+      // })
+
+      $("tbody").on('click', '.view-button', function () {
+
+          const userURL = $(this).data('url'); 
+
+          // use ajax to get the data of leave request
+          $.get(userURL, function (data) {
+
+              // show modal
+              $('#leave-request-modal').show();
+              $('.modal-backdrop').show();
+
+              // populate modal with the fetched data
+              $('[data-employee-leave-datail="id"]').text(data.id);
+              $('[data-employee-leave-datail="name"]').text(data.name);
+              $('[data-employee-leave-datail="leaveCount"]').text(data.daysLeave);
+              $('[data-employee-leave-datail="credits"]').text(data.credits);
+              $('[data-employee-leave-datail="startDate"]').text(formatDate(data.sLeave));
+              $('[data-employee-leave-datail="endDate"]').text(formatDate(data.eLeave));
+              $('[data-employee-leave-datail="leaveType"]').text(data.tLeave);
+              $('[data-employee-leave-datail="reason"]').text(data.reason);
+          })
+
+      });
       
     });
+
+    function formatDate(date) {
+      const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+    
+      const dateObject = new Date(date);
+      const month = months[dateObject.getMonth()];
+      const day = dateObject.getDate();
+      const year = dateObject.getFullYear();
+    
+      return `${month} ${day.toString().padStart(2, '0')}, ${year}`;
+    }
   </script>
 @endsection

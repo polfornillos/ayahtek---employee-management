@@ -164,31 +164,30 @@
                         </tr>
                     </thead>
                     <tbody id="table-data">
+                        @if($employees)
+                        @foreach ($employees as $employee)
                         <tr>
                             <!-- Populate main table -->
-                            @if($employees)
-                            @foreach ($employees as $employee)
                             <td>EMP-{{ str_pad($employee->id, 3, '0', STR_PAD_LEFT) }}</td>
                             <td>{{ $employee->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($employee->birthday)->format('F d, Y') }}</td>
                             <td>{{ $employee->gender }}</td>
                             <td>{{ $employee->contact }}</td>
                             <td>{{ $employee->updated_at->format('F d, Y') }}</td>
-                            <td><div class='status-container'><span class='status-{{ $employee->status }}'>{{ ucfirst($employee->status) }}</span></div></td>
+                            <td><div class='status-container'><span class='status-{{$employee->status}}'>{{ucfirst($employee->status)}}</span></div></td>
                             <td><div class="dropdown-option">
-                                    <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
+                                    <button class="dropdown-toggle" type="button">
                                         <i class="fas fa-ellipsis-v"></i>
                                     </button>
-                                    <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item-option" href="#">View</a>
-                                        <a class="dropdown-item-option" href="#">Deactivate</a>
+                                    <div class="dropdown-menu-option" id="myDropdown">
+                                        <a class="dropdown-item-option view-button" href="#" data-employee-id="{{ $employee->id }}">View</a>
+                                        <a class="dropdown-item-option deactivate-button" href="#" data-employee-id="{{ $employee->id }}">Deactivate</a>
                                     </div>
                                 </div>
                             </td>
-                            @endforeach
-                            @endif
-
                         </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

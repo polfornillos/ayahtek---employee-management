@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 // ! Sample Employee data
->>>>>>> 4cd14a4db8a390fb9757c100e3472c86d0f30b11
 // Changing icons when sorting
 const headerLinks = document.querySelectorAll('.header-link');
 let currentSortedColumn = null;
@@ -404,7 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-/*
+
 // Function to filter the data based on gender
 function filterDataByGender(data, gender) {
   return data.filter(item => {
@@ -536,7 +533,7 @@ function generateFilteredTableDataByMonth(data, element, month) {
 
   // Update pagination
   updatePagination();
-} */
+}
 
 //Show Kebab menu button 
 // Function to toggle the dropdown menu for a specific row
@@ -558,24 +555,14 @@ dropdownButtons.forEach(button => {
 
 // Open View Modal
 document.addEventListener('DOMContentLoaded', function () {
-<<<<<<< HEAD
-  const viewOption = document.querySelector('.dropdown-item-option[href="#"]');
-  const cancelButton = document.getElementById('cancel-btn');
-  const cancelEditButton = document.getElementById('edit-cancel-btn');
-  const editButton = document.querySelector('.edit-employee-button');
-  const viewModal = document.getElementById('view-modal');
-  const editModal = document.getElementById('edit-modal');
-=======
   const viewButtons = document.querySelectorAll('.view-button');
   const closeButtons = document.querySelectorAll('.cancel-employee-button');
->>>>>>> 4cd14a4db8a390fb9757c100e3472c86d0f30b11
 
   viewButtons.forEach(viewButton => {
       viewButton.addEventListener('click', function () {
           const employeeId = viewButton.getAttribute('data-employee-id');
           const viewModal = document.getElementById('viewModal' + employeeId);
 
-<<<<<<< HEAD
   function openEditModal() {
      editModal.style.display = 'flex';
   }
@@ -595,7 +582,6 @@ document.addEventListener('DOMContentLoaded', function () {
   cancelButton.addEventListener('click', closeViewModal);
   cancelEditButton.addEventListener('click', closeEditModal);
   editButton.addEventListener('click', openEditModal);
-=======
           if (viewModal) {
               viewModal.style.display = 'flex';
           }
@@ -612,49 +598,12 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   });
 });
-<<<<<<< HEAD
-
-//Open View Modal
-document.addEventListener('DOMContentLoaded', function () {
-  const viewOption = document.querySelector('.dropdown-item-option[href="#"]');
-  const cancelButton = document.querySelector('.cancel-employee-button');
-  const editButton = document.querySelector('.edit-employee-button');
-  const viewModal = document.getElementById('view-modal');
-  const editModal = document.getElementById('edit-modal');
-
-  // Function to show the modal
-  function openViewModal() {
-      viewModal.style.display = 'flex';
-  }
-
-  function openEditModal() {
-    editModal.style.display = 'flex';
-}
-
-  // Function to hide the modal
-  function closeViewModal() {
-      editModal.style.display = 'none';
-  }
-
-  // Add click event listeners
-  viewOption.addEventListener('click', openViewModal);
-  cancelButton.addEventListener('click', closeViewModal);
-  editButton.addEventListener('click', openEditModal);
-=======
->>>>>>> 4cd14a4db8a390fb9757c100e3472c86d0f30b11
->>>>>>> 733f39ea68f2dabb3d4ff986fe493f47e7dd4863
-
   window.onclick = function(event) {
     if (event.target == viewModal) {
         viewModal.style.display = "none";
     }
   }
-});
-<<<<<<< HEAD
-
-=======
 /*
->>>>>>> 733f39ea68f2dabb3d4ff986fe493f47e7dd4863
 // Function to populate the HTML structure with data
 function populateEmployeeDetails(employeeData, index) {
   const employeeContainers = document.querySelectorAll(".employee-details");

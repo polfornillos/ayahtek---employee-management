@@ -57,7 +57,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="table-data">
                       @if($leaveRequests)
                         @foreach($leaveRequests as $lr)
                           <tr>
@@ -70,13 +70,13 @@
                             <td>{{ \Carbon\Carbon::parse($lr->sLeave)->format('F d, Y') }}</td>
                             <td>{{ \Carbon\Carbon::parse($lr->eLeave)->format('F d, Y') }}</td>
                             <td><div class='status-container'><span class='status-{{ $lr->status }}'>{{ $lr->status }}</span></div></td>
-                            <td><div class="dropdown-option">
+                            <td>
+                              <div class="dropdown-option">
                                     <button class="dropdown-toggle" type="button">
-                                        <i class="fas fa-ellipsis-v"></i>
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item-option view-button" href="#" data-lr-id="{{ $lr->id }}">View</a>
-                                        <a class="dropdown-item-option" href="#">Deactivate</a>
                                     </div>
                                 </div>
                             </td>
@@ -148,7 +148,13 @@
 @section('jquery')
   <script>
     $(document).ready(function() {
-      // code goes here ...
+      $("tbody").on("click", ".dropdown-toggle", function(event) {
+        // close all dropdown, excluding the target
+        $(".dropdown-menu-option").not($(this).closest("tr").find(".dropdown-menu-option")).hide();
+
+        // toggle visibility of target dropdown
+        $(this).closest("tr").find(".dropdown-menu-option").toggle();
+      });
     });
   </script>
 @endsection

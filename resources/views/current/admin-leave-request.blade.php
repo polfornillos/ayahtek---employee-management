@@ -179,8 +179,16 @@
 
         <div class="modal-footer-lr-view">
           <div class="grant-section">
-            <button type="button" class="btn-lr-view btn-approve-lr-view">Approve</button>
-            <button type="button" class="btn-lr-view btn-deny-lr-view">Deny</button>
+            <form action="/leave-request/update" method="POST">
+              @csrf
+              <input type="text" id="approve-input" name="leaveReqId" hidden>
+              <button type="submit" name="intent" value="Approved" class="btn-lr-view btn-approve-lr-view">Approve</button>
+            </form>
+            <form action="/leave-request/update" method="POST">
+              @csrf
+              <input type="text" id="deny-input" name="leaveReqId" hidden>
+              <button type="submit" name="intent" value="Denied" class="btn-lr-view btn-deny-lr-view">Deny</button>
+            </form>
           </div>
           <div class="edit-section">
             <button type="button" class="btn-lr-view btn-cancel-lr-view" data-dismiss="modal">Cancel</button>
@@ -238,6 +246,8 @@
               $('[data-employee-leave-datail="endDate"]').text(formatDate(data.eLeave));
               $('[data-employee-leave-datail="leaveType"]').text(data.tLeave);
               $('[data-employee-leave-datail="reason"]').text(data.reason);
+              $('#approve-input').val(data.id);
+              $('#deny-input').val(data.id);
           })
 
       });

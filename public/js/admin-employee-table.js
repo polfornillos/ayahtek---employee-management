@@ -659,10 +659,13 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// Open View Modal and Deactivate Modal
+//View Modal, Activate Modal, Deactivate Modal
 document.addEventListener('DOMContentLoaded', function () {
   const viewButtons = document.querySelectorAll('.view-button');
   const closeButtons = document.querySelectorAll('.cancel-employee-button');
+  const deactivateButtons = document.querySelectorAll('.deactivate-button');
+  const activateButtons = document.querySelectorAll('.activate-button');
+  const modalBackgrounds = document.querySelectorAll('.view-modal-container, .deactivate-modal-container, .activate-modal-container');
 
   viewButtons.forEach(viewButton => {
       viewButton.addEventListener('click', function () {
@@ -684,32 +687,31 @@ document.addEventListener('DOMContentLoaded', function () {
           }
       });
   });
-  
-  const deactivateButtons = document.querySelectorAll('.deactivate-button');
+
   deactivateButtons.forEach(deactivateButton => {
       deactivateButton.addEventListener('click', function (event) {
-          event.preventDefault();
+          event.preventDefault(); 
           const employeeId = deactivateButton.getAttribute('data-employee-id');
           const deactivateModal = document.getElementById('deactivateEmployee' + employeeId);
+
           if (deactivateModal) {
               deactivateModal.style.display = 'flex';
           }
       });
   });
 
-  const closeDeactivateButtons = document.querySelectorAll('.cancel-deactivate-button'); 
-  closeDeactivateButtons.forEach(closeDeactivateButton => {
-      closeDeactivateButton.addEventListener('click', function () {
-          const deactivateModal = closeDeactivateButton.closest('.deactivate-modal-container');
-          
-          if (deactivateModal) {
-              deactivateModal.style.display = 'none';
+  activateButtons.forEach(activateButton => {
+      activateButton.addEventListener('click', function (event) {
+          event.preventDefault();
+          const employeeId = activateButton.getAttribute('data-employee-id');
+          const activateModal = document.getElementById('activateEmployee' + employeeId);
+
+          if (activateModal) {
+              activateModal.style.display = 'flex';
           }
       });
   });
 
-  // Close modals when clicking on the background
-  const modalBackgrounds = document.querySelectorAll('.view-modal-container, .deactivate-modal-container');
   modalBackgrounds.forEach(modalBackground => {
       modalBackground.addEventListener('click', function (event) {
           if (event.target === modalBackground) {
@@ -717,6 +719,26 @@ document.addEventListener('DOMContentLoaded', function () {
           }
       });
   });
+
+  const closeDeactivateButtons = document.querySelectorAll('.cancel-deactivate-button');
+    closeDeactivateButtons.forEach(closeDeactivateButton => {
+        closeDeactivateButton.addEventListener('click', function () {
+            const deactivateModal = closeDeactivateButton.closest('.deactivate-modal-container');
+            if (deactivateModal) {
+                deactivateModal.style.display = 'none';
+            }
+        });
+    });
+
+    const closeActivateButtons = document.querySelectorAll('.cancel-activate-button');
+    closeActivateButtons.forEach(closeActivateButton => {
+        closeActivateButton.addEventListener('click', function () {
+            const activateModal = closeActivateButton.closest('.activate-modal-container');
+            if (activateModal) {
+                activateModal.style.display = 'none';
+            }
+        });
+    });
 
 });
 

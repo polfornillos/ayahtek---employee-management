@@ -126,24 +126,27 @@ span[data-employee-leave-detail] {
     margin-right: 0.5rem;
 }
 
+[data-status="Approved"],
+[data-status="Denied"],
+[data-status="Pending"] {
+  display: inline-block;
+  width: 6.5rem;
+  padding-block: 0.5rem;
+  text-align: center;
+  color: #ffffff;
+  border-radius: 20px;
+}
+
 [data-status="Approved"] {
-    display: inline-block;
-    width: 6.5rem;
-    padding-block: 0.5rem;
-    text-align: center;
-    color: #ffffff;
-    background-color: #7fd159;
-    border-radius: 20px;
+  background-color: #7fd159;
 }
 
 [data-status="Denied"] {
-    display: inline-block;
-    width: 6.5rem;
-    padding-block: 0.5rem;
-    text-align: center;
-    color: #ffffff;
-    background-color: #d94545;
-    border-radius: 20px;
+  background-color: #d94545;
+}
+
+[data-status="Pending"] {
+  background-color: #ed6c02;
 }
 
 .dropdown-toggle-lr {
@@ -165,22 +168,21 @@ span[data-employee-leave-detail] {
 }
 
 .dropdown-item-lr {
-  display: block;
-  background-color: transparent;
-  border: 0;
-  font-size: 0.813rem;
-  font-weight: 500;
-  color: #FFFFFF;
-  padding-left: 0.75rem;
-  padding-block: 0.25rem;
-  cursor: pointer;
+    display: block;
+    background-color: transparent;
+    border: 0;
+    font-size: 0.813rem;
+    font-weight: 500;
+    color: #ffffff;
+    padding-left: 0.75rem;
+    padding-block: 0.25rem;
+    cursor: pointer;
 }
 
 .dropdown-item-lr:hover {
-  color: #cfcfcf;
+    color: #cfcfcf;
 }
 
-
 .dropdown-menu.show {
-  background-color: #008080;
+    background-color: #008080;
 }

@@ -18,6 +18,7 @@ class LoginController extends Controller
         $this->admin = new User();
         $this->employees = new AEmployees();
     }
+    
     public function login(){
         return view('auth.admin-login');
     }

@@ -534,9 +534,22 @@ color: #79baf7;
     left: 50%; 
     transform: translate(-50%, -50%); 
 }
-.add-modal-content{
+
+.add-modal-container{
     display: none;
+    z-index: 999;
+    position: absolute;
+   
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.76);
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
 }
+
 .view-modal-content, .add-modal-content, .edit-modal-content{
     width: 1120px;
     height: 702px;

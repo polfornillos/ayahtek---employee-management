@@ -797,5 +797,151 @@ window.onclick = function(event) {
   }
 }
 
+// Function to format SSS number
+const sssNumberInput = document.getElementById('sss_number');
+
+sssNumberInput.addEventListener('input', function () {
+  const inputValue = sssNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+  let formattedValue = '';
+
+  if (inputValue.length > 2) {
+    formattedValue = inputValue.substring(0, 2) + '-';
+
+    if (inputValue.length > 9) {
+      formattedValue += inputValue.substring(2, 9) + '-';
+
+      if (inputValue.length > 10) {
+        formattedValue += inputValue.substring(9, 10);
+      } else {
+        formattedValue += inputValue.substring(9);
+      }
+    } else {
+      formattedValue += inputValue.substring(2);
+    }
+
+    sssNumberInput.value = formattedValue;
+  }
+});
+
+sssNumberInput.addEventListener('keypress', function (e) {
+  const key = String.fromCharCode(e.charCode);
+  if (!/^\d$/.test(key)) {
+    e.preventDefault(); // Prevent entering non-numeric characters
+  }
+});
+
+const philhealthNumberInput = document.getElementById('philhealth_number');
+
+philhealthNumberInput.addEventListener('input', function () {
+  // Remove non-numeric characters
+  let inputValue = philhealthNumberInput.value.replace(/[^0-9]/g, '');
+  let formattedValue = '';
+
+  if (inputValue.length >= 2) {
+    formattedValue = inputValue.substring(0, 2);
+
+    if (inputValue.length > 2) {
+      formattedValue += '-' + inputValue.substring(2, 9);
+
+      if (inputValue.length > 9) {
+        formattedValue += '-' + inputValue.substring(9, 10);
+      }
+    }
+
+    philhealthNumberInput.value = formattedValue;
+  }
+});
+
+philhealthNumberInput.addEventListener('keypress', function (e) {
+  const key = String.fromCharCode(e.charCode);
+  if (!/^\d$/.test(key)) {
+    e.preventDefault(); // Prevent entering non-numeric characters
+  }
+});
+
+// Function to format TIN
+const tinNumberInput = document.getElementById('tin');
+
+tinNumberInput.addEventListener('input', function () {
+  const inputValue = tinNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+  let formattedValue = '';
+
+  if (inputValue.length > 0) {
+    formattedValue = inputValue.substring(0, 3);
+
+    if (inputValue.length > 3) {
+      formattedValue += '-' + inputValue.substring(3, 6);
+    }
+
+    if (inputValue.length > 6) {
+      formattedValue += '-' + inputValue.substring(6, 9);
+    }
+
+    if (inputValue.length > 9) {
+      formattedValue += '-' + inputValue.substring(9, 12);
+    }
+
+    tinNumberInput.value = formattedValue;
+  }
+});
+
+tinNumberInput.addEventListener('keypress', function (e) {
+  const key = String.fromCharCode(e.charCode);
+  if (!/^\d$/.test(key)) {
+    e.preventDefault(); // Prevent entering non-numeric characters
+  }
+});
+
+// Function to format Salary input
+const salaryInput = document.getElementById('salary');
+
+// Set the initial value to "0.00"
+salaryInput.value = "0.00";
+
+salaryInput.addEventListener('input', function () {
+  let inputValue = salaryInput.value.replace(/[^0-9.]/g, ''); // Remove non-numeric characters except '.'
+  
+  // Ensure there's a decimal point
+  if (!inputValue.includes('.')) {
+    inputValue += ".00";
+  } else {
+    // Limit decimal places to 2
+    const parts = inputValue.split('.');
+    if (parts[1] && parts[1].length > 2) {
+      parts[1] = parts[1].substring(0, 2);
+    }
+    inputValue = parts.join('.');
+  }
+  
+  salaryInput.value = inputValue;
+});
+
+// Function to format Contact number input
+const contactInput = document.getElementById('contact');
+
+contactInput.addEventListener('input', function () {
+  let inputValue = contactInput.value.replace(/[^0-9+]/g, ''); // Remove non-numeric characters except '+'
+  
+  // Check if the input starts with "+63"
+  if (!inputValue.startsWith('+63')) {
+    inputValue = '+63' + inputValue;
+  }
+  
+  contactInput.value = inputValue;
+});
+
+const eContactInput = document.getElementById('emergency_contact');
+
+eContactInput.addEventListener('input', function () {
+  let inputValue = eContactInput.value.replace(/[^0-9+]/g, ''); // Remove non-numeric characters except '+'
+  
+  // Check if the input starts with "+63"
+  if (!inputValue.startsWith('+63')) {
+    inputValue = '+63' + inputValue;
+  }
+  
+  eContactInput.value = inputValue;
+});
+
 initializeFilteredRows();
 updatePagination();

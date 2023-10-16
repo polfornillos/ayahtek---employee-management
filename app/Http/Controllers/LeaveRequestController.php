@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\LRequest;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 
 class LeaveRequestController extends Controller
@@ -16,8 +17,19 @@ class LeaveRequestController extends Controller
   }
 
     // renders leave request page
-    public function index() {
+    public function index(Request $request) {
       $leaveRequests = $this->LRequest->getLRequests();
+
+      if($request->has('filter')) {
+        $leaveRequests = match ($request->filter) {
+          'approve' => $leaveRequests->where('status', 'Approved'),
+          'pending' => $leaveRequests->where('status', 'Pending'),
+          'denied' => $leaveRequests->where('status', 'Denied'),
+          'highCredit' => $leaveRequests->where('credits', '>', 4),
+          'lowCredit' => $leaveRequests->where('credits', '<', 5),
+          'reset' => $leaveRequests,
+        };
+      }
 
       return view('current.admin-leave-request', compact('leaveRequests'));
     }

@@ -21,4 +21,8 @@ class LRequest extends Model
     public function getLRequests() {
       return $this->all();
     }
+
+    public function getLeaveReq($id) {
+      return $this->find($id);
+    }
 }

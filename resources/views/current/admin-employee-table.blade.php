@@ -139,7 +139,7 @@
                                         </div>
                                     </div>
                                     <div class="employee-button-container">
-                                        <button id="add-cancel-btn" class="cancel-employee-button">CANCEL</button>
+                                        <button type="button" id="add-cancel-btn" class="cancel-employee-button" >CANCEL</button>
                                         <input type="submit" id="submit-btn" class="submit-employee-button" value="SUBMIT"/>                 
                                     </div>
                                 </div>              

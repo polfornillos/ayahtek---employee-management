@@ -215,8 +215,8 @@
         <div class="deactivate-modal-content">
             <img src="images/Warning.png">
             <div class ="deactivate-content">
-                <p id="confirm-text">CONFIRM</p>
-                <p id="confirm-sub-text">Are you sure you want to deactivate this user?</p>
+                <p class="confirm-text">CONFIRM</p>
+                <p class="confirm-sub-text">Are you sure you want to deactivate this user?</p>
             </div>
             <div class="deactivate-button-container">
                 <button class="cancel-deactivate-button">Cancel</button>
@@ -236,8 +236,8 @@
         <div class="activate-modal-content">
             <img src="images/Confirm.png">
             <div class ="deactivate-content">
-                <p id="confirm-text">CONFIRM</p>
-                <p id="confirm-sub-text">Are you sure you want to activate this user?</p>
+                <p class="confirm-text">CONFIRM</p>
+                <p class="confirm-sub-text">Are you sure you want to activate this user?</p>
             </div>
             <div class="activate-button-container">
                 <button class="cancel-activate-button">Cancel</button>
@@ -387,25 +387,25 @@
                                                     </div>
                                                     <div id="employee-contact-container" class="employee-content">
                                                         <h3>Contact number</h3>
-                                                        <input name="contact" class="textbox" type="text" value="{{ $employee->contact }}" required>
+                                                        <input id="e_contact" name="contact" class="textbox" type="text" value="{{ $employee->contact }}" required>
                                                     </div>
                                                 </div>
                                                 <div class="employee-details">
                                                     <div id="employee-id-container" class="employee-content">
                                                         <h3>Salary</h3>
-                                                        <input name="salary" class="textbox" type="text" value="{{ $employee->salary }}" required>
+                                                        <input id="e_salary" name="salary" class="textbox" type="text" value="{{ $employee->salary }}" required>
                                                     </div>
                                                     <div id="employee-name-container" class="employee-content">
                                                         <h3>SSS Number</h3>
-                                                        <input name="sss_number" class="textbox" type="text" value="{{ $employee->sss_number }}" required>
+                                                        <input id="e_sss_number" name="sss_number" class="textbox" type="text" value="{{ $employee->sss_number }}" required>
                                                     </div>
                                                     <div id="employee-birthday-container" class="employee-content">
                                                         <h3>Philhealth Number</h3>
-                                                        <input name="philhealth_number" class="textbox" type="text" value="{{ $employee->philhealth_number }}" required>
+                                                        <input id="e_philhealth_number" name="philhealth_number" class="textbox" type="text" value="{{ $employee->philhealth_number }}" required>
                                                     </div>
                                                     <div id="employee-gender-container" class="employee-content">
                                                         <h3>TIN</h3>
-                                                        <input name="tin" class="textbox" type="text" value="{{ $employee->tin }}" required>
+                                                        <input id="e_tin" name="tin" class="textbox" type="text" value="{{ $employee->tin }}" required>
                                                     </div>
                                                     <div id="employee-contact-container" class="employee-content">
                                                         <h3>Date Added</h3>
@@ -430,19 +430,34 @@
                                                         </div>
                                                         <div id="employee-emergency-contact-container" class="employee-content">
                                                             <h3>Contact Number</h3>
-                                                            <input name="emergency_contact_number" class="textbox" type="text" value="{{ $employee->emergency_contact_number }}">
+                                                            <input id="e_emergency_contact" name="emergency_contact_number" class="textbox" type="text" value="{{ $employee->emergency_contact_number }}">
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <div class="employee-button-container">
-                                                <input type="submit" id="save-btn" class="save-employee-button" value="SAVE"/> 
-                                                </form>  
+                                            <div class="employee-button-container">  
                                                 <button type="button" id="edit-cancel-btn" class="cancel-employee-button">CANCEL</button>
-                                                <form method="POST" action="/employee-delete/{{ $employee->id }}" id="delete-form">
-                                                    @csrf
-                                                    <button type="submit" id="delete-btn" class="delete-employee-button">DELETE</button>
-                                                </form>                                            
-                                            </div>  
+                                                <button type="button" id="delete-btn" class="delete-employee-button"  data-employee-id="{{ $employee->id }}">DELETE</button>  
+                                                <input type="submit" id="save-btn" class="save-employee-button" value="SAVE"/> 
+                                                </form>                                        
+                                            </div>
+                                            
+                                            <div id="deleteEmployee{{ $employee->id }}" class="delete-modal-container">
+                                                <div class="delete-modal-content">
+                                                    <img src="images/Warning.png">
+                                                    <div class ="delete-content">
+                                                        <p class="confirm-text">CONFIRM</p>
+                                                        <p class="confirm-sub-text">Are you sure you want to delete this user?</p>
+                                                    </div>
+                                                    <div class="delete-button-container">
+                                                        <button class="cancel-delete-button">Cancel</button>
+                                                        <form method="POST" action="/employee-delete/{{ $employee->id }}" id="delete-form">
+                                                            @csrf
+                                                            <button type="submit" class="confirm-delete-button">Confirm</button>
+                                                        </form>              
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>              
                                     </div>
                                 </div>
@@ -453,7 +468,8 @@
             </div>
         </div>
     </div>
-</div>
     @endforeach
     @endif  
+</div>
+
 @endsection

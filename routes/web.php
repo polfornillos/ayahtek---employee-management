@@ -28,4 +28,5 @@ Route::controller(LeaveRequestController::class)->group(function () {
 });
 
 Route::get('/welcome', [employeeTableController::class, 'index']); 
-Route::get('/employeetable', [employeeTableController::class, 'employeeTable']); 
+Route::get('/employeetable', [employeeTableController::class, 'employeeTable']);
+Route::post('/employee-save', [employeeTableController::class, 'store']);

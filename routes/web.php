@@ -27,4 +27,4 @@ Route::controller(LeaveRequestController::class)->group(function () {
 
 Route::get('/employeetable', [employeeTableController::class, 'employeeTable']);
 Route::post('/employeetable-deactivate/{id}', [employeeTableController::class, 'deactivateUser']);
-
+Route::post('/employee-save', [employeeTableController::class, 'store']);

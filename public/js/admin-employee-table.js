@@ -563,6 +563,35 @@ document.addEventListener('DOMContentLoaded', function () {
           }
       });
   });
+});
+
+
+//Open View Modal
+document.addEventListener('DOMContentLoaded', function () {
+  const viewOption = document.querySelector('.dropdown-item-option[href="#"]');
+  const cancelButton = document.querySelector('.cancel-employee-button');
+  const editButton = document.querySelector('.edit-employee-button');
+  const viewModal = document.getElementById('view-modal');
+  const editModal = document.getElementById('edit-modal');
+
+  // Function to show the modal
+  function openViewModal() {
+      viewModal.style.display = 'flex';
+  }
+
+  function openEditModal() {
+    editModal.style.display = 'flex';
+}
+
+  // Function to hide the modal
+  function closeViewModal() {
+      editModal.style.display = 'none';
+  }
+
+  // Add click event listeners
+  viewOption.addEventListener('click', openViewModal);
+  cancelButton.addEventListener('click', closeViewModal);
+  editButton.addEventListener('click', openEditModal);
 
   const closeDeactivateButtons = document.querySelectorAll('.cancel-deactivate-button'); 
   closeDeactivateButtons.forEach(closeDeactivateButton => {

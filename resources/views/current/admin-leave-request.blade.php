@@ -184,10 +184,6 @@
               @csrf
               <input type="text" id="approve-input" name="leaveReqId" hidden>
               <button type="submit" name="intent" value="Approved" class="btn-lr-view btn-approve-lr-view">Approve</button>
-            </form>
-            <form action="/leave-request/update" method="POST">
-              @csrf
-              <input type="text" id="deny-input" name="leaveReqId" hidden>
               <button type="submit" name="intent" value="Denied" class="btn-lr-view btn-deny-lr-view">Deny</button>
             </form>
           </div>

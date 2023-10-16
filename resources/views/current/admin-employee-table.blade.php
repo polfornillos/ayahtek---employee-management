@@ -120,7 +120,7 @@
                                     </div>
                                 </div> 
                                 <div id="employee-details-row-two" class="employee-details-row">
-                                    <div class="employee-details-header"> Employee Details</div>
+                                    <div class="employee-details-header"> Emergency Contact</div>
                                     <hr id="employee-details-divider"class="solid">
                                     <div class="employee-details-content">
                                         <div class="employee-details">
@@ -311,7 +311,7 @@
                     </div>
                 </div> 
                 <div id="employee-details-row-two" class="employee-details-row">
-                    <div class="employee-details-header"> Employee Details</div>
+                    <div class="employee-details-header"> Emergency Contact</div>
                     <hr id="employee-details-divider"class="solid">
                     <div class="employee-details-content">
                         <div class="employee-details">
@@ -415,7 +415,7 @@
                                             </div>
                                         </div> 
                                         <div id="employee-details-row-two" class="employee-details-row">
-                                            <div class="employee-details-header"> Employee Details</div>
+                                            <div class="employee-details-header"> Emergency Contact</div>
                                             <hr id="employee-details-divider"class="solid">
                                             <div class="employee-details-content">
                                                 <div class="employee-details-content">

@@ -32,14 +32,15 @@
                         </div>
                         <div class="filter-dropdown-container">
                             <button class="filters-button">Filter</button>
-                            <ul class="dropdown-menu">
-                              <li class="dropdown-item">Approved</li>
-                              <li class="dropdown-item">Pending</li>
-                              <li class="dropdown-item">Declined</li>
-                              <li class="dropdown-item">High Credit</li>
-                              <li class="dropdown-item">Low Credit</li>
-                              <li class="dropdown-item">Reset Filter</li>
-                            </ul>
+                            <form action="/leave-request" method="GET" class="dropdown-menu dropdown-menu-lr">
+                              @csrf
+                              <button type="submit" name="filter" value="approve" class="dropdown-item">Approved</button>
+                              <button type="submit" name="filter" value="pending" class="dropdown-item">Pending</button>
+                              <button type="submit" name="filter" value="denied" class="dropdown-item">Denied</button>
+                              <button type="submit" name="filter" value="highCredit" class="dropdown-item">High Credit</button>
+                              <button type="submit" name="filter" value="lowCredit" class="dropdown-item">Low Credit</button>
+                              <button type="submit" name="filter" value="reset" class="dropdown-item">Reset Filter</button>
+                            </form>
                         </div>
                     </div>
                     <button class="add-employee-button" data-bs-toggle="modal" data-bs-target="#add-leave-request-modal">Add Leave Request</button>
@@ -203,7 +204,7 @@
 @section('jquery')
   <script>
     $(document).ready(function() {
-      $("tbody").on("click", ".dropdown-toggle", function(event) {
+      $("tbody").on("click", ".dropdown-toggle-lr", function(event) {
         // close all dropdown, excluding the target
         $(".dropdown-menu-option").not($(this).closest("tr").find(".dropdown-menu-option")).hide();
 

@@ -39,4 +39,10 @@ class LeaveRequestController extends Controller
 
       return redirect('/leave-request');
     }
+
+    public function show($id) {
+      $user = $this->LRequest->getLeaveReq($id);
+
+      return response()->json($user);
+    }
 }

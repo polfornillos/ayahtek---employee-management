@@ -727,27 +727,3 @@ document.addEventListener('DOMContentLoaded', function () {
         viewModal.style.display = "none";
     }
   }
-/*
-// Function to populate the HTML structure with data
-function populateEmployeeDetails(employeeData, index) {
-  const employeeContainers = document.querySelectorAll(".employee-details");
-
-  if (index < employeeContainers.length) {
-    // Assuming your data structure corresponds to the order of elements in the HTML
-    const container = employeeContainers[index];
-    container.querySelector(".employee-id").textContent = employeeData.id;
-    container.querySelector(".employee-name").textContent = employeeData.name;
-    container.querySelector(".employee-birthday").textContent = employeeData.birthday;
-    container.querySelector(".employee-gender").textContent = employeeData.gender;
-    container.querySelector(".employee-contact").textContent = employeeData.contact;
-    // Add other fields in a similar manner
-  }
-}
-
-// Iterate through the data and populate the HTML structure
-data.forEach((employee, index) => {
-  populateEmployeeDetails(employee, index);
-});
-
-initializeFilteredRows();
-updatePagination();

@@ -134,8 +134,8 @@
               <label for="reason">Reason</label>
               <textarea class="form-control mb-4" placeholder="Leave your reason here" id="reason" name="reason"></textarea>
 
-              <label for="status" class="form-label">Status</label>
-              <input type="input" id="status" name="status" class="form-control mb-4" >
+              <!-- <label for="status" class="form-label">Status</label> -->
+              <input type="input" id="status" name="status" value="Pending" hidden >
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

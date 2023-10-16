@@ -22,6 +22,16 @@ class employeeTableController extends Controller
     public function employeeTable() { 
         $employees = $this->employees->getEmployees();
 
-        return view('current.employee-table',compact('employees'));
+        return view('current.admin-employee-table',compact('employees'));
+    }
+
+    public function deactivateUser($id) {
+        $employee = AEmployees::find($id);
+        
+        if ($employee) {
+            $employee->update(['status' => 'inactive']);
+            
+            return redirect('/employeetable');
+        }
     }
 }

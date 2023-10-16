@@ -19,8 +19,8 @@
                     <img src="images/pexels-pixabay-220453.jpg" alt="Profile Picture">
                 </div>
                 <div class="profile-details">
-                    <h2>Juan Dela Cruz</h2>
-                    <p>ADM-001</p>
+                    <h2>{{$data->name}}</h2>
+                    <p>{{$data->email}}</p>
                 </div>
             </div>
         </div>
@@ -32,10 +32,10 @@
                     
                 </li>
                 <li class="employee-link">
-                    <a href="/employeetable"><i class="fas fa-users fa-lg"></i> <span>EMPLOYEES</span><div id="link-box-profile" class="link-box-current"></div></a>
+                    <a href="#"><i class="fas fa-users fa-lg"></i> <span>EMPLOYEES</span><div id="link-box-profile" class="link-box"></div></a>
                 </li>
                 <li><a href="/leaverequest"><i class="fa-solid fa-table fa-lg"></i> <span>LEAVE REQUESTS</span><div id="link-box-profile" class="link-box"></div></a></li>
-                <li id="signoutBtn"><a href="/"><i class="fas fa-sign-out-alt fa-lg"></i> <span>SIGN OUT</span><div id="link-box-profile" class="link-box"></div></a></li>
+                <li id="signoutBtn"><a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt fa-lg"></i> <span>SIGN OUT</span><div id="link-box-profile" class="link-box"></div></a></li>
             </ul>
         </div>
         <div class="logo">

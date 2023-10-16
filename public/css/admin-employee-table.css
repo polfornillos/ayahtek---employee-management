@@ -151,6 +151,7 @@ body, html {
     display: block;
 }
 
+
 .main-content {
     position: absolute;
     display: flex;
@@ -163,6 +164,7 @@ body, html {
     padding: 20px; 
 }
 
+/* Employee Table */
 .employee-table{
     padding: 35px;
     background-color: #FFFFFF;
@@ -337,7 +339,7 @@ ol, ul {
 	list-style: none;
 }
 
-/* dropdown */
+/* dropdown for filter */
 .filter-dropdown-container {
   position: relative;
 }
@@ -413,6 +415,7 @@ color: #79baf7;
 }  
 
 /*dropdown for options*/
+
 .dropdown-toggle{
     background: none;
     border: none;
@@ -441,7 +444,71 @@ color: #79baf7;
     color: #000000;
 }
 
-.view-modal-container, .addModal{
+/* View and Deactive Modals*/
+.deactivate-modal-container{
+    z-index: 999;
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.76);
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}
+
+.deactivate-modal-content{
+    width: 462px;
+    height: 294px;
+    background-color: #FFFFFF;  
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#confirm-text{
+    font-size: 150%;
+    font-weight: 600;
+}
+
+.deactivate-button-container{
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+}
+.confirm-deactivate-button {
+    border: none;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    padding: 8px 0px;
+    width: 120px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: #DD3030;
+    cursor: pointer;
+}
+
+.cancel-deactivate-button {
+    border: none;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    width: 120px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #008080;
+    background-color: #FFFFFF;
+    box-shadow: inset 0px 0px 0px 2px #008080;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.view-modal-container{
     z-index: 999;
     position: fixed;
     display: none;
@@ -467,7 +534,9 @@ color: #79baf7;
     left: 50%; 
     transform: translate(-50%, -50%); 
 }
-
+.add-modal-content{
+    display: none;
+}
 .view-modal-content, .add-modal-content, .edit-modal-content{
     width: 1120px;
     height: 702px;

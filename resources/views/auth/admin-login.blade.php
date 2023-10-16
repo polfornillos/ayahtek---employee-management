@@ -19,23 +19,27 @@
                 <div class="featured-logo mb-5 mt-5">
                 <img src="images/ayahtekLogo.png" class="img-fluid">
             </div>
-            <form action="/employeetable" class="needs-validation" novalidate>
-                <div class="input-group mb-4 has-validation" id="input">
+            <form action="{{ route('login-admin') }}" method="POST" class="needs-validation" novalidate>
+                @if(Session::has('success'))
+                <div class="alert alert-success">{{ Session::get('success') }}</div>
+                @endif
+                @if(Session::has('fail'))
+                <div class="alert alert-danger">{{ Session::get('fail') }}</div>
+                @endif
+                @csrf
+                <div class="input-group mb-1 has-validation" id="input">
                     <span class="input-group-text" id="basic-addon1"><svg width="15" height="16" viewBox="0 0 15 16"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M7.5 9C4.99687 9 0 10.34 0 13V16H15V13C15 10.34 10.0031 9 7.5 9ZM13.2188 14.1H1.78125V13C1.78125 12.36 4.71562 10.9 7.5 10.9C10.2844 10.9 13.2188 12.36 13.2188 13V14.1ZM7.5 8C9.57188 8 11.25 6.21 11.25 4C11.25 1.79 9.57188 0 7.5 0C5.42812 0 3.75 1.79 3.75 4C3.75 6.21 5.42812 8 7.5 8ZM7.5 1.9C7.75854 1.9 8.01455 1.95432 8.25341 2.05985C8.49227 2.16539 8.7093 2.32007 8.89212 2.51508C9.07493 2.71008 9.21995 2.94158 9.31889 3.19636C9.41783 3.45115 9.46875 3.72422 9.46875 4C9.46875 4.27578 9.41783 4.54885 9.31889 4.80364C9.21995 5.05842 9.07493 5.28992 8.89212 5.48492C8.7093 5.67993 8.49227 5.83461 8.25341 5.94015C8.01455 6.04568 7.75854 6.1 7.5 6.1C6.97786 6.1 6.4771 5.87875 6.10788 5.48492C5.73867 5.0911 5.53125 4.55695 5.53125 4C5.53125 3.44305 5.73867 2.9089 6.10788 2.51508C6.4771 2.12125 6.97786 1.9 7.5 1.9Z"
                                 fill="white" />
                         </svg>
-
                     </span>
-                    <input id="username" type="text" class="form-control fs-6" placeholder="Enter username"
-                        aria-label="Username" aria-describedby="basic-addon1" required>
-                    <div class="invalid-feedback">
-                        Please enter a username.
-                    </div>
+                    <input @if(isset($_COOKIE["email"])) value="{{ $_COOKIE["email"] }}"  @endif id="email" type="email" class="form-control fs-6" placeholder="Enter email"
+                        name="email" aria-label="Email" aria-describedby="basic-addon1" required>
                 </div>
-                <div class="input-group mb-4 has-validation" id="input">
+                            <div id="error" text="text-danger">@error('email') {{$message}} @enderror</div>
+                <div class="input-group mb-1 has-validation" id="input">
                     <span class="input-group-text" id="basic-addon1"><svg width="15" height="16" viewBox="0 0 15 16"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -44,26 +48,22 @@
                         </svg>
 
                     </span>
-                    <input type="password" class="form-control fs-6" placeholder="Enter password" aria-label="Password"
-                        aria-describedby="basic-addon1" required>
-                    <div class="invalid-feedback">
-                        Please enter a password.
-                    </div>
+                    <input @if(isset($_COOKIE["password"])) value="{{ $_COOKIE["password"] }}"  @endif type="password" class="form-control fs-6" placeholder="Enter password" aria-label="Password"
+                        name="password" aria-describedby="basic-addon1" required>
                 </div>
+                        <div id="error" text="text-danger">@error('password') {{$message}} @enderror</div>
                 <div class="input-group mb-5 justify-content-between">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="formCheck">
+                        <input type="checkbox" class="form-check-input" id="formCheck" name="remember" @if(isset($_COOKIE['email'])) checked @endif>
                         <label for="formCheck" class="form-check-label"><small id="remember">Remember me</small></label>
                     </div>
                     <div class="forgot">
-                        <small><a href="/forgotpassword">Forgot password?</a></small>
+                        <small><a href="{{route('forgotpassword')}}">Forgot password?</a></small>
                     </div>
                 </div>
-                <form action="/employeetable" method="">
                     <div class="input-group mb-1 justify-content-center">
                         <button type="submit" class="btn btn-lg shadow btn-primary fs-6">LOGIN</button>
                     </div>
-                </form>
             </form>
             </div>
             
@@ -75,25 +75,6 @@
         </div>
     </div>
 
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        document.addEventListener('DOMContentLoaded', () => {
-            const forms = document.querySelectorAll('.needs-validation');
-
-            forms.forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                });
-            });
-
-
-        });
-
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>

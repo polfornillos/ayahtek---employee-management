@@ -172,7 +172,101 @@
                             </ul>
                         </div>
                     </div>
-                    <button class="add-employee-button">Add Employee</button>
+                    <button class="add-employee-button" id="add-employee-button">Add Employee</button>
+
+                    <div id="add-modal" class="addModal">
+                        <form method="POST" action="/employee-save">
+                        @csrf
+                        <div class="add-modal-content">
+                            <span class="close"></span>
+                            <div class="add-header">
+                                <h3 class="modal-header">ADD EMPLOYEE</h3>
+                                <img class="modal-logo" src="images/ayahtek-logo.png" alt="Logo">
+                            </div>
+                            <div id="employee-details-row-one" class="employee-details-container">
+                                <div class="employee-details-row">
+                                    <div class="employee-details-header"> Employee Details</div>
+                                    <hr id="employee-details-divider"class="solid">
+                                    <div class="employee-details-content">
+                                        <div class="employee-details">
+                                            <div id="employee-id-container" class="employee-content">
+                                                <h3>Employee ID:</h3>
+                                                <input name="id" class="textbox" type="text" disabled>
+                                            </div>
+                                            <div id="employee-name-container" class="employee-content">
+                                                <h3>Employee Name:</h3>
+                                                <input name="name" class="textbox" type="text" required>
+                                            </div>
+                                            <div id="employee-birthday-container" class="employee-content">
+                                                <h3>Birthday</h3>
+                                                <input name="birthday" class="date" type="date" required>
+                                            </div>
+                                            <div id="employee-gender-container" class="employee-content">
+                                                <h3>Gender</h3>
+                                                <select name="gender" id="gender">
+                                                    <option value="empty" disabled selected></option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Others">Others</option>
+                                                </select>
+                                            </div>
+                                            <div id="employee-contact-container" class="employee-content">
+                                                <h3>Contact number</h3>
+                                                <input name="contact" class="textbox" type="text" required>
+                                            </div>
+                                        </div>
+                                        <div class="employee-details">
+                                            <div id="employee-id-container" class="employee-content">
+                                                <h3>Salary</h3>
+                                                <input name="salary" class="textbox" type="text" required>
+                                            </div>
+                                            <div id="employee-name-container" class="employee-content">
+                                                <h3>SSS Number</h3>
+                                                <input name="sss_number" class="textbox" type="text" required>
+                                            </div>
+                                            <div id="employee-birthday-container" class="employee-content">
+                                                <h3>Philhealth Number</h3>
+                                                <input name="philhealth_number" class="textbox" type="text" required>
+                                            </div>
+                                            <div id="employee-gender-container" class="employee-content">
+                                                <h3>TIN</h3>
+                                                <input name="tin" class="textbox" type="text" required>
+                                            </div>
+                                            <div id="employee-contact-container" class="employee-content">
+                                                <h3>Date Added</h3>
+                                                <input name="created_at" class="date" type="date" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div id="employee-details-row-two" class="employee-details-row">
+                                    <div class="employee-details-header"> Employee Details</div>
+                                    <hr id="employee-details-divider"class="solid">
+                                    <div class="employee-details-content">
+                                        <div class="employee-details">
+                                            <div id="employee-emergency-name-container" class="employee-content">
+                                                <h3>Name</h3>
+                                                <input name="emergency_contact_name" class="textbox" type="text">
+                                            </div>
+                                            <div id="employee-emergency-relationship-container" class="employee-content">
+                                                <h3>Relationship</h3>
+                                                <input name="emergency_contact_name" class="textbox" type="text">
+                                            </div>
+                                            <div id="employee-emergency-contact-container" class="employee-content">
+                                                <h3>Contact Number</h3>
+                                                <input name="emergency_contact_name" class="textbox" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="employee-button-container">
+                                        <button id="add-cancel-btn" class="cancel-employee-button">CANCEL</button>
+                                        <input type="submit" id="submit-btn" class="submit-employee-button" value="SUBMIT"/>                 
+                                    </div>
+                                </div>              
+                            </div>
+                        </div>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="table-container">
@@ -205,9 +299,9 @@
                                     <button class="dropdown-toggle" type="button">
                                         <i class="fas fa-ellipsis-v"></i>
                                     </button>
-                                    <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
+                                    <div class="dropdown-menu-option" id="myDropdown">
                                         <a class="dropdown-item-option view-button" href="#" data-employee-id="{{ $employee->id }}">View</a>
-                                        <a class="dropdown-item-option" href="#">Deactivate</a>
+                                        <a class="dropdown-item-option deactivate-button" href="#" data-employee-id="{{ $employee->id }}">Deactivate</a>
                                     </div>
                                 </div>
                             </td>
@@ -229,6 +323,28 @@
             </div>
         </div> 
     </div>
+
+    @if($employees)
+    @foreach ($employees as $employee)
+    <div id="deactivateEmployee{{ $employee->id }}" class="deactivate-modal-container">
+        <div class="deactivate-modal-content">
+            <img src="images/Warning.png">
+            <div class ="deactivate-content">
+                <p id="confirm-text">CONFIRM</p>
+                <p id="confirm-sub-text">Are you sure you want to deactivate this user?</p>
+            </div>
+            <div class="deactivate-button-container">
+                <button class="cancel-deactivate-button">Cancel</button>
+                <form action="/employeetable-deactivate/{{ $employee->id }}" method="POST">
+                    @csrf
+                    <button type="submit" class="confirm-deactivate-button">Confirm</button>
+                </form>              
+            </div>
+        </div>
+    </div>
+    @endforeach
+    @endif
+
     @if($employees)
     @foreach ($employees as $employee)
     <div id="viewModal{{ $employee->id }}" class="view-modal-container">

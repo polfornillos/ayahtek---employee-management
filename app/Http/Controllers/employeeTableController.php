@@ -35,6 +35,16 @@ class employeeTableController extends Controller
         }
     }
     
+    public function activateUser($id) {
+        $employee = AEmployees::find($id);
+        
+        if ($employee) {
+            $employee->update(['status' => 'active']);
+            
+            return redirect('/employeetable');
+        }
+    }
+
     public function create() {
         return view('current.admin-employee-table');
     }

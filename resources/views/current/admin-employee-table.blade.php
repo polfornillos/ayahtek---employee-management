@@ -130,11 +130,11 @@
                                             </div>
                                             <div id="employee-emergency-relationship-container" class="employee-content">
                                                 <h3>Relationship</h3>
-                                                <input name="emergency_contact_name" class="textbox" type="text">
+                                                <input name="emergency_contact_relationship" class="textbox" type="text">
                                             </div>
                                             <div id="employee-emergency-contact-container" class="employee-content">
                                                 <h3>Contact Number</h3>
-                                                <input name="emergency_contact_name" class="textbox" type="text">
+                                                <input name="emergency_contact_number" class="textbox" type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -181,7 +181,12 @@
                                     </button>
                                     <div class="dropdown-menu-option" id="myDropdown">
                                         <a class="dropdown-item-option view-button" href="#" data-employee-id="{{ $employee->id }}">View</a>
-                                        <a class="dropdown-item-option deactivate-button" href="#" data-employee-id="{{ $employee->id }}">Deactivate</a>
+                                        @if ($employee->status === 'active')
+                                            <a class="dropdown-item-option deactivate-button" href="#" data-employee-id="{{ $employee->id }}">Deactivate</a>
+                                        @elseif ($employee->status === 'inactive')
+                                            <a class="dropdown-item-option activate-button" href="#" data-employee-id="{{ $employee->id }}">Activate</a>
+                                        @endif
+                                        
                                     </div>
                                 </div>
                             </td>
@@ -218,6 +223,27 @@
                 <form action="/employeetable-deactivate/{{ $employee->id }}" method="POST">
                     @csrf
                     <button type="submit" class="confirm-deactivate-button">Confirm</button>
+                </form>              
+            </div>
+        </div>
+    </div>
+    @endforeach
+    @endif
+
+    @if($employees)
+    @foreach ($employees as $employee)
+    <div id="activateEmployee{{ $employee->id }}" class="activate-modal-container">
+        <div class="activate-modal-content">
+            <img src="images/Confirm.png">
+            <div class ="deactivate-content">
+                <p id="confirm-text">CONFIRM</p>
+                <p id="confirm-sub-text">Are you sure you want to activate this user?</p>
+            </div>
+            <div class="activate-button-container">
+                <button class="cancel-activate-button">Cancel</button>
+                <form action="/employeetable-activate/{{ $employee->id }}" method="POST">
+                    @csrf
+                    <button type="submit" class="confirm-activate-button">Confirm</button>
                 </form>              
             </div>
         </div>
@@ -291,15 +317,33 @@
                         <div class="employee-details">
                             <div id="employee-emergency-name-container" class="employee-content">
                                 <h3>Name</h3>
-                                <p>Not Available</p>
+                                <p>
+                                    @if ($employee->emergency_contact_name)
+                                        {{ $employee->emergency_contact_name }}
+                                    @else
+                                        Not Available
+                                    @endif
+                                </p>
                             </div>
                             <div id="employee-emergency-relationship-container" class="employee-content">
                                 <h3>Relationship</h3>
-                                <p>Not Available</p>
+                                <p>
+                                    @if ($employee->emergency_contact_relationship)
+                                        {{ $employee->emergency_contact_relationship }}
+                                    @else
+                                        Not Available
+                                    @endif
+                                </p>
                             </div>
                             <div id="employee-emergency-contact-container" class="employee-content">
                                 <h3>Contact Number</h3>
-                                <p>Not Available</p>
+                                <p>
+                                    @if ($employee->emergency_contact_number)
+                                        {{ $employee->emergency_contact_number }}
+                                    @else
+                                        Not Available
+                                    @endif
+                                </p>
                             </div>
                         </div>
                     </div>

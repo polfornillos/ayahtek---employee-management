@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\AEmployees;
-use Hash;
-use Session;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
+    protected $admin;
+    protected $employees;
+
     public function __construct(){
         $this->admin = new User();
         $this->employees = new AEmployees();

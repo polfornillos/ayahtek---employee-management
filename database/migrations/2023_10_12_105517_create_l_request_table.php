@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('l_request', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
             $table->string('name');
             $table->string('credits');
             $table->string('tLeave');

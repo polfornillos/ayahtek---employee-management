@@ -499,6 +499,139 @@ document.addEventListener('DOMContentLoaded', function () {
   updatePagination();
 });
 
+// Function to filter the data based on gender
+function filterDataByGender(data, gender) {
+  return data.filter(item => {
+    if (gender === 'All Genders') {
+      return true; // Return all items
+    } else {
+      // Normalize gender values for case-insensitive comparison
+      return item.gender.toLowerCase() === gender.toLowerCase();
+    }
+  });
+}
+
+// Event listener for gender filter options
+document.addEventListener('DOMContentLoaded', function () {
+  const genderDropdownItems = document.querySelectorAll('.dropdown-item[data-filter-type^="gender-"]');
+
+  genderDropdownItems.forEach(item => {
+      item.addEventListener('click', function (event) {
+          event.stopPropagation();
+
+          // Get the filter type
+          const filterType = item.getAttribute('data-filter-type');
+
+          // Extract the gender filter value
+          const selectedGender = filterType.replace('gender-', '');
+
+          // Log the selected gender
+          console.log(`Selected gender: ${selectedGender}`);
+
+          // Update the filtered table data based on the selected gender
+          generateFilteredTableDataByGender(data, tbody, selectedGender);
+      });
+  });
+});
+
+function generateFilteredTableDataByGender(data, element, gender) {
+  // Filter the data based on the selected gender
+  const filteredData = filterDataByGender(data, gender);
+
+  console.log('Filtered Data by Gender:', filteredData);
+
+  // Clear the existing table data
+  element.innerHTML = "";
+
+  // Iterate over the filtered data and create table rows
+  for (const row of filteredData) {
+    const tr = document.createElement("tr");
+
+    // Create a table data cell for each column in the row
+    for (const [key, value] of Object.entries(row)) {
+      const td = document.createElement("td");
+      td.innerHTML = value;
+      tr.append(td);
+    }
+
+    // Append the row to the table
+    element.appendChild(tr);
+  }
+
+  // After filtering, update the filteredRows list
+  filteredRows = Array.from(element.querySelectorAll('tr'));
+
+  // Update pagination
+  updatePagination();
+}
+
+function filterDataByMonth(data, month) {
+  return data.filter(item => {
+    // Assuming that your data has a "birthday" property in the format "Month Day, Year"
+    const birthdayMonth = item.birthday.split(' ')[0];
+
+    if (month === 'All Months') {
+      return true; // Return all items
+    } else {
+      return birthdayMonth.toLowerCase() === month.toLowerCase();
+    }
+  });
+}
+
+// Event listener for birthday filter options
+document.addEventListener('DOMContentLoaded', function () {
+  const birthdayDropdownItems = document.querySelectorAll('.dropdown-item[data-filter-type^="birthday-"]');
+
+  birthdayDropdownItems.forEach(item => {
+    item.addEventListener('click', function (event) {
+      event.stopPropagation();
+
+      // Get the filter type
+      const filterType = item.getAttribute('data-filter-type');
+
+      // Extract the month filter value
+      const selectedMonth = filterType.replace('birthday-', '');
+
+      // Log the selected month
+      console.log(`Selected month: ${selectedMonth}`);
+
+      // Update the filtered table data based on the selected month
+      generateFilteredTableDataByMonth(data, tbody, selectedMonth);
+    });
+  });
+});
+
+function generateFilteredTableDataByMonth(data, element, month) {
+  // Filter the data based on the selected month
+  const filteredData = filterDataByMonth(data, month);
+
+  console.log('Filtered Data by Month:', filteredData);
+
+  // Clear the existing table data
+  element.innerHTML = "";
+
+  // Iterate over the filtered data and create table rows
+  for (const row of filteredData) {
+    const tr = document.createElement("tr");
+
+    // Create a table data cell for each column in the row
+    for (const [key, value] of Object.entries(row)) {
+      const td = document.createElement("td");
+      td.innerHTML = value;
+      tr.append(td);
+    }
+
+    // Append the row to the table
+    element.appendChild(tr);
+  }
+
+  // After filtering, update the filteredRows list
+  filteredRows = Array.from(element.querySelectorAll('tr'));
+
+  // Update pagination
+  updatePagination();
+}
+
 //Show Kebab menu button 
 function toggleDropdown(event) {
   const row = event.target.closest('tr');

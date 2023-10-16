@@ -12,7 +12,7 @@ class AEmployees extends Model
     protected $guarded = [];
 
     public function saveEmployee($data){
-        return $this->create();
+        return $this->create($data);
     }
 
     public function getEmployees(){

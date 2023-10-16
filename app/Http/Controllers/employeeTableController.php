@@ -48,6 +48,7 @@ class employeeTableController extends Controller
             'salary' => $request->salary,
             'sss_number' => $request->sss_number,
             'philhealth_number' => $request->philhealth_number,
+            'tin' => $request->tin,
             'emergency_contact_name' => $request->emergency_contact_name,
             'emergency_contact_number' => $request->emergency_contact_number,
             'emergency_contact_relationship' => $request->emergency_contact_relationship,

@@ -71,7 +71,7 @@
                                         <div class="employee-details">
                                             <div id="employee-id-container" class="employee-content">
                                                 <h3>Employee ID:</h3>
-                                                <input name="id" class="textbox" type="text" required>
+                                                <input name="id" class="textbox" type="text" disabled>
                                             </div>
                                             <div id="employee-name-container" class="employee-content">
                                                 <h3>Employee Name:</h3>
@@ -114,7 +114,7 @@
                                             </div>
                                             <div id="employee-contact-container" class="employee-content">
                                                 <h3>Date Added</h3>
-                                                <input name="created_at" class="date" type="date" required>
+                                                <input name="created_at" class="date" type="date" disabled>
                                             </div>
                                         </div>
                                     </div>

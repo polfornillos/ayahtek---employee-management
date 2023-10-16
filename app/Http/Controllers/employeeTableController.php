@@ -31,7 +31,6 @@ class employeeTableController extends Controller
 
     public function store(Request $request) {
         $data = [
-            'id' => $request->id,
             'name' => $request->name,
             'birthday' => $request->birthday,
             'gender' => $request->gender,

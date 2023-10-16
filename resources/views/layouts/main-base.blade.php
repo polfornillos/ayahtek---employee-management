@@ -11,7 +11,7 @@
     
 </head>
 
-<body>
+<body class="bg-main">
     <div class="navbar-container">
         <div class="top-section">
             <div class="profile-section">
@@ -32,7 +32,7 @@
                     
                 </li>
                 <li class="employee-link">
-                    <a href="/employeetable"><i class="fas fa-users fa-lg"></i> <span>EMPLOYEES</span><div id="link-box-profile" class="link-box-current"></div></a>
+                    <a href="#"><i class="fas fa-users fa-lg"></i> <span>EMPLOYEES</span><div id="link-box-profile" class="link-box"></div></a>
                 </li>
                 <li><a href="/leaverequest"><i class="fa-solid fa-table fa-lg"></i> <span>LEAVE REQUESTS</span><div id="link-box-profile" class="link-box"></div></a></li>
                 <li id="signoutBtn"><a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt fa-lg"></i> <span>SIGN OUT</span><div id="link-box-profile" class="link-box"></div></a></li>

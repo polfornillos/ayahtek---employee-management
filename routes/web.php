@@ -21,14 +21,14 @@ Route::get('/verifycode', [LoginController::class, 'enterSecurityCode'])->name('
 
 Route::get('/resetpassword', [LoginController::class, 'resetpassword'])->name('resetpassword');;
 
-Route::get('/employeetable', [employeeTableController::class, 'employeetable']);
-
 Route::get('/leaverequest', [LeaveRequestController::class, 'index']);
 
 // group route that utilizes the same controller class
 Route::controller(LeaveRequestController::class)->group(function () {
-    Route::get('/leave-request}', 'index');
+    Route::get('/leave-request', 'index');
     Route::post('/leave-request/add', 'store');
 });
 
-Route::get('/welcome', [employeeTableController::class, 'index']); 
+Route::get('/employeetable', [employeeTableController::class, 'employeeTable']);
+Route::post('/employeetable-deactivate/{id}', [employeeTableController::class, 'deactivateUser']);
+Route::post('/employee-save', [employeeTableController::class, 'store']);

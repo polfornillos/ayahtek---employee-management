@@ -130,11 +130,11 @@
                                             </div>
                                             <div id="employee-emergency-relationship-container" class="employee-content">
                                                 <h3>Relationship</h3>
-                                                <input name="emergency_contact_name" class="textbox" type="text">
+                                                <input name="emergency_contact_relationship" class="textbox" type="text">
                                             </div>
                                             <div id="employee-emergency-contact-container" class="employee-content">
                                                 <h3>Contact Number</h3>
-                                                <input name="emergency_contact_name" class="textbox" type="text">
+                                                <input name="emergency_contact_number" class="textbox" type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -291,7 +291,7 @@
                         <div class="employee-details">
                             <div id="employee-emergency-name-container" class="employee-content">
                                 <h3>Name</h3>
-                                <p>Not Available</p>
+                                <p>{{ $employee->tin }}</p>
                             </div>
                             <div id="employee-emergency-relationship-container" class="employee-content">
                                 <h3>Relationship</h3>

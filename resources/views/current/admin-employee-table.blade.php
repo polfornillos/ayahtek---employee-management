@@ -348,8 +348,8 @@
                         </div>
                     </div>
                     <div class="employee-button-container">
-                        <button class="cancel-employee-button">Cancel</button>
-                        <button class="edit-employee-button" data-employee-id="{{ $employee->id }}">Edit</button>                 
+                        <button class="cancel-employee-button">CANCEL</button>
+                        <button class="edit-employee-button" data-employee-id="{{ $employee->id }}">EDIT</button>                 
                     </div>
                 </div>               
             </div>

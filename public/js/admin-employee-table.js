@@ -667,15 +667,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const activateButtons = document.querySelectorAll('.activate-button');
   const modalBackgrounds = document.querySelectorAll('.view-modal-container, .deactivate-modal-container, .activate-modal-container');
 
-  viewButtons.forEach(viewButton => {
-      viewButton.addEventListener('click', function () {
-          const employeeId = viewButton.getAttribute('data-employee-id');
-          const viewModal = document.getElementById('viewModal' + employeeId);
 
-          if (viewModal) {
-              viewModal.style.display = 'flex';
-          }
-      });
+  viewButtons.forEach(viewButton => {
+    viewButton.addEventListener('click', function () {
+        const employeeId = viewButton.getAttribute('data-employee-id');
+        const viewModal = document.getElementById('viewModal' + employeeId);
+
+        if (viewModal) {
+            viewModal.style.display = 'flex';
+        }
+    });
   });
 
   closeButtons.forEach(closeButton => {
@@ -742,7 +743,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-//Open Add Employye Modal
+//Open Add Employee Modal
 document.addEventListener('DOMContentLoaded', function () {
   // Get the "Add Employee" button, the modal element, and the "Cancel" button
   const addEmployeeButton = document.querySelector('.add-employee-button');

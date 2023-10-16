@@ -360,47 +360,127 @@ resetFilterItem.addEventListener('click', function(event) {
   resetFilters(); // Call the resetFilters function when "Reset" is clicked
 });
 
-// Function to filter the table rows based on status
-function filterRowsByStatus(status) {
+//For Filtering Table by Gender
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the filter buttons and table rows
+  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="gender-"]');
   const rows = document.querySelectorAll('#table-data tr');
 
-  rows.forEach(row => {
-    const statusContainer = row.querySelector('.status-container');
-    if (statusContainer) {
-      // Extract the employee status from the class
-      const statusElement = statusContainer.querySelector(`.status-${status}`);
-      if (statusElement) {
-        const rowStatus = statusElement.textContent;
-
-        console.log('Row:', row);
-        console.log('Status Element:', statusElement);
-        console.log('Row status:', rowStatus);
-
-        if (status === 'All' || rowStatus.toLowerCase() === status.toLowerCase()) {
-          row.style.display = ''; // Show the row
-        } else {
-          row.style.display = 'none'; // Hide the row
-        }
-      }
-    }
-  });
-}
-
-// Event listener for filter buttons
-document.addEventListener('DOMContentLoaded', function() {
-  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="status-"]');
-
+  // Add click event listeners to the filter buttons
   filterButtons.forEach(button => {
-    button.addEventListener('click', function(event) {
-      event.stopPropagation();
-      const filterType = button.getAttribute('data-filter-type');
-      const status = filterType.replace('status-', ''); 
-      console.log('Clicked filter for:', status);
-      filterRowsByStatus(status);
-    });
+      button.addEventListener('click', function () {
+          // Extract the gender from the data-filter-type attribute
+          const gender = button.getAttribute('data-filter-type').replace('gender-', '');
+
+          // Filter the rows based on the selected gender
+          filterRowsByGender(gender); 
+          updateEntriesCount();
+          
+      });
   });
+
+  // Function to filter the rows based on gender
+  function filterRowsByGender(selectedGender) {
+      rows.forEach(row => {
+          const genderCell = row.querySelector('td:nth-child(4)');
+          if (genderCell) {
+              const rowGender = genderCell.textContent;
+
+              if (selectedGender === 'all' || rowGender.toLowerCase() === selectedGender) {
+                  row.style.display = ''; // Show the row
+              } else {
+                  row.style.display = 'none'; // Hide other rows
+              }
+          }
+
+      });
+  }
 });
 
+//For Filtering Table by Birthday
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the filter buttons and table rows
+  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="birthday-"]');
+  const rows = document.querySelectorAll('#table-data tr');
+
+  // Add click event listeners to the filter buttons
+  filterButtons.forEach(button => {
+      button.addEventListener('click', function () {
+
+          // Extract the Birthday from the data-filter-type attribute
+          const birthdayFilter = button.getAttribute('data-filter-type').replace('birthday-', '');
+
+          // Convert the month name to the numeric index
+          const selectedMonth = monthNameToIndex(birthdayFilter);
+          
+          // Filter the rows based on the selected Birthday
+          filterRowsByBirthday(selectedMonth); 
+          updateEntriesCount();
+      });
+  });
+
+  // Function to filter the rows based on the month of the birthday
+  function filterRowsByBirthday(selectedMonth) {
+    rows.forEach(row => {
+      const birthdayCell = row.querySelector('td:nth-child(3)');
+      if (birthdayCell) {
+        const rowBirthday = new Date(birthdayCell.textContent);
+        const rowMonth = rowBirthday.getMonth(); //Results to 0 for january, 1 for febuary so on and so forth
+
+        console.log(rowMonth);
+        if (selectedMonth === 'all' || rowMonth === selectedMonth) {
+          row.style.display = ''; // Show the row
+        } else {
+          row.style.display = 'none'; // Hide other rows
+        }
+      }
+    });
+  }
+
+  // Function to convert month name to the numeric index
+  function monthNameToIndex(monthName) {
+    const monthNames = [
+      'january', 'february', 'march', 'april', 'may', 'june',
+      'july', 'august', 'september', 'october', 'november', 'december'
+    ];
+    return monthNames.indexOf(monthName.toLowerCase());
+  }
+});
+
+//Filter by Status
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the filter buttons and table rows
+  const filterButtons = document.querySelectorAll('.dropdown-item[data-filter-type^="status-"]');
+  const rows = document.querySelectorAll('#table-data tr');
+
+  // Add click event listeners to the filter buttons
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      // Extract the status from the data-filter-type attribute
+      const status = button.getAttribute('data-filter-type').replace('status-', '');
+
+      // Filter the rows based on the selected status
+      filterRowsByStatus(status);
+      updateEntriesCount();
+    });
+  });
+
+  // Function to filter the rows based on status
+  function filterRowsByStatus(selectedStatus) {
+    rows.forEach(row => {
+      const statusContainer = row.querySelector('.status-container');
+      if (statusContainer) {
+        const rowStatus = statusContainer.textContent.toLowerCase();
+
+        if (selectedStatus === 'all' || rowStatus === selectedStatus) {
+          row.style.display = ''; // Show the row
+        } else {
+          row.style.display = 'none'; // Hide other rows
+        }
+      }
+    });
+  }
+});
 
 // Function to filter the data based on gender
 function filterDataByGender(data, gender) {
@@ -536,7 +616,7 @@ function generateFilteredTableDataByMonth(data, element, month) {
 }
 
 //Show Kebab menu button 
-// Function to toggle the dropdown menu for a specific row
+//Function to toggle the dropdown menu for a specific row
 function toggleDropdown(event) {
   const row = event.target.closest('tr');
   const dropdown = row.querySelector('.dropdown-menu-option');
@@ -558,11 +638,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const viewButtons = document.querySelectorAll('.view-button');
   const closeButtons = document.querySelectorAll('.cancel-employee-button');
 
+  //Get the id of the specific row to be able to display the data of that specific row
   viewButtons.forEach(viewButton => {
-      viewButton.addEventListener('click', function () {
-          const employeeId = viewButton.getAttribute('data-employee-id');
-          const viewModal = document.getElementById('viewModal' + employeeId);
+    viewButton.addEventListener('click', function () {
+      const employeeId = viewButton.getAttribute('data-employee-id');
+      const viewModal = document.getElementById('viewModal' + employeeId);
 
+      if (viewModal) {
+        viewModal.style.display = 'flex';
+      }
+    });
   function openEditModal() {
      editModal.style.display = 'flex';
   }
@@ -589,15 +674,54 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   closeButtons.forEach(closeButton => {
-      closeButton.addEventListener('click', function () {
-          const viewModal = closeButton.closest('.view-modal-container');
+    closeButton.addEventListener('click', function () {
+      const viewModal = closeButton.closest('.view-modal-container');
 
-          if (viewModal) {
-              viewModal.style.display = 'none';
-          }
-      });
+      if (viewModal) {
+        viewModal.style.display = 'none';
+      }
+    });
   });
+
+  // Close the view modal when clicking the background
+  viewButtons.forEach(viewButton => {
+    const employeeId = viewButton.getAttribute('data-employee-id');
+    const viewModal = document.getElementById('viewModal' + employeeId);
+
+    if (viewModal) {
+      viewModal.addEventListener('click', function (event) {
+        if (event.target === viewModal) {
+          viewModal.style.display = 'none';
+        }
+      });
+    }
+  });
+
+//Open Add Employye Modal
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the "Add Employee" button, the modal element, and the "Cancel" button
+  const addEmployeeButton = document.querySelector('.add-employee-button');
+  const addModal = document.getElementById('add-modal');
+  const cancelModalButton = document.getElementById('add-cancel-btn');
+
+  // Add a click event listener to the "Add Employee" button to open the modal
+  addEmployeeButton.addEventListener('click', function () {
+    addModal.style.display = 'flex';
+  });
+
+  // Add a click event listener to the "Cancel" button to close the modal
+  cancelModalButton.addEventListener('click', function () {
+    addModal.style.display = 'none';
+  });
+
+  addModal.addEventListener('click', function (event) {
+    if (event.target === addModal) {
+      addModal.style.display = 'none';
+    }
+  });
+
 });
+
   window.onclick = function(event) {
     if (event.target == viewModal) {
         viewModal.style.display = "none";

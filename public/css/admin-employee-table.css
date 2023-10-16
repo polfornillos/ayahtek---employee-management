@@ -444,8 +444,8 @@ color: #79baf7;
     color: #000000;
 }
 
-/* View and Deactive Modals*/
-.deactivate-modal-container{
+/* View,Delete, Deactive Modals*/
+.deactivate-modal-container, .activate-modal-container, .delete-modal-container{
     z-index: 999;
     position: fixed;
     display: none;
@@ -459,7 +459,7 @@ color: #79baf7;
     transform: translate(-50%, -50%); 
 }
 
-.deactivate-modal-content{
+.deactivate-modal-content, .activate-modal-content , .delete-modal-content{
     width: 462px;
     height: 294px;
     background-color: #FFFFFF;  
@@ -471,17 +471,24 @@ color: #79baf7;
     text-align: center;
 }
 
-#confirm-text{
+.confirm-text{
+    color: #000000;
     font-size: 150%;
     font-weight: 600;
 }
 
-.deactivate-button-container{
+.confirm-sub-text{
+    color: #000000;
+    font-size: 100%;
+    font-weight: 300;
+}
+
+.deactivate-button-container, .activate-button-container, .delete-button-container{
     margin-top: 40px;
     display: flex;
     gap: 20px;
 }
-.confirm-deactivate-button {
+.confirm-deactivate-button, .confirm-delete-button {
     border: none;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
@@ -494,7 +501,20 @@ color: #79baf7;
     cursor: pointer;
 }
 
-.cancel-deactivate-button {
+.confirm-activate-button {
+    border: none;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    padding: 8px 0px;
+    width: 120px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: #008080;
+    cursor: pointer;
+}
+
+.cancel-deactivate-button, .cancel-activate-button, .cancel-delete-button {
     border: none;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
@@ -632,7 +652,7 @@ color: #79baf7;
     width: 100%;
     display: flex;
     bottom: 0;
-    justify-content: center;
+    justify-content: space-between;
     gap: 10px;
     border-radius:20px;
 }

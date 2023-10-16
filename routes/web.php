@@ -28,6 +28,7 @@ Route::controller(LeaveRequestController::class)->group(function () {
     Route::get('/leave-request', 'index');
     Route::post('/leave-request/add', 'store');
     Route::get('/leave-request/{id}', 'show');
+    Route::post('/leave-request/update', 'update');
 });
 
 Route::get('/employeetable', [employeeTableController::class, 'employeeTable']);

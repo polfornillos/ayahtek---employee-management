@@ -740,6 +740,29 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    const editButtons = document.querySelectorAll('.edit-employee-button');
+    const closeEditButtons = document.querySelectorAll('.cancel-edit-button');
+
+    editButtons.forEach(editButton => {
+        editButton.addEventListener('click', function () {
+            const employeeId = editButton.getAttribute('data-employee-id');
+            const editModal = document.getElementById('editModal' + employeeId);
+
+            if (editModal) {
+                editModal.style.display = 'flex';
+            }
+        });
+    });
+
+    closeEditButtons.forEach(closeEditButton => {
+        closeEditButton.addEventListener('click', function () {
+            const editModal = closeEditButton.closest('.edit-modal-container');
+            if (editModal) {
+                editModal.style.display = 'none';
+            }
+        });
+    });
+
 });
 
 //Open Add Employye Modal

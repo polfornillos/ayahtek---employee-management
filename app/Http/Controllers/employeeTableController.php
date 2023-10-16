@@ -68,4 +68,28 @@ class employeeTableController extends Controller
 
         return redirect('/employeetable');
     }
+
+    public function update(Request $request, $id) {
+        $employee = AEmployees::find($id);
+
+        $data = [
+            'name' => $request->name,
+            'birthday' => $request->birthday,
+            'gender' => $request->gender,
+            'contact' => $request->contact,
+            'salary' => $request->salary,
+            'sss_number' => $request->sss_number,
+            'philhealth_number' => $request->philhealth_number,
+            'tin' => $request->tin,
+            'emergency_contact_name' => $request->emergency_contact_name,
+            'emergency_contact_number' => $request->emergency_contact_number,
+            'emergency_contact_relationship' => $request->emergency_contact_relationship,
+        ];
+
+        if($employee){
+            $employee->update($data);
+        }
+
+        return redirect('/employeetable');
+    }
 }

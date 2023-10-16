@@ -348,8 +348,104 @@
                         </div>
                     </div>
                     <div class="employee-button-container">
-                        <button class="cancel-employee-button">Cancel</button>
-                        <button class="edit-employee-button" data-employee-id="{{ $employee->id }}">Edit</button>                 
+                        <button class="cancel-employee-button">CANCEL</button>
+                        <button class="edit-employee-button" data-employee-id="{{ $employee->id }}">EDIT</button>         
+                        <div id="editModal{{ $employee->id }}" class="edit-modal-container" >
+                            <form method="POST" action="/employee-update/{{ $employee->id }}">
+                            @csrf
+                                <div class="edit-modal-content">
+                                    <div class="edit-modal-header">
+                                        <h3 class="modal-header">EDIT PROFILE</h3>
+                                        <img class="modal-logo" src="images/ayahtek-logo.png" alt="Logo">
+                                    </div>
+                                    <div id="employee-details-row-one" class="employee-details-container">
+                                        <div class="employee-details-row">
+                                            <div class="employee-details-header"> Employee Details</div>
+                                            <hr id="employee-details-divider"class="solid">
+                                            <div class="employee-details-content">
+                                                <div class="employee-details">
+                                                    <div id="employee-id-container" class="employee-content">
+                                                        <h3>Employee ID</h3>
+                                                        <p name="id" class="employee-id">EMP-{{ str_pad($employee->id, 3, '0', STR_PAD_LEFT) }}</p>
+                                                    </div>
+                                                    <div id="employee-name-container" class="employee-content">
+                                                        <h3>Employee Name:</h3>
+                                                        <input name="name" class="textbox" type="text" value="{{ $employee->name }}" required>
+                                                    </div>
+                                                    <div id="employee-birthday-container" class="employee-content">
+                                                        <h3>Birthday</h3>
+                                                        <input name="birthday" class="date" type="date" value="{{ ($employee->birthday) }}" required>
+                                                    </div>
+                                                    <div id="employee-gender-container" class="employee-content">
+                                                        <h3>Gender</h3>
+                                                        <select name="gender" id="gender">
+                                                            <option value="{{ $employee->gender }}">{{ $employee->gender }}</option>
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                            <option value="Others">Others</option>
+                                                        </select>
+                                                    </div>
+                                                    <div id="employee-contact-container" class="employee-content">
+                                                        <h3>Contact number</h3>
+                                                        <input name="contact" class="textbox" type="text" value="{{ $employee->contact }}" required>
+                                                    </div>
+                                                </div>
+                                                <div class="employee-details">
+                                                    <div id="employee-id-container" class="employee-content">
+                                                        <h3>Salary</h3>
+                                                        <input name="salary" class="textbox" type="text" value="{{ $employee->salary }}" required>
+                                                    </div>
+                                                    <div id="employee-name-container" class="employee-content">
+                                                        <h3>SSS Number</h3>
+                                                        <input name="sss_number" class="textbox" type="text" value="{{ $employee->sss_number }}" required>
+                                                    </div>
+                                                    <div id="employee-birthday-container" class="employee-content">
+                                                        <h3>Philhealth Number</h3>
+                                                        <input name="philhealth_number" class="textbox" type="text" value="{{ $employee->philhealth_number }}" required>
+                                                    </div>
+                                                    <div id="employee-gender-container" class="employee-content">
+                                                        <h3>TIN</h3>
+                                                        <input name="tin" class="textbox" type="text" value="{{ $employee->tin }}" required>
+                                                    </div>
+                                                    <div id="employee-contact-container" class="employee-content">
+                                                        <h3>Date Added</h3>
+                                                        <p>{{ $employee->created_at->format('F d, Y')  }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div id="employee-details-row-two" class="employee-details-row">
+                                            <div class="employee-details-header"> Employee Details</div>
+                                            <hr id="employee-details-divider"class="solid">
+                                            <div class="employee-details-content">
+                                                <div class="employee-details-content">
+                                                    <div class="employee-details">
+                                                        <div id="employee-emergency-name-container" class="employee-content">
+                                                            <h3>Name</h3>
+                                                            <input name="emergency_contact_name" class="textbox" type="text" value="{{ $employee->emergency_contact_name }}">
+                                                        </div>
+                                                        <div id="employee-emergency-relationship-container" class="employee-content">
+                                                            <h3>Relationship</h3>
+                                                            <input name="emergency_contact_relationship" class="textbox" type="text" value="{{ $employee->emergency_contact_relationship }}">
+                                                        </div>
+                                                        <div id="employee-emergency-contact-container" class="employee-content">
+                                                            <h3>Contact Number</h3>
+                                                            <input name="emergency_contact_number" class="textbox" type="text" value="{{ $employee->emergency_contact_number }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="employee-button-container">
+                                                    <button id="edit-cancel-btn" class="cancel-employee-button">CANCEL</button>
+                                                    <button id="delete-btn" class="delete-employee-button">DELETE</button> 
+                                                    <input type="submit" id="save-btn" class="save-employee-button" value="SAVE"/>             
+                                                </div>
+                                                
+                                        </div>              
+                                    </div>
+                                </div>
+                            </form>
+                        </div> 
+                    </div>
                     </div>
                 </div>               
             </div>

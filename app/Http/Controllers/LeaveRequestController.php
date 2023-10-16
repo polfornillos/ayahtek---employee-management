@@ -45,4 +45,15 @@ class LeaveRequestController extends Controller
 
       return response()->json($user);
     }
+
+    public function update(Request $request) {
+
+      $id = $request->leaveReqId;
+
+      $data = $request->intent;
+
+      $this->LRequest->updateLeaveReq($data, $id);
+
+      return redirect('/leave-request');
+    }
 }

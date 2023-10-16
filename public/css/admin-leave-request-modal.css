@@ -125,3 +125,30 @@ span[data-employee-leave-detail] {
   color: #096F6F;
   margin-right: 0.5rem;
 }
+
+[data-status="Approved"] {
+  display: inline-block;
+  width: 6.5rem;
+  padding-block: 0.5rem;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #7FD159;
+  border-radius: 20px;
+}
+
+[data-status="Denied"] {
+  display: inline-block;
+  width: 6.5rem;
+  padding-block: 0.5rem;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #D94545;;
+  border-radius: 20px;
+}
+
+.dropdown-toggle-lr {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

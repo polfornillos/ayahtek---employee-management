@@ -71,10 +71,10 @@
                             <td>{{ $lr->credits }}</td>
                             <td>{{ \Carbon\Carbon::parse($lr->sLeave)->format('F d, Y') }}</td>
                             <td>{{ \Carbon\Carbon::parse($lr->eLeave)->format('F d, Y') }}</td>
-                            <td><div class='status-container'><span class='status-{{ $lr->status }}'>{{ $lr->status }}</span></div></td>
+                            <td><div class='status-container'><span data-status="{{$lr->status}}">{{$lr->status}}</span></div></td>
                             <td>
                               <div class="dropdown-option">
-                                    <button class="dropdown-toggle" type="button">
+                                    <button class="dropdown-toggle-lr" type="button">
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">

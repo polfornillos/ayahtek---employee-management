@@ -591,7 +591,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Extract the month filter value
       const selectedMonth = filterType.replace('birthday-', '');
-
+      console.log(selectedMonth);
       // Log the selected month
       console.log(`Selected month: ${selectedMonth}`);
 

@@ -22,7 +22,7 @@
                                 <li id="item-birthday" class="dropdown-item" data-filter-type="birthday"><i id="cake-icon" class="fa-solid fa-cake-candles"></i>Birthday
                                     <ul class="submenu">
                                         <li class="dropdown-item" data-filter-type="birthday-january">January</li>
-                                        <li class="dropdown-item" data-filter-type="birthday-febuary">Febuary</li>
+                                        <li class="dropdown-item" data-filter-type="birthday-february">February</li>
                                         <li class="dropdown-item" data-filter-type="birthday-march">March</li>
                                         <li class="dropdown-item" data-filter-type="birthday-april">April</li>
                                         <li class="dropdown-item" data-filter-type="birthday-may">May</li>

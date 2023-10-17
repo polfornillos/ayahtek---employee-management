@@ -197,10 +197,10 @@
                 </table>
             </div>
             <div class="table-footer">
-                <div class="entries-container">
+                <div id="leave-request-pagination" class="entries-container">
                     <p id="entries-count"><span id="countText"></span></p>
                 </div>
-                <div class="pagination">
+                <div id="leave-request-pagination" class="pagination">
                     <button id="prev-page"><i class="fa-solid fa-caret-left fa-xl"></i></i></button>
                     <span id="page-info"></span>
                     <button id="next-page"><i class="fa-solid fa-caret-right fa-xl"></i></button>

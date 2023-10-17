@@ -19,7 +19,7 @@
 
 @section('content')
 <div class="main-content">
-        <h1 class="page-title">Leave Requests</h1>
+        <h1 class="page-title">LEAVE REQUESTS</h1>
         <div class="employee-table">
             <div class="header-employee-table">
                 <div class="actions">            

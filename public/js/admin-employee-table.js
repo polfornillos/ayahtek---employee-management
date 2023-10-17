@@ -591,7 +591,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Extract the month filter value
       const selectedMonth = filterType.replace('birthday-', '');
-
+      console.log(selectedMonth);
       // Log the selected month
       console.log(`Selected month: ${selectedMonth}`);
 
@@ -659,68 +659,136 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// Open View Modal and Deactivate Modal
+//View Modal, Activate Modal, Deactivate Modal, Delete Modal
 document.addEventListener('DOMContentLoaded', function () {
+  // Query all elements
   const viewButtons = document.querySelectorAll('.view-button');
   const closeButtons = document.querySelectorAll('.cancel-employee-button');
+  const deactivateButtons = document.querySelectorAll('.deactivate-button');
+  const activateButtons = document.querySelectorAll('.activate-button');
+  const deleteButtons = document.querySelectorAll('.delete-employee-button');
+  const modalBackgrounds = document.querySelectorAll('.view-modal-container, .deactivate-modal-container, .activate-modal-container, .delete-modal-container');
+  const closeDeactivateButtons = document.querySelectorAll('.cancel-deactivate-button');
+  const closeActivateButtons = document.querySelectorAll('.cancel-activate-button');
+  const closeDeleteButtons = document.querySelectorAll('.cancel-delete-button');
+  const editButtons = document.querySelectorAll('.edit-employee-button');
+  const closeEditButtons = document.querySelectorAll('.cancel-edit-button');
 
+  // Function to toggle modal display
+  function toggleModal(modalId, show) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = show ? 'flex' : 'none';
+    }
+  }
+
+  // Handle view modals
   viewButtons.forEach(viewButton => {
-      viewButton.addEventListener('click', function () {
-          const employeeId = viewButton.getAttribute('data-employee-id');
-          const viewModal = document.getElementById('viewModal' + employeeId);
+    viewButton.addEventListener('click', function () {
+      const employeeId = viewButton.getAttribute('data-employee-id');
+      
+      // Check if the Edit modal is open and close it
+      const editModal = document.getElementById('editModal' + employeeId);
+      if (editModal.style.display === 'flex') {
+        editModal.style.display = 'none';
+      }
 
-          if (viewModal) {
-              viewModal.style.display = 'flex';
-          }
-      });
+      // Then open the View modal
+      toggleModal('viewModal' + employeeId, true);
+    });
   });
 
   closeButtons.forEach(closeButton => {
-      closeButton.addEventListener('click', function () {
-          const viewModal = closeButton.closest('.view-modal-container');
-
-          if (viewModal) {
-              viewModal.style.display = 'none';
-          }
-      });
+    closeButton.addEventListener('click', function () {
+      const viewModal = closeButton.closest('.view-modal-container');
+      if (viewModal) {
+        toggleModal(viewModal.id, false);
+      }
+    });
   });
-  
-  const deactivateButtons = document.querySelectorAll('.deactivate-button');
+
+  // Handle deactivate modals
   deactivateButtons.forEach(deactivateButton => {
-      deactivateButton.addEventListener('click', function (event) {
-          event.preventDefault();
-          const employeeId = deactivateButton.getAttribute('data-employee-id');
-          const deactivateModal = document.getElementById('deactivateEmployee' + employeeId);
-          if (deactivateModal) {
-              deactivateModal.style.display = 'flex';
-          }
-      });
+    deactivateButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      const employeeId = deactivateButton.getAttribute('data-employee-id');
+      toggleModal('deactivateEmployee' + employeeId, true);
+    });
   });
 
-  const closeDeactivateButtons = document.querySelectorAll('.cancel-deactivate-button'); 
   closeDeactivateButtons.forEach(closeDeactivateButton => {
-      closeDeactivateButton.addEventListener('click', function () {
-          const deactivateModal = closeDeactivateButton.closest('.deactivate-modal-container');
-          
-          if (deactivateModal) {
-              deactivateModal.style.display = 'none';
-          }
-      });
+    closeDeactivateButton.addEventListener('click', function () {
+      const deactivateModal = closeDeactivateButton.closest('.deactivate-modal-container');
+      if (deactivateModal) {
+        toggleModal(deactivateModal.id, false);
+      }
+    });
   });
 
-  // Close modals when clicking on the background
-  const modalBackgrounds = document.querySelectorAll('.view-modal-container, .deactivate-modal-container');
+  // Handle activate modals
+  activateButtons.forEach(activateButton => {
+    activateButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      const employeeId = activateButton.getAttribute('data-employee-id');
+      toggleModal('activateEmployee' + employeeId, true);
+    });
+  });
+
+  closeActivateButtons.forEach(closeActivateButton => {
+    closeActivateButton.addEventListener('click', function () {
+      const activateModal = closeActivateButton.closest('.activate-modal-container');
+      if (activateModal) {
+        toggleModal(activateModal.id, false);
+      }
+    });
+  });
+
+  // Handle delete modals
+  deleteButtons.forEach(deleteButton => {
+    deleteButton.addEventListener('click', function () {
+      const employeeId = deleteButton.getAttribute('data-employee-id');
+      console.log('Opening delete modal for employee ID: ' + employeeId); // Add this line
+      toggleModal('deleteEmployee' + employeeId, true);
+    });
+  });
+
+  closeDeleteButtons.forEach(closeDeleteButton => {
+    closeDeleteButton.addEventListener('click', function () {
+      const deleteModal = closeDeleteButton.closest('.delete-modal-container');
+      if (deleteModal) {
+        toggleModal(deleteModal.id, false);
+      }
+    });
+  });
+
+  // Handle edit modals
+  editButtons.forEach(editButton => {
+    editButton.addEventListener('click', function () {
+      const employeeId = editButton.getAttribute('data-employee-id');
+      toggleModal('editModal' + employeeId, true);
+    });
+  });
+
+  closeEditButtons.forEach(closeEditButton => {
+    closeEditButton.addEventListener('click', function () {
+      const editModal = closeEditButton.closest('.edit-modal-container');
+      if (editModal) {
+        toggleModal(editModal.id, false);
+      }
+    });
+  });
+
+  // Handle modal backgrounds
   modalBackgrounds.forEach(modalBackground => {
-      modalBackground.addEventListener('click', function (event) {
-          if (event.target === modalBackground) {
-              modalBackground.style.display = 'none';
-          }
-      });
+    modalBackground.addEventListener('click', function (event) {
+      if (event.target === modalBackground) {
+        modalBackground.style.display = 'none';
+      }
+    });
   });
-
 });
 
-//Open Add Employye Modal
+//Open Add Employee Modal
 document.addEventListener('DOMContentLoaded', function () {
   // Get the "Add Employee" button, the modal element, and the "Cancel" button
   const addEmployeeButton = document.querySelector('.add-employee-button');
@@ -750,6 +818,317 @@ window.onclick = function(event) {
       viewModal.style.display = "none";
   }
 }
+
+// Function to format SSS number
+const sssNumberInput = document.getElementById('sss_number');
+
+sssNumberInput.addEventListener('input', function () {
+  const inputValue = sssNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+  let formattedValue = '';
+
+  if (inputValue.length > 2) {
+    formattedValue = inputValue.substring(0, 2) + '-';
+
+    if (inputValue.length > 9) {
+      formattedValue += inputValue.substring(2, 9) + '-';
+
+      if (inputValue.length > 10) {
+        formattedValue += inputValue.substring(9, 10);
+      } else {
+        formattedValue += inputValue.substring(9);
+      }
+    } else {
+      formattedValue += inputValue.substring(2);
+    }
+
+    sssNumberInput.value = formattedValue;
+  }
+});
+
+sssNumberInput.addEventListener('keypress', function (e) {
+  const key = String.fromCharCode(e.charCode);
+  if (!/^\d$/.test(key)) {
+    e.preventDefault(); // Prevent entering non-numeric characters
+  }
+});
+
+const philhealthNumberInput = document.getElementById('philhealth_number');
+
+philhealthNumberInput.addEventListener('input', function () {
+  // Remove non-numeric characters
+  let inputValue = philhealthNumberInput.value.replace(/[^0-9]/g, '');
+  let formattedValue = '';
+
+  if (inputValue.length >= 2) {
+    formattedValue = inputValue.substring(0, 2);
+
+    if (inputValue.length > 2) {
+      formattedValue += '-' + inputValue.substring(2, 9);
+
+      if (inputValue.length > 9) {
+        formattedValue += '-' + inputValue.substring(9, 10);
+      }
+    }
+
+    philhealthNumberInput.value = formattedValue;
+  }
+});
+
+philhealthNumberInput.addEventListener('keypress', function (e) {
+  const key = String.fromCharCode(e.charCode);
+  if (!/^\d$/.test(key)) {
+    e.preventDefault(); // Prevent entering non-numeric characters
+  }
+});
+
+// Function to format TIN
+const tinNumberInput = document.getElementById('tin');
+
+tinNumberInput.addEventListener('input', function () {
+  const inputValue = tinNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+  let formattedValue = '';
+
+  if (inputValue.length > 0) {
+    formattedValue = inputValue.substring(0, 3);
+
+    if (inputValue.length > 3) {
+      formattedValue += '-' + inputValue.substring(3, 6);
+    }
+
+    if (inputValue.length > 6) {
+      formattedValue += '-' + inputValue.substring(6, 9);
+    }
+
+    if (inputValue.length > 9) {
+      formattedValue += '-' + inputValue.substring(9, 12);
+    }
+
+    tinNumberInput.value = formattedValue;
+  }
+});
+
+tinNumberInput.addEventListener('keypress', function (e) {
+  const key = String.fromCharCode(e.charCode);
+  if (!/^\d$/.test(key)) {
+    e.preventDefault(); // Prevent entering non-numeric characters
+  }
+});
+
+// Function to format Salary input
+const salaryInput = document.getElementById('salary');
+
+// Set the initial value to "0.00"
+salaryInput.value = "0.00";
+
+salaryInput.addEventListener('input', function () {
+  let inputValue = salaryInput.value.replace(/[^0-9.]/g, ''); // Remove non-numeric characters except '.'
+  
+  // Ensure there's a decimal point
+  if (!inputValue.includes('.')) {
+    inputValue += ".00";
+  } else {
+    // Limit decimal places to 2
+    const parts = inputValue.split('.');
+    if (parts[1] && parts[1].length > 2) {
+      parts[1] = parts[1].substring(0, 2);
+    }
+    inputValue = parts.join('.');
+  }
+  
+  salaryInput.value = inputValue;
+});
+
+// Function to format Contact number input
+const contactInput = document.getElementById('contact');
+const eContactInput = document.getElementById('emergency_contact');
+
+contactInput.addEventListener('input', function () {
+  handlePhoneNumberInput(contactInput);
+});
+
+eContactInput.addEventListener('input', function () {
+  handlePhoneNumberInput(eContactInput);
+});
+
+function handlePhoneNumberInput(inputElement) {
+  let inputValue = inputElement.value.replace(/[^0-9+]/g, ''); // Remove non-numeric characters except '+'
+
+  // If the input is empty or starts with "+" but has no numbers following it
+  if (inputValue === '' || (inputValue === '+' && inputValue.length === 1)) {
+    inputValue = ''; // Remove "+63" or any plus sign if no numbers
+  } else if (!inputValue.startsWith('+')) {
+    inputValue = '+63' + inputValue; // Add "+63" prefix if it's missing
+  }
+
+  inputElement.value = inputValue;
+}
+
+// --------Edit Form-------- //
+
+// Function to format SSS number
+const e_sssNumberInputs = document.querySelectorAll('[id^="e_sss_number_"]');
+
+e_sssNumberInputs.forEach(e_sssNumberInput => {
+  e_sssNumberInput.addEventListener('input', function () {
+    const inputValue = e_sssNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    let formattedValue = '';
+
+    if (inputValue.length > 2) {
+      formattedValue = inputValue.substring(0, 2) + '-';
+
+      if (inputValue.length > 9) {
+        formattedValue += inputValue.substring(2, 9) + '-';
+
+        if (inputValue.length > 10) {
+          formattedValue += inputValue.substring(9, 10);
+        } else {
+          formattedValue += inputValue.substring(9);
+        }
+      } else {
+        formattedValue += inputValue.substring(2);
+      }
+
+      e_sssNumberInput.value = formattedValue;
+    }
+  });
+
+  e_sssNumberInput.addEventListener('keypress', function (e) {
+    const key = String.fromCharCode(e.charCode);
+    if (!/^\d$/.test(key)) {
+      e.preventDefault(); // Prevent entering non-numeric characters
+    }
+  });
+});
+
+// Function to format Philhealth number
+const e_philhealthNumberInputs = document.querySelectorAll('[id^="e_philhealth_number_"]');
+
+e_philhealthNumberInputs.forEach(e_philhealthNumberInput => {
+  e_philhealthNumberInput.addEventListener('input', function () {
+    const inputValue = e_philhealthNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    let formattedValue = '';
+
+    if (inputValue.length > 2) {
+      formattedValue = inputValue.substring(0, 2) + '-';
+
+      if (inputValue.length > 9) {
+        formattedValue += inputValue.substring(2, 9) + '-';
+
+        if (inputValue.length > 10) {
+          formattedValue += inputValue.substring(9, 10);
+        } else {
+          formattedValue += inputValue.substring(9);
+        }
+      } else {
+        formattedValue += inputValue.substring(2);
+      }
+
+      e_philhealthNumberInput.value = formattedValue;
+    }
+  });
+
+  e_philhealthNumberInput.addEventListener('keypress', function (e) {
+    const key = String.fromCharCode(e.charCode);
+    if (!/^\d$/.test(key)) {
+      e.preventDefault(); // Prevent entering non-numeric characters
+    }
+  });
+});
+
+// Function to format TIN
+const e_tinNumberInputs = document.querySelectorAll('[id^="e_tin_"]');
+
+e_tinNumberInputs.forEach(e_tinNumberInput => {
+  e_tinNumberInput.addEventListener('input', function () {
+    const inputValue = e_tinNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    let formattedValue = '';
+
+    if (inputValue.length > 0) {
+      formattedValue = inputValue.substring(0, 3);
+
+      if (inputValue.length > 3) {
+        formattedValue += '-' + inputValue.substring(3, 6);
+      }
+
+      if (inputValue.length > 6) {
+        formattedValue += '-' + inputValue.substring(6, 9);
+      }
+
+      if (inputValue.length > 9) {
+        formattedValue += '-' + inputValue.substring(9, 12);
+      }
+
+      e_tinNumberInput.value = formattedValue;
+    }
+  });
+
+  e_tinNumberInput.addEventListener('keypress', function (e) {
+    const key = String.fromCharCode(e.charCode);
+    if (!/^\d$/.test(key)) {
+      e.preventDefault(); // Prevent entering non-numeric characters
+    }
+  });
+});
+
+// Function to format Salary input
+const e_salaryInputs = document.querySelectorAll('[id^="e_salary_"]');
+
+e_salaryInputs.forEach(e_salaryInput => {
+
+  e_salaryInput.addEventListener('input', function () {
+    let inputValue = e_salaryInput.value.replace(/[^0-9.]/g, ''); // Remove non-numeric characters except '.'
+    
+    // Ensure there's a decimal point
+    if (!inputValue.includes('.')) {
+      inputValue += ".00";
+    } else {
+      // Limit decimal places to 2
+      const parts = inputValue.split('.');
+      if (parts[1] && parts[1].length > 2) {
+        parts[1] = parts[1].substring(0, 2);
+      }
+      inputValue = parts.join('.');
+    }
+    
+    e_salaryInput.value = inputValue;
+  });
+});
+
+// Function to format Contact number input
+const e_contactInputs = document.querySelectorAll('[id^="e_contact_"]');
+
+e_contactInputs.forEach(e_contactInput => {
+  e_contactInput.addEventListener('input', function () {
+    let inputValue = e_contactInput.value.replace(/[^0-9+]/g, ''); // Remove non-numeric characters except '+'
+
+    // If the input is empty or starts with "+" but has no numbers following it
+    if (inputValue === '' || (inputValue === '+' && inputValue.length === 1)) {
+      inputValue = ''; // Remove "+63" or any plus sign if no numbers
+    } else if (!inputValue.startsWith('+')) {
+      inputValue = '+63' + inputValue; // Add "+63" prefix if it's missing
+    }
+
+    e_contactInput.value = inputValue;
+  });
+});
+
+// Function to format Emergency Contact number input
+const e_eContactInputs = document.querySelectorAll('[id^="e_emergency_contact_"]');
+
+e_eContactInputs.forEach(e_eContactInput => {
+  e_eContactInput.addEventListener('input', function () {
+    let inputValue = e_eContactInput.value.replace(/[^0-9+]/g, ''); // Remove non-numeric characters except '+'
+    
+    // If the input is empty or starts with "+" but has no numbers following it
+    if (inputValue === '' || (inputValue === '+' && inputValue.length === 1)) {
+      inputValue = ''; // Remove "+63" or any plus sign if no numbers
+    } else if (!inputValue.startsWith('+')) {
+      inputValue = '+63' + inputValue; // Add "+63" prefix if it's missing
+    }
+    
+    e_eContactInput.value = inputValue;
+  });
+});
 
 initializeFilteredRows();
 updatePagination();

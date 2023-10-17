@@ -11,7 +11,6 @@ use App\Http\Controllers\ForgotPasswordController;
 Route::controller(LoginController::class)->group(function () {
     Route::get('/', 'login')->name('login')->middleware('alreadyLoggedIn');
     Route::post('/', 'loginAdmin')->name('login-admin');
-    Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::get('/logout', 'logout')->name('logout');
 });
 
@@ -28,10 +27,23 @@ Route::controller(ForgotPasswordController::class)->group(function () {
 // group route that utilizes the same controller class
 Route::controller(LeaveRequestController::class)->group(function () {
     Route::get('/leave-request', 'index')->middleware('isLoggedIn');
-    Route::post('/leave-request/add', 'store')->middleware('isLoggedIn');
+    Route::post('/leave-request/add', 'store');
     Route::get('/leave-request/{id}', 'show')->middleware('isLoggedIn');
+    Route::post('/leave-request/update', 'update');
 });
 
+Route::controller(employeeTableController::class)->group(function () {
+    Route::get('/employeetable', 'employeeTable')->middleware('isLoggedIn');
+    Route::post('/employeetable-deactivate/{id}', 'deactivateUser');
+    Route::post('/employeetable-activate/{id}','activateUser');
+    Route::post('/employee-save', 'store');
+    Route::post('/employee-update/{id}', 'update');
+    Route::post('/employee-delete/{id}','delete');
+});
+/* 
 Route::get('/employeetable', [employeeTableController::class, 'employeeTable'])->middleware('isLoggedIn');
-Route::post('/employeetable-deactivate/{id}', [employeeTableController::class, 'deactivateUser'])->middleware('isLoggedIn');
-Route::post('/employee-save', [employeeTableController::class, 'store'])->middleware('isLoggedIn');
+Route::post('/employeetable-deactivate/{id}', [employeeTableController::class, 'deactivateUser']);
+Route::post('/employeetable-activate/{id}', [employeeTableController::class, 'activateUser']);
+Route::post('/employee-save', [employeeTableController::class, 'store']);
+Route::post('/employee-update/{id}', [employeeTableController::class, 'update']);
+Route::post('/employee-delete/{id}', [employeeTableController::class, 'delete']); */

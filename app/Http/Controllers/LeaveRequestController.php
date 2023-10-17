@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\LRequest;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Session;
@@ -18,10 +19,24 @@ class LeaveRequestController extends Controller
   }
 
     // renders leave request page
-    public function index() {
+    public function index(Request $request) {
       $leaveRequests = $this->LRequest->getLRequests();
       $data = User::where('id', '=', Session::get('loginId'))->first();
+
+
+      if($request->has('filter')) {
+        $leaveRequests = match ($request->filter) {
+          'approve' => $leaveRequests->where('status', 'Approved'),
+          'pending' => $leaveRequests->where('status', 'Pending'),
+          'denied' => $leaveRequests->where('status', 'Denied'),
+          'highCredit' => $leaveRequests->where('credits', '>', 4),
+          'lowCredit' => $leaveRequests->where('credits', '<', 5),
+          'reset' => $leaveRequests,
+        };
+      }
+
       return view('current.admin-leave-request', compact('data','leaveRequests'));
+
     }
 
     // function to add leave request data in db
@@ -46,5 +61,16 @@ class LeaveRequestController extends Controller
       $user = $this->LRequest->getLeaveReq($id);
 
       return response()->json($user);
+    }
+
+    public function update(Request $request) {
+
+      $id = $request->leaveReqId;
+
+      $data = $request->intent;
+
+      $this->LRequest->updateLeaveReq($data, $id);
+
+      return redirect('/leave-request');
     }
 }

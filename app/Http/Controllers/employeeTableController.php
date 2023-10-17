@@ -32,10 +32,20 @@ class employeeTableController extends Controller
         if ($employee) {
             $employee->update(['status' => 'inactive']);
             
-            return redirect('/employeetable');
+            return redirect('/dashboard');
         }
     }
     
+    public function activateUser($id) {
+        $employee = AEmployees::find($id);
+        
+        if ($employee) {
+            $employee->update(['status' => 'active']);
+            
+            return redirect('/dashboard');
+        }
+    }
+
     public function create() {
         return view('current.admin-employee-table');
     }
@@ -57,6 +67,39 @@ class employeeTableController extends Controller
 
         $this->employees->saveEmployee($data); 
 
-        return redirect('/employeetable');
+        return redirect('/dashboard');
     }
+
+    public function update(Request $request, $id) {
+        $employee = AEmployees::find($id);
+
+        $data = [
+            'name' => $request->name,
+            'birthday' => $request->birthday,
+            'gender' => $request->gender,
+            'contact' => $request->contact,
+            'salary' => $request->salary,
+            'sss_number' => $request->sss_number,
+            'philhealth_number' => $request->philhealth_number,
+            'tin' => $request->tin,
+            'emergency_contact_name' => $request->emergency_contact_name,
+            'emergency_contact_number' => $request->emergency_contact_number,
+            'emergency_contact_relationship' => $request->emergency_contact_relationship,
+        ];
+
+        if($employee){
+            $employee->update($data);
+        }
+
+        return redirect('/dashboard');
+    }
+
+    public function delete($id) {
+        $employee = AEmployees::find($id);
+    
+        $employee->delete();
+    
+        return redirect('/dashboard');
+    }
+    
 }

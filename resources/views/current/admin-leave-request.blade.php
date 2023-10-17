@@ -19,7 +19,7 @@
 
 @section('content')
 <div class="main-content">
-        <h1 class="page-title">Leave Requests</h1>
+        <h1 class="page-title">LEAVE REQUESTS</h1>
         <div class="employee-table">
             <div class="header-employee-table">
                 <div class="actions">            
@@ -32,14 +32,15 @@
                         </div>
                         <div class="filter-dropdown-container">
                             <button class="filters-button">Filter</button>
-                            <ul class="dropdown-menu">
-                              <li class="dropdown-item">Approved</li>
-                              <li class="dropdown-item">Pending</li>
-                              <li class="dropdown-item">Declined</li>
-                              <li class="dropdown-item">High Credit</li>
-                              <li class="dropdown-item">Low Credit</li>
-                              <li class="dropdown-item">Reset Filter</li>
-                            </ul>
+                            <form action="/leave-request" method="GET" class="dropdown-menu dropdown-menu-lr">
+                              @csrf
+                              <button type="submit" name="filter" value="approve" class="dropdown-item-lr">Approved</button>
+                              <button type="submit" name="filter" value="pending" class="dropdown-item-lr">Pending</button>
+                              <button type="submit" name="filter" value="denied" class="dropdown-item-lr">Denied</button>
+                              <button type="submit" name="filter" value="highCredit" class="dropdown-item-lr">High Credit</button>
+                              <button type="submit" name="filter" value="lowCredit" class="dropdown-item-lr">Low Credit</button>
+                              <button type="submit" name="filter" value="reset" class="dropdown-item-lr">Reset Filter</button>
+                            </form>
                         </div>
                     </div>
                     <button class="add-employee-button" data-bs-toggle="modal" data-bs-target="#add-leave-request-modal">Add Leave Request</button>
@@ -63,18 +64,17 @@
                       @if($leaveRequests)
                         @foreach($leaveRequests as $lr)
                           <tr>
-                            <!-- Populate main table -->
-                            
+                            <!-- Populate main table -->                           
                             <td>EMP-{{ str_pad($lr->id, 3, '0', STR_PAD_LEFT) }}</td>
                             <td>{{ $lr->name }}</td>
                             <td>{{ $lr->daysLeave }}</td>
                             <td>{{ $lr->credits }}</td>
                             <td>{{ \Carbon\Carbon::parse($lr->sLeave)->format('F d, Y') }}</td>
                             <td>{{ \Carbon\Carbon::parse($lr->eLeave)->format('F d, Y') }}</td>
-                            <td><div class='status-container'><span class='status-{{ $lr->status }}'>{{ $lr->status }}</span></div></td>
+                            <td><div class='status-container'><span data-status="{{$lr->status}}">{{$lr->status}}</span></div></td>
                             <td>
                               <div class="dropdown-option">
-                                    <button class="dropdown-toggle" type="button">
+                                    <button class="dropdown-toggle-lr" type="button">
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu-option" id="myDropdown" aria-labelledby="dropdownMenuButton">
@@ -122,7 +122,7 @@
               <input type="input" id="tLeave" name="tLeave" class="form-control mb-4" >
 
               <label for="daysLeave" class="form-label">Days of Leave</label>
-              <input type="input" id="daysLeave" name="daysLeave" class="form-control mb-4" >
+              <input type="input" id="daysLeave" name="daysLeave" class="form-control mb-4" readonly>
 
               <label for="sLeave" class="form-label">Start of Leave</label>
               <input type="date" id="sLeave" name="sLeave" class="form-control mb-4" >
@@ -133,8 +133,8 @@
               <label for="reason">Reason</label>
               <textarea class="form-control mb-4" placeholder="Leave your reason here" id="reason" name="reason"></textarea>
 
-              <label for="status" class="form-label">Status</label>
-              <input type="input" id="status" name="status" class="form-control mb-4" >
+              <!-- <label for="status" class="form-label">Status</label> -->
+              <input type="input" id="status" name="status" value="Pending" hidden >
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -179,8 +179,12 @@
 
         <div class="modal-footer-lr-view">
           <div class="grant-section">
-            <button type="button" class="btn-lr-view btn-approve-lr-view">Approve</button>
-            <button type="button" class="btn-lr-view btn-deny-lr-view">Deny</button>
+            <form action="/leave-request/update" method="POST">
+              @csrf
+              <input type="text" id="approve-input" name="leaveReqId" hidden>
+              <button type="submit" name="intent" value="Approved" class="btn-lr-view btn-approve-lr-view">Approve</button>
+              <button type="submit" name="intent" value="Denied" class="btn-lr-view btn-deny-lr-view">Deny</button>
+            </form>
           </div>
           <div class="edit-section">
             <button type="button" class="btn-lr-view btn-cancel-lr-view" data-dismiss="modal">Cancel</button>
@@ -195,7 +199,7 @@
 @section('jquery')
   <script>
     $(document).ready(function() {
-      $("tbody").on("click", ".dropdown-toggle", function(event) {
+      $("tbody").on("click", ".dropdown-toggle-lr", function(event) {
         // close all dropdown, excluding the target
         $(".dropdown-menu-option").not($(this).closest("tr").find(".dropdown-menu-option")).hide();
 
@@ -238,6 +242,8 @@
               $('[data-employee-leave-datail="endDate"]').text(formatDate(data.eLeave));
               $('[data-employee-leave-datail="leaveType"]').text(data.tLeave);
               $('[data-employee-leave-datail="reason"]').text(data.reason);
+              $('#approve-input').val(data.id);
+              $('#deny-input').val(data.id);
           })
 
       });
@@ -257,5 +263,36 @@
     
       return `${month} ${day.toString().padStart(2, '0')}, ${year}`;
     }
+
+  // Calculate Days of leave
+  const sLeaveInput = document.getElementById('sLeave');
+  const eLeaveInput = document.getElementById('eLeave');
+  const daysLeaveInput = document.getElementById('daysLeave');
+
+  sLeaveInput.addEventListener('input', updateDaysOfLeave);
+  eLeaveInput.addEventListener('input', updateDaysOfLeave);
+
+  // Function to calculate the number of days between two dates
+  function dateDiffInDays(date1, date2) {
+    const diffInMilliseconds = date2 - date1;
+    return Math.round(diffInMilliseconds / (1000 * 60 * 60 * 24));
+  }
+
+  // Function to update the 'Days of Leave' field
+  function updateDaysOfLeave() {
+    const startDate = new Date(sLeaveInput.value);
+    const endDate = new Date(eLeaveInput.value);
+
+    if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+      const days = dateDiffInDays(startDate, endDate);
+      if (days >= 0) {
+        daysLeaveInput.value = days;
+      } else {
+        daysLeaveInput.value = '';
+      }
+    } else {
+      daysLeaveInput.value = '';
+    }
+  }
   </script>
 @endsection

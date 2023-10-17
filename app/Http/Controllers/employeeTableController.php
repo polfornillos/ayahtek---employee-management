@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\AEmployees;
 use App\Models\User;
-use Session;
+use Illuminate\Support\Facades\Session;
+
 class employeeTableController extends Controller
 {
     private $employees;

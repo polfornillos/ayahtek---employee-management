@@ -22,8 +22,6 @@ Route::controller(ForgotPasswordController::class)->group(function () {
     Route::post('/resetpassword', 'resetPasswordPost')->name('resetpasswordPost');
 });
 
-
-
 // group route that utilizes the same controller class
 Route::controller(LeaveRequestController::class)->group(function () {
     Route::get('/leave-request', 'index')->middleware('isLoggedIn');

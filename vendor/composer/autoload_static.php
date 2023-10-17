@@ -552,6 +552,7 @@ class ComposerStaticInit416f52855f75e392f477ec1ceb9ee6f0
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/ForgotPasswordController.php',
         'App\\Http\\Controllers\\LeaveRequestController' => __DIR__ . '/../..' . '/app/Http/Controllers/LeaveRequestController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\employeeTableController' => __DIR__ . '/../..' . '/app/Http/Controllers/employeeTableController.php',

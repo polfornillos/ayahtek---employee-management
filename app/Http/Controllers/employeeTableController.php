@@ -32,7 +32,7 @@ class employeeTableController extends Controller
         if ($employee) {
             $employee->update(['status' => 'inactive']);
             
-            return redirect('/dashboard');
+            return redirect('/employeetable');
         }
     }
     
@@ -42,7 +42,7 @@ class employeeTableController extends Controller
         if ($employee) {
             $employee->update(['status' => 'active']);
             
-            return redirect('/dashboard');
+            return redirect('/employeetable');
         }
     }
 
@@ -67,7 +67,7 @@ class employeeTableController extends Controller
 
         $this->employees->saveEmployee($data); 
 
-        return redirect('/dashboard');
+        return redirect('/employeetable');
     }
 
     public function update(Request $request, $id) {
@@ -91,7 +91,7 @@ class employeeTableController extends Controller
             $employee->update($data);
         }
 
-        return redirect('/dashboard');
+        return redirect('/employeetable');
     }
 
     public function delete($id) {
@@ -99,7 +99,7 @@ class employeeTableController extends Controller
     
         $employee->delete();
     
-        return redirect('/dashboard');
+        return redirect('/employeetable');
     }
     
 }

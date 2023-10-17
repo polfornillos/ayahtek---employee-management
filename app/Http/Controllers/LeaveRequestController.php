@@ -7,7 +7,7 @@ use App\Models\LRequest;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class LeaveRequestController extends Controller
 {

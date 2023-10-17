@@ -9,6 +9,7 @@ use App\Models\AEmployees;
 use Hash;
 use Session;
 
+
 class LoginController extends Controller
 {
     public function __construct(){
@@ -36,22 +37,13 @@ class LoginController extends Controller
                     setcookie("password","");
                 }
                 $request->session()->put('loginId', $admin->id);
-                return redirect('dashboard');
+                return redirect('/employeetable');
             }else{
                 return back()->with('fail', 'The email or password does not exist.');
             }
         }else{
             return back()->with('fail', 'The email or password does not exist.');
         }
-    }
-
-    public function dashboard(){
-        $data = array();
-        if(Session::has('loginId')){
-            $data = User::where('id', '=', Session::get('loginId'))->first();
-            $employees = $this->employees->getEmployees();
-        }
-        return view('current.admin-employee-table', compact('data','employees'));
     }
 
     public function logout(){
@@ -61,15 +53,4 @@ class LoginController extends Controller
         }
     }
 
-    public function forgotpassword(){
-        return view('auth.admin-forgotpassword');
-    }
-    
-    public function enterSecurityCode(){
-        return view('auth.admin-entersecuritycode');
-    }
-
-    public function resetpassword(){
-        return view('auth.admin-resetpassword');
-    }
 }

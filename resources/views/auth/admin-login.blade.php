@@ -26,6 +26,7 @@
                 @if(Session::has('fail'))
                 <div class="alert alert-danger">{{ Session::get('fail') }}</div>
                 @endif
+                
                 @csrf
                 <div class="input-group mb-1 has-validation" id="input">
                     <span class="input-group-text" id="basic-addon1"><svg width="15" height="16" viewBox="0 0 15 16"

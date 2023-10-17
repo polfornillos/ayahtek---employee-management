@@ -20,9 +20,31 @@
                 <img src="images/ayahtekLogo.png" class="img-fluid">
             </div>
             <h4 class="mb-3">Forgot Password</h4>
-            <small class="mb-4">Enter email associated with your account and we’ll send you a code to reset your
+            <small class="mb-4">Enter email associated with your account and we’ll send you a link to reset your
                 password.</small>
-            <form action="/verifycode" class="needs-validation" novalidate>
+            <form action="{{ route('forgotpasswordPost') }}" method="POST" class="needs-validation" novalidate>
+                @if($errors->any())
+                    <div class="col-12">
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger">
+                                {{ $error }}
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
+                @if(session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{session('error')}}
+                    </div>
+                @endif
+                @if(session()->has('success'))
+                    <div class="alert alert-success">
+                        {{session('success')}}
+                    </div>
+                @endif
+
+                @csrf
                 <div class="input-group mb-3 has-validation" id="input">
                     <span class="input-group-text" id="basic-addon1"><svg width="15" height="12" viewBox="0 0 15 12"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,7 +53,7 @@
                                 fill="white" />
                         </svg>
                     </span>
-                    <input type="email" id="input1" class="form-control fs-6" placeholder="Enter email"
+                    <input name="email" type="email" id="input1" class="form-control fs-6" placeholder="Enter email"
                         aria-label="Email" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback mb-0">
                         Please enter a valid email.

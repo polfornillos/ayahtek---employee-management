@@ -22,24 +22,52 @@
             <h4 class="mb-3">Create new password</h4>
             <small>
                 <ul>
-                    <li>At least 12 characters long but 14 or more is better</li>
+                    <li>At least 8 characters long</li>
                     <li>A combination of uppercase letters, and lower case letters, numbers and symbols.</li>
                     <li>Significantly different from your previous passwords.</li>
                 </ul>
             </small>
+            <form action="{{ route('resetpasswordPost') }}" method='POST'>
+            @if($errors->any())
+                    <div class="col-12">
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger">
+                                {{ $error }}
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
 
-            <div class="input-group mb-3">
-                <input type="password" id="newpass" class="form-control fs-6" placeholder="Create new password"
-                    aria-label="Verification code" aria-describedby="basic-addon1">
-            </div>
-            <div class="input-group mb-3">
-                <input type="password" id="newpass" class="form-control fs-6" placeholder="Confirm new password"
-                    aria-label="Verification code" aria-describedby="basic-addon1">
-            </div>
-            <div class="input-group mb-3 justify-content-center">
-                <button class="btn btn-lg btn-primary shadow fs-6" data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop">CHANGE PASSWORD</button>
-            </div>
+                @if(session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{session('error')}}
+                    </div>
+                @endif
+                @if(session()->has('success'))
+                    <div class="alert alert-success">
+                        {{session('success')}}
+                    </div>
+                @endif
+                @csrf
+                <input type="text" name="token" hidden value="{{ $token }}">
+                <!-- <div class="input-group mb-3">
+                    <input name="email" type="email" id="email" class="form-control fs-6" placeholder="Enter email"
+                        aria-label="Email" aria-describedby="basic-addon1">
+                </div> -->
+                <div class="input-group mb-3">
+                    <input name="password" type="password" id="newpass" class="form-control fs-6" placeholder="Create new password"
+                        aria-label="Create new password" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <input name="password_confirmation" type="password" id="newpass" class="form-control fs-6" placeholder="Confirm new password"
+                        aria-label="Confirm new password" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3 justify-content-center">
+                    <button class="btn btn-lg btn-primary shadow fs-6" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">CHANGE PASSWORD</button>
+                </div>
+            </form>
+            
             <div class="row mt-5">
                 <div class="d-inline col">
                     <span><svg width="26" height="24" viewBox="0 0 26 24" fill="none"
@@ -62,7 +90,7 @@
 
         </div>
     </div>
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content justify-content-center align-items-center">
@@ -84,8 +112,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script>
+    </div> -->
+    <!-- <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (() => {
             'use strict'
@@ -105,7 +133,7 @@
                 }, false)
             })
         })()
-    </script>
+    </script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>

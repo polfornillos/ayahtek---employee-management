@@ -5,31 +5,33 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\employeeTableController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ForgotPasswordController;
 
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/', 'login')->name('login')->middleware('alreadyLoggedIn');
-    Route::post('/login-admin', 'loginAdmin')->name('login-admin');
+    Route::post('/', 'loginAdmin')->name('login-admin');
+    Route::get('/dashboard', 'dashboard')->name('dashboard');
+    Route::get('/logout', 'logout')->name('logout');
 });
 
-Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard')->middleware('isLoggedIn');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::controller(ForgotPasswordController::class)->group(function () {
+    Route::get('/forgotpassword', 'forgotpassword')->name('forgotpassword');
+    Route::post('/forgotpassword', 'forgotpasswordPost')->name('forgotpasswordPost');
+    // Route::get('/verifycode', 'enterSecurityCode')->name('entersecuritycode');;
+    Route::get('/resetpassword{token}', 'resetPassword')->name('resetpassword');
+    Route::post('/resetpassword', 'resetPasswordPost')->name('resetpasswordPost');
+});
 
-Route::get('/forgotpassword', [LoginController::class, 'forgotpassword'])->name('forgotpassword');
 
-Route::get('/verifycode', [LoginController::class, 'enterSecurityCode'])->name('entersecuritycode');;
-
-Route::get('/resetpassword', [LoginController::class, 'resetpassword'])->name('resetpassword');;
-
-Route::get('/leaverequest', [LeaveRequestController::class, 'index']);
 
 // group route that utilizes the same controller class
 Route::controller(LeaveRequestController::class)->group(function () {
-    Route::get('/leave-request', 'index');
-    Route::post('/leave-request/add', 'store');
-    Route::get('/leave-request/{id}', 'show');
+    Route::get('/leave-request', 'index')->middleware('isLoggedIn');
+    Route::post('/leave-request/add', 'store')->middleware('isLoggedIn');
+    Route::get('/leave-request/{id}', 'show')->middleware('isLoggedIn');
 });
 
-Route::get('/employeetable', [employeeTableController::class, 'employeeTable']);
-Route::post('/employeetable-deactivate/{id}', [employeeTableController::class, 'deactivateUser']);
-Route::post('/employee-save', [employeeTableController::class, 'store']);
+Route::get('/employeetable', [employeeTableController::class, 'employeeTable'])->middleware('isLoggedIn');
+Route::post('/employeetable-deactivate/{id}', [employeeTableController::class, 'deactivateUser'])->middleware('isLoggedIn');
+Route::post('/employee-save', [employeeTableController::class, 'store'])->middleware('isLoggedIn');

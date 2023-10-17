@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\LRequest;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Session;
 
 class LeaveRequestController extends Controller
 {
@@ -18,8 +20,8 @@ class LeaveRequestController extends Controller
     // renders leave request page
     public function index() {
       $leaveRequests = $this->LRequest->getLRequests();
-
-      return view('current.admin-leave-request', compact('leaveRequests'));
+      $data = User::where('id', '=', Session::get('loginId'))->first();
+      return view('current.admin-leave-request', compact('data','leaveRequests'));
     }
 
     // function to add leave request data in db

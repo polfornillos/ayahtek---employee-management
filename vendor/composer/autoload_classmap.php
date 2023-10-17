@@ -13,6 +13,8 @@ return array(
     'App\\Http\\Controllers\\LoginController' => $baseDir . '/app/Http/Controllers/LoginController.php',
     'App\\Http\\Controllers\\employeeTableController' => $baseDir . '/app/Http/Controllers/employeeTableController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
+    'App\\Http\\Middleware\\AlreadyLoggedIn' => $baseDir . '/app/Http/Middleware/AlreadyLoggedIn.php',
+    'App\\Http\\Middleware\\AuthCheck' => $baseDir . '/app/Http/Middleware/AuthCheck.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => $baseDir . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\AEmployees;
-
+use App\Models\User;
+use Session;
 class employeeTableController extends Controller
 {
     private $employees;
@@ -21,8 +22,8 @@ class employeeTableController extends Controller
 
     public function employeeTable() { 
         $employees = $this->employees->getEmployees();
-
-        return view('current.admin-employee-table',compact('employees'));
+        $data = User::where('id', '=', Session::get('loginId'))->first();
+        return view('current.admin-employee-table',compact('data','employees'));
     }
 
     public function deactivateUser($id) {

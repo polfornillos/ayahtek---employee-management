@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit65e85f9f959c0b087110331754d451cf
+class ComposerStaticInit416f52855f75e392f477ec1ceb9ee6f0
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -356,8 +356,8 @@ class ComposerStaticInit65e85f9f959c0b087110331754d451cf
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -467,8 +467,8 @@ class ComposerStaticInit65e85f9f959c0b087110331754d451cf
         ),
         'Fruitcake\\Cors\\' => 
         array (
-            0 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
-            1 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
+            0 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
+            1 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
         ),
         'Faker\\' => 
         array (
@@ -556,6 +556,8 @@ class ComposerStaticInit65e85f9f959c0b087110331754d451cf
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\employeeTableController' => __DIR__ . '/../..' . '/app/Http/Controllers/employeeTableController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\AlreadyLoggedIn' => __DIR__ . '/../..' . '/app/Http/Middleware/AlreadyLoggedIn.php',
+        'App\\Http\\Middleware\\AuthCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/AuthCheck.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
@@ -6226,9 +6228,9 @@ class ComposerStaticInit65e85f9f959c0b087110331754d451cf
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit65e85f9f959c0b087110331754d451cf::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit65e85f9f959c0b087110331754d451cf::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit65e85f9f959c0b087110331754d451cf::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit416f52855f75e392f477ec1ceb9ee6f0::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit416f52855f75e392f477ec1ceb9ee6f0::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit416f52855f75e392f477ec1ceb9ee6f0::$classMap;
 
         }, null, ClassLoader::class);
     }

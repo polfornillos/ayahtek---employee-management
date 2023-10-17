@@ -30,6 +30,7 @@ Route::controller(LeaveRequestController::class)->group(function () {
     Route::post('/leave-request/add', 'store');
     Route::get('/leave-request/{id}', 'show')->middleware('isLoggedIn');
     Route::post('/leave-request/update', 'update');
+    Route::post('/leave-request/delete', 'delete');
 });
 
 Route::controller(employeeTableController::class)->group(function () {

@@ -121,14 +121,14 @@
               <label for="tLeave" class="form-label">Type of Leave</label>
               <input type="input" id="tLeave" name="tLeave" class="form-control mb-4" >
 
-              <label for="daysLeave" class="form-label">Days of Leave</label>
-              <input type="input" id="daysLeave" name="daysLeave" class="form-control mb-4" readonly>
-
               <label for="sLeave" class="form-label">Start of Leave</label>
               <input type="date" id="sLeave" name="sLeave" class="form-control mb-4" >
 
               <label for="eLeave" class="form-label">End of Leave</label>
               <input type="date" id="eLeave" name="eLeave" class="form-control mb-4" >
+
+              <label for="daysLeave" class="form-label">Days of Leave</label>
+              <input type="input" id="daysLeave" name="daysLeave" class="form-control mb-4" readonly>
 
               <label for="reason">Reason</label>
               <textarea class="form-control mb-4" placeholder="Leave your reason here" id="reason" name="reason"></textarea>
@@ -181,14 +181,18 @@
           <div class="grant-section">
             <form action="/leave-request/update" method="POST">
               @csrf
-              <input type="text" id="approve-input" name="leaveReqId" hidden>
+              <input type="text" id="grant-input" name="leaveReqId" hidden>
               <button type="submit" name="intent" value="Approved" class="btn-lr-view btn-approve-lr-view">Approve</button>
               <button type="submit" name="intent" value="Denied" class="btn-lr-view btn-deny-lr-view">Deny</button>
             </form>
           </div>
           <div class="edit-section">
-            <button type="button" class="btn-lr-view btn-cancel-lr-view" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn-lr-view btn-edit-lr-view">Edit</button>
+            <form action="/leave-request/delete" method="POST">
+              @csrf
+              <input type="text" id="del-input" name="leaveReqId" hidden>
+              <button type="button" class="btn-lr-view btn-cancel-lr-view" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn-lr-view btn-delete-lr-view">Delete</button>
+            </form>
           </div>
         </div>
       </section>
@@ -242,8 +246,8 @@
               $('[data-employee-leave-datail="endDate"]').text(formatDate(data.eLeave));
               $('[data-employee-leave-datail="leaveType"]').text(data.tLeave);
               $('[data-employee-leave-datail="reason"]').text(data.reason);
-              $('#approve-input').val(data.id);
-              $('#deny-input').val(data.id);
+              $('#grant-input').val(data.id);
+              $('#del-input').val(data.id);
           })
 
       });

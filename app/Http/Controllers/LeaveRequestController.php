@@ -73,4 +73,14 @@ class LeaveRequestController extends Controller
 
       return redirect('/leave-request');
     }
+
+    public function delete(Request $request) {
+      $id = $request->leaveReqId;
+
+      $leaveRequest = LRequest::find($id);
+
+      $leaveRequest->delete();
+
+      return redirect('/leave-request');
+    }
 }

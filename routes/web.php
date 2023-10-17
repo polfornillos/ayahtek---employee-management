@@ -31,9 +31,18 @@ Route::controller(LeaveRequestController::class)->group(function () {
     Route::post('/leave-request/update', 'update');
 });
 
+Route::controller(employeeTableController::class)->group(function () {
+    Route::get('/employeetable', 'employeeTable');
+    Route::post('/employeetable-deactivate/{id}', 'deactivateUser');
+    Route::post('/employeetable-activate/{id}','activateUser');
+    Route::post('/employee-save', 'store');
+    Route::post('/employee-update/{id}', 'update');
+    Route::post('/employee-delete/{id}','delete');
+});
+/* 
 Route::get('/employeetable', [employeeTableController::class, 'employeeTable']);
 Route::post('/employeetable-deactivate/{id}', [employeeTableController::class, 'deactivateUser']);
 Route::post('/employeetable-activate/{id}', [employeeTableController::class, 'activateUser']);
 Route::post('/employee-save', [employeeTableController::class, 'store']);
 Route::post('/employee-update/{id}', [employeeTableController::class, 'update']);
-Route::post('/employee-delete/{id}', [employeeTableController::class, 'delete']);
+Route::post('/employee-delete/{id}', [employeeTableController::class, 'delete']); */

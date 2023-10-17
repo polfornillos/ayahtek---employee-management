@@ -686,6 +686,14 @@ document.addEventListener('DOMContentLoaded', function () {
   viewButtons.forEach(viewButton => {
     viewButton.addEventListener('click', function () {
       const employeeId = viewButton.getAttribute('data-employee-id');
+      
+      // Check if the Edit modal is open and close it
+      const editModal = document.getElementById('editModal' + employeeId);
+      if (editModal.style.display === 'flex') {
+        editModal.style.display = 'none';
+      }
+
+      // Then open the View modal
       toggleModal('viewModal' + employeeId, true);
     });
   });
@@ -932,179 +940,195 @@ salaryInput.addEventListener('input', function () {
 
 // Function to format Contact number input
 const contactInput = document.getElementById('contact');
-
-contactInput.addEventListener('input', function () {
-  let inputValue = contactInput.value.replace(/[^0-9+]/g, ''); // Remove non-numeric characters except '+'
-  
-  // Check if the input starts with "+63"
-  if (!inputValue.startsWith('+63')) {
-    inputValue = '+63' + inputValue;
-  }
-  
-  contactInput.value = inputValue;
-});
-
 const eContactInput = document.getElementById('emergency_contact');
 
-eContactInput.addEventListener('input', function () {
-  let inputValue = eContactInput.value.replace(/[^0-9+]/g, ''); // Remove non-numeric characters except '+'
-  
-  // Check if the input starts with "+63"
-  if (!inputValue.startsWith('+63')) {
-    inputValue = '+63' + inputValue;
-  }
-  
-  eContactInput.value = inputValue;
+contactInput.addEventListener('input', function () {
+  handlePhoneNumberInput(contactInput);
 });
+
+eContactInput.addEventListener('input', function () {
+  handlePhoneNumberInput(eContactInput);
+});
+
+function handlePhoneNumberInput(inputElement) {
+  let inputValue = inputElement.value.replace(/[^0-9+]/g, ''); // Remove non-numeric characters except '+'
+
+  // If the input is empty or starts with "+" but has no numbers following it
+  if (inputValue === '' || (inputValue === '+' && inputValue.length === 1)) {
+    inputValue = ''; // Remove "+63" or any plus sign if no numbers
+  } else if (!inputValue.startsWith('+')) {
+    inputValue = '+63' + inputValue; // Add "+63" prefix if it's missing
+  }
+
+  inputElement.value = inputValue;
+}
 
 // --------Edit Form-------- //
 
 // Function to format SSS number
-const e_sssNumberInput = document.getElementById('e_sss_number');
+const e_sssNumberInputs = document.querySelectorAll('[id^="e_sss_number_"]');
 
-e_sssNumberInput.addEventListener('input', function () {
-  const inputValue = e_sssNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
-  let formattedValue = '';
+e_sssNumberInputs.forEach(e_sssNumberInput => {
+  e_sssNumberInput.addEventListener('input', function () {
+    const inputValue = e_sssNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    let formattedValue = '';
 
-  if (inputValue.length > 2) {
-    formattedValue = inputValue.substring(0, 2) + '-';
+    if (inputValue.length > 2) {
+      formattedValue = inputValue.substring(0, 2) + '-';
 
-    if (inputValue.length > 9) {
-      formattedValue += inputValue.substring(2, 9) + '-';
+      if (inputValue.length > 9) {
+        formattedValue += inputValue.substring(2, 9) + '-';
 
-      if (inputValue.length > 10) {
-        formattedValue += inputValue.substring(9, 10);
+        if (inputValue.length > 10) {
+          formattedValue += inputValue.substring(9, 10);
+        } else {
+          formattedValue += inputValue.substring(9);
+        }
       } else {
-        formattedValue += inputValue.substring(9);
+        formattedValue += inputValue.substring(2);
       }
-    } else {
-      formattedValue += inputValue.substring(2);
+
+      e_sssNumberInput.value = formattedValue;
     }
+  });
 
-    e_sssNumberInput.value = formattedValue;
-  }
-});
-
-e_sssNumberInput.addEventListener('keypress', function (e) {
-  const key = String.fromCharCode(e.charCode);
-  if (!/^\d$/.test(key)) {
-    e.preventDefault(); // Prevent entering non-numeric characters
-  }
+  e_sssNumberInput.addEventListener('keypress', function (e) {
+    const key = String.fromCharCode(e.charCode);
+    if (!/^\d$/.test(key)) {
+      e.preventDefault(); // Prevent entering non-numeric characters
+    }
+  });
 });
 
 // Function to format Philhealth number
-const e_philhealthNumberInput = document.getElementById('e_philhealth_number');
+const e_philhealthNumberInputs = document.querySelectorAll('[id^="e_philhealth_number_"]');
 
-e_philhealthNumberInput.addEventListener('input', function () {
-  const inputValue = e_philhealthNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
-  let formattedValue = '';
+e_philhealthNumberInputs.forEach(e_philhealthNumberInput => {
+  e_philhealthNumberInput.addEventListener('input', function () {
+    const inputValue = e_philhealthNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    let formattedValue = '';
 
-  if (inputValue.length > 2) {
-    formattedValue = inputValue.substring(0, 2) + '-';
+    if (inputValue.length > 2) {
+      formattedValue = inputValue.substring(0, 2) + '-';
 
-    if (inputValue.length > 9) {
-      formattedValue += inputValue.substring(2, 9) + '-';
+      if (inputValue.length > 9) {
+        formattedValue += inputValue.substring(2, 9) + '-';
 
-      if (inputValue.length > 10) {
-        formattedValue += inputValue.substring(9, 10);
+        if (inputValue.length > 10) {
+          formattedValue += inputValue.substring(9, 10);
+        } else {
+          formattedValue += inputValue.substring(9);
+        }
       } else {
-        formattedValue += inputValue.substring(9);
+        formattedValue += inputValue.substring(2);
       }
-    } else {
-      formattedValue += inputValue.substring(2);
+
+      e_philhealthNumberInput.value = formattedValue;
     }
+  });
 
-    e_philhealthNumberInput.value = formattedValue;
-  }
-});
-
-e_philhealthNumberInput.addEventListener('keypress', function (e) {
-  const key = String.fromCharCode(e.charCode);
-  if (!/^\d$/.test(key)) {
-    e.preventDefault(); // Prevent entering non-numeric characters
-  }
+  e_philhealthNumberInput.addEventListener('keypress', function (e) {
+    const key = String.fromCharCode(e.charCode);
+    if (!/^\d$/.test(key)) {
+      e.preventDefault(); // Prevent entering non-numeric characters
+    }
+  });
 });
 
 // Function to format TIN
-const e_tinNumberInput = document.getElementById('e_tin');
+const e_tinNumberInputs = document.querySelectorAll('[id^="e_tin_"]');
 
-e_tinNumberInput.addEventListener('input', function () {
-  const inputValue = e_tinNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
-  let formattedValue = '';
+e_tinNumberInputs.forEach(e_tinNumberInput => {
+  e_tinNumberInput.addEventListener('input', function () {
+    const inputValue = e_tinNumberInput.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    let formattedValue = '';
 
-  if (inputValue.length > 0) {
-    formattedValue = inputValue.substring(0, 3);
+    if (inputValue.length > 0) {
+      formattedValue = inputValue.substring(0, 3);
 
-    if (inputValue.length > 3) {
-      formattedValue += '-' + inputValue.substring(3, 6);
+      if (inputValue.length > 3) {
+        formattedValue += '-' + inputValue.substring(3, 6);
+      }
+
+      if (inputValue.length > 6) {
+        formattedValue += '-' + inputValue.substring(6, 9);
+      }
+
+      if (inputValue.length > 9) {
+        formattedValue += '-' + inputValue.substring(9, 12);
+      }
+
+      e_tinNumberInput.value = formattedValue;
     }
+  });
 
-    if (inputValue.length > 6) {
-      formattedValue += '-' + inputValue.substring(6, 9);
+  e_tinNumberInput.addEventListener('keypress', function (e) {
+    const key = String.fromCharCode(e.charCode);
+    if (!/^\d$/.test(key)) {
+      e.preventDefault(); // Prevent entering non-numeric characters
     }
-
-    if (inputValue.length > 9) {
-      formattedValue += '-' + inputValue.substring(9, 12);
-    }
-
-    e_tinNumberInput.value = formattedValue;
-  }
-});
-
-e_tinNumberInput.addEventListener('keypress', function (e) {
-  const key = String.fromCharCode(e.charCode);
-  if (!/^\d$/.test(key)) {
-    e.preventDefault(); // Prevent entering non-numeric characters
-  }
+  });
 });
 
 // Function to format Salary input
-const e_salary = document.getElementById('e_salary');
+const e_salaryInputs = document.querySelectorAll('[id^="e_salary_"]');
 
-e_salary.addEventListener('input', function () {
-  let inputValue = e_salary.value.replace(/[^0-9.]/g, ''); // Remove non-numeric characters except '.'
-  
-  // Ensure there's a decimal point
-  if (!inputValue.includes('.')) {
-    inputValue += ".00";
-  } else {
-    // Limit decimal places to 2
-    const parts = inputValue.split('.');
-    if (parts[1] && parts[1].length > 2) {
-      parts[1] = parts[1].substring(0, 2);
+e_salaryInputs.forEach(e_salaryInput => {
+
+  e_salaryInput.addEventListener('input', function () {
+    let inputValue = e_salaryInput.value.replace(/[^0-9.]/g, ''); // Remove non-numeric characters except '.'
+    
+    // Ensure there's a decimal point
+    if (!inputValue.includes('.')) {
+      inputValue += ".00";
+    } else {
+      // Limit decimal places to 2
+      const parts = inputValue.split('.');
+      if (parts[1] && parts[1].length > 2) {
+        parts[1] = parts[1].substring(0, 2);
+      }
+      inputValue = parts.join('.');
     }
-    inputValue = parts.join('.');
-  }
-  
-  e_salary.value = inputValue;
+    
+    e_salaryInput.value = inputValue;
+  });
 });
 
 // Function to format Contact number input
-const e_contactInput = document.getElementById('e_contact');
+const e_contactInputs = document.querySelectorAll('[id^="e_contact_"]');
 
-e_contactInput.addEventListener('input', function () {
-  let inputValue = e_contactInput.value.replace(/[^0-9+]/g, ''); // Remove non-numeric characters except '+'
-  
-  // Check if the input starts with "+63"
-  if (!inputValue.startsWith('+63')) {
-    inputValue = '+63' + inputValue;
-  }
-  
-  e_contactInput.value = inputValue;
+e_contactInputs.forEach(e_contactInput => {
+  e_contactInput.addEventListener('input', function () {
+    let inputValue = e_contactInput.value.replace(/[^0-9+]/g, ''); // Remove non-numeric characters except '+'
+
+    // If the input is empty or starts with "+" but has no numbers following it
+    if (inputValue === '' || (inputValue === '+' && inputValue.length === 1)) {
+      inputValue = ''; // Remove "+63" or any plus sign if no numbers
+    } else if (!inputValue.startsWith('+')) {
+      inputValue = '+63' + inputValue; // Add "+63" prefix if it's missing
+    }
+
+    e_contactInput.value = inputValue;
+  });
 });
 
 // Function to format Emergency Contact number input
-const e_eContactInput = document.getElementById('e_emergency_contact');
+const e_eContactInputs = document.querySelectorAll('[id^="e_emergency_contact_"]');
 
-e_eContactInput.addEventListener('input', function () {
-  let inputValue = e_eContactInput.value.replace(/[^0-9+]/g, ''); // Remove non-numeric characters except '+'
-  
-  // Check if the input starts with "+63"
-  if (!inputValue.startsWith('+63')) {
-    inputValue = '+63' + inputValue;
-  }
-  
-  e_eContactInput.value = inputValue;
+e_eContactInputs.forEach(e_eContactInput => {
+  e_eContactInput.addEventListener('input', function () {
+    let inputValue = e_eContactInput.value.replace(/[^0-9+]/g, ''); // Remove non-numeric characters except '+'
+    
+    // If the input is empty or starts with "+" but has no numbers following it
+    if (inputValue === '' || (inputValue === '+' && inputValue.length === 1)) {
+      inputValue = ''; // Remove "+63" or any plus sign if no numbers
+    } else if (!inputValue.startsWith('+')) {
+      inputValue = '+63' + inputValue; // Add "+63" prefix if it's missing
+    }
+    
+    e_eContactInput.value = inputValue;
+  });
 });
+
 initializeFilteredRows();
 updatePagination();

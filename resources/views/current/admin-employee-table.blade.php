@@ -387,25 +387,25 @@
                                                     </div>
                                                     <div id="employee-contact-container" class="employee-content">
                                                         <h3>Contact number</h3>
-                                                        <input id="e_contact" name="contact" class="textbox" type="text" value="{{ $employee->contact }}" required>
+                                                        <input id="e_contact_{{ $employee->id }}" name="contact" class="textbox" type="text" value="{{ $employee->contact }}" maxlength="13" required>
                                                     </div>
                                                 </div>
                                                 <div class="employee-details">
                                                     <div id="employee-id-container" class="employee-content">
                                                         <h3>Salary</h3>
-                                                        <input id="e_salary" name="salary" class="textbox" type="text" value="{{ $employee->salary }}" required>
+                                                        <input id="e_salary_{{ $employee->id }}" name="salary" class="textbox" type="text" value="{{ $employee->salary }}" required>
                                                     </div>
                                                     <div id="employee-name-container" class="employee-content">
                                                         <h3>SSS Number</h3>
-                                                        <input id="e_sss_number" name="sss_number" class="textbox" type="text" value="{{ $employee->sss_number }}" required>
+                                                        <input id="e_sss_number_{{ $employee->id }}" name="sss_number" class="textbox" type="text" value="{{ $employee->sss_number }}" required>
                                                     </div>
                                                     <div id="employee-birthday-container" class="employee-content">
                                                         <h3>Philhealth Number</h3>
-                                                        <input id="e_philhealth_number" name="philhealth_number" class="textbox" type="text" value="{{ $employee->philhealth_number }}" required>
+                                                        <input id="e_philhealth_number_{{ $employee->id }}" name="philhealth_number" class="textbox" type="text" value="{{ $employee->philhealth_number }}" required>
                                                     </div>
                                                     <div id="employee-gender-container" class="employee-content">
                                                         <h3>TIN</h3>
-                                                        <input id="e_tin" name="tin" class="textbox" type="text" value="{{ $employee->tin }}" required>
+                                                        <input id="e_tin_{{ $employee->id }}" name="tin" class="textbox" type="text" value="{{ $employee->tin }}" required>
                                                     </div>
                                                     <div id="employee-contact-container" class="employee-content">
                                                         <h3>Date Added</h3>
@@ -430,7 +430,7 @@
                                                         </div>
                                                         <div id="employee-emergency-contact-container" class="employee-content">
                                                             <h3>Contact Number</h3>
-                                                            <input id="e_emergency_contact" name="emergency_contact_number" class="textbox" type="text" value="{{ $employee->emergency_contact_number }}">
+                                                            <input id="e_emergency_contact_{{ $employee->id }}" name="emergency_contact_number" class="textbox" type="text" value="{{ $employee->emergency_contact_number }}" maxlength="13">
                                                         </div>
                                                     </div>
                                                 </div>

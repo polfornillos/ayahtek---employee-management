@@ -112,11 +112,11 @@ span[data-employee-leave-detail] {
 }
 
 .btn-deny-lr-view {
-    background-color: #dd3030;
+    background-color: #ed6c02;
 }
 
-.btn-edit-lr-view {
-    background-color: #096f6f;
+.btn-delete-lr-view {
+    background-color: #dd3030;
 }
 
 .btn-cancel-lr-view {

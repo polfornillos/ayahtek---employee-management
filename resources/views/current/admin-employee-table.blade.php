@@ -16,126 +16,6 @@
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
-                        <div id="add-modal" class="addModal">
-                            <div class="add-modal-content">
-                                <span class="close"></span>
-                                <div class="add-header">
-                                    <h3 class="modal-header">ADD EMPLOYEE</h3>
-                                    <img class="modal-logo" src="images/ayahtek-logo.png" alt="Logo">
-                                </div>
-                                <div id="employee-details-row-one" class="employee-details-container">
-                                    <div class="employee-details-row">
-                                        <div class="employee-details-header"> Employee Details</div>
-                                        <hr id="employee-details-divider"class="solid">
-                                        <div class="employee-details-content">
-                                            <div class="employee-details">
-                                                <div id="employee-id-container" class="employee-content">
-                                                    <h3>Employee ID:</h3>
-                                                    <input name="id" class="textbox" type="text" required>
-                                                </div>
-                                                <div id="employee-name-container" class="employee-content">
-                                                    <h3>Employee Name:</h3>
-                                                    <input name="name" class="textbox" type="text" required>
-                                                </div>
-                                                <div id="employee-birthday-container" class="employee-content">
-                                                    <h3>Birthday</h3>
-                                                    <select name="month" id="month">
-                                                        <option value="empty" disabled selected>Month</option>
-                                                        <?php
-                                                        $months = [
-                                                            'January', 'February', 'March', 'April', 'May', 'June',
-                                                            'July', 'August', 'September', 'October', 'November', 'December'
-                                                        ];
-                                                        foreach ($months as $month) {
-                                                            echo "<option value=\"$month\">$month</option>";
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                    <select name="day" id="day">
-                                                        <option value="empty" disabled selected>Day</option>
-                                                        <?php
-                                                        for ($day = 1; $day <= 31; $day++) {
-                                                            $dayFormatted = str_pad($day, 2, '0', STR_PAD_LEFT); // Add leading zero if needed
-                                                            echo "<option value=\"$dayFormatted\">$dayFormatted</option>";
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                    <select name="year" id="year">
-                                                        <option value="empty" disabled selected>Year</option>
-                                                        <?php
-                                                        $currentYear = date("Y");
-                                                        $startYear = 1973;
-                                                        for ($year = $currentYear; $year >= $startYear; $year--) {
-                                                            echo "<option value=\"$year\">$year</option>";
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                <div id="employee-gender-container" class="employee-content">
-                                                    <h3>Gender</h3>
-                                                    <select name="gender" id="gender">
-                                                        <option value="empty" disabled selected></option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                        <option value="Others">Others</option>
-                                                    </select>
-                                                </div>
-                                                <div id="employee-contact-container" class="employee-content">
-                                                    <h3>Contact number</h3>
-                                                    <input name="contact" class="textbox" type="text" required>
-                                                </div>
-                                            </div>
-                                            <div class="employee-details">
-                                                <div id="employee-id-container" class="employee-content">
-                                                    <h3>Salary</h3>
-                                                    <input name="salary" class="textbox" type="text" required>
-                                                </div>
-                                                <div id="employee-name-container" class="employee-content">
-                                                    <h3>SSS Number</h3>
-                                                    <input name="sss_number" class="textbox" type="text" required>
-                                                </div>
-                                                <div id="employee-birthday-container" class="employee-content">
-                                                    <h3>Philhealth Number</h3>
-                                                    <input name="philhealth_number" class="textbox" type="text" required>
-                                                </div>
-                                                <div id="employee-gender-container" class="employee-content">
-                                                    <h3>TIN</h3>
-                                                    <input name="tin" class="textbox" type="text" required>
-                                                </div>
-                                                <div id="employee-contact-container" class="employee-content">
-                                                    <h3>Date Added</h3>
-                                                    <input name="created_at" class="date" type="date" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> 
-                                    <div id="employee-details-row-two" class="employee-details-row">
-                                        <div class="employee-details-header"> Employee Details</div>
-                                        <hr id="employee-details-divider"class="solid">
-                                        <div class="employee-details-content">
-                                            <div class="employee-details">
-                                                <div id="employee-emergency-name-container" class="employee-content">
-                                                    <h3>Name</h3>
-                                                    <input name="emergency_contact_name" class="textbox" type="text">
-                                                </div>
-                                                <div id="employee-emergency-relationship-container" class="employee-content">
-                                                    <h3>Relationship</h3>
-                                                    <input name="emergency_contact_name" class="textbox" type="text">
-                                                </div>
-                                                <div id="employee-emergency-contact-container" class="employee-content">
-                                                    <h3>Contact Number</h3>
-                                                    <input name="emergency_contact_name" class="textbox" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="employee-button-container">
-                                            <button id="add-cancel-btn" class="cancel-employee-button">CANCEL</button>
-                                            <button id="submit-btn" class="submit-employee-button">SUBMIT</button>                 
-                                        </div>
-                                    </div>              
-                                </div>
-                            </div>
-                        </div>
                         <div class="filter-dropdown-container">
                             <button class="filters-button">Filters</button>
                             <ul class="dropdown-menu">
@@ -174,7 +54,7 @@
                     </div>
                     <button class="add-employee-button" id="add-employee-button">Add Employee</button>
 
-                    <div id="add-modal" class="addModal">
+                    <div id="add-modal" class="add-modal-container">
                         <form method="POST" action="/employee-save">
                         @csrf
                         <div class="add-modal-content">

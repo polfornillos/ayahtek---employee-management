@@ -20,8 +20,8 @@
                     <img src="images/pexels-pixabay-220453.jpg" alt="Profile Picture">
                 </div>
                 <div class="profile-details">
-                    <h2></h2>
-                    <p></p>
+                    <h2>{{ $data->name }}</h2>
+                    <p>{{ $data->email }}</p>
                 </div>
             </div>
         </div>

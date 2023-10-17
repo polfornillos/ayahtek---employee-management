@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\AEmployees;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class employeeTableController extends Controller
 {
@@ -97,9 +98,10 @@ class employeeTableController extends Controller
 
     public function delete($id) {
         $employee = AEmployees::find($id);
-    
+        $lastDeletedId = $employee->id; 
         $employee->delete();
-    
+        
+        DB::statement("ALTER TABLE a_employees AUTO_INCREMENT = $lastDeletedId");
         return redirect('/employeetable');
     }
     

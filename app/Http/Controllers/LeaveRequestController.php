@@ -8,6 +8,7 @@ use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class LeaveRequestController extends Controller
 {
@@ -78,8 +79,10 @@ class LeaveRequestController extends Controller
       $id = $request->leaveReqId;
 
       $leaveRequest = LRequest::find($id);
-
+      $lastDeletedId = $leaveRequest->id;
       $leaveRequest->delete();
+
+      DB::statement("ALTER TABLE l_request AUTO_INCREMENT = $lastDeletedId");
 
       return redirect('/leave-request');
     }

@@ -64,8 +64,7 @@
                       @if($leaveRequests)
                         @foreach($leaveRequests as $lr)
                           <tr>
-                            <!-- Populate main table -->
-                            
+                            <!-- Populate main table -->                           
                             <td>EMP-{{ str_pad($lr->id, 3, '0', STR_PAD_LEFT) }}</td>
                             <td>{{ $lr->name }}</td>
                             <td>{{ $lr->daysLeave }}</td>
@@ -123,7 +122,7 @@
               <input type="input" id="tLeave" name="tLeave" class="form-control mb-4" >
 
               <label for="daysLeave" class="form-label">Days of Leave</label>
-              <input type="input" id="daysLeave" name="daysLeave" class="form-control mb-4" >
+              <input type="input" id="daysLeave" name="daysLeave" class="form-control mb-4" readonly>
 
               <label for="sLeave" class="form-label">Start of Leave</label>
               <input type="date" id="sLeave" name="sLeave" class="form-control mb-4" >
@@ -264,5 +263,36 @@
     
       return `${month} ${day.toString().padStart(2, '0')}, ${year}`;
     }
+
+  // Calculate Days of leave
+  const sLeaveInput = document.getElementById('sLeave');
+  const eLeaveInput = document.getElementById('eLeave');
+  const daysLeaveInput = document.getElementById('daysLeave');
+
+  sLeaveInput.addEventListener('input', updateDaysOfLeave);
+  eLeaveInput.addEventListener('input', updateDaysOfLeave);
+
+  // Function to calculate the number of days between two dates
+  function dateDiffInDays(date1, date2) {
+    const diffInMilliseconds = date2 - date1;
+    return Math.round(diffInMilliseconds / (1000 * 60 * 60 * 24));
+  }
+
+  // Function to update the 'Days of Leave' field
+  function updateDaysOfLeave() {
+    const startDate = new Date(sLeaveInput.value);
+    const endDate = new Date(eLeaveInput.value);
+
+    if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+      const days = dateDiffInDays(startDate, endDate);
+      if (days >= 0) {
+        daysLeaveInput.value = days;
+      } else {
+        daysLeaveInput.value = '';
+      }
+    } else {
+      daysLeaveInput.value = '';
+    }
+  }
   </script>
 @endsection
